@@ -12,12 +12,12 @@ export default function Home() {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url(${mountainBgImage})`,
       }}
     >
-      {/* Language Switch with Flags */}
-      <div className="absolute top-4 right-4 z-10">
-        <div className="flex glass rounded-full p-2">
+      {/* Language Switch with Flags - Responsive */}
+      <div className="absolute top-3 sm:top-4 right-3 sm:right-4 z-10">
+        <div className="flex glass rounded-full p-1 sm:p-2">
           <button
             onClick={switchLanguage}
-            className={`px-3 py-2 rounded-full text-lg font-medium transition-all flex items-center ${
+            className={`px-2 sm:px-3 py-1 sm:py-2 rounded-full text-base sm:text-lg font-medium transition-all flex items-center touch-manipulation ${
               language === "fr"
                 ? "bg-white text-slate-800 shadow-sm"
                 : "text-white hover:bg-white/10"
@@ -27,7 +27,7 @@ export default function Home() {
           </button>
           <button
             onClick={switchLanguage}
-            className={`px-3 py-2 rounded-full text-lg font-medium transition-all flex items-center ${
+            className={`px-2 sm:px-3 py-1 sm:py-2 rounded-full text-base sm:text-lg font-medium transition-all flex items-center touch-manipulation ${
               language === "en"
                 ? "bg-white text-slate-800 shadow-sm"
                 : "text-white hover:bg-white/10"
@@ -39,39 +39,45 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center px-6 text-center pt-20">
-        {/* Site Title and Tagline - Moved Higher */}
-        <div className="mb-16">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+      <div className="flex-1 flex flex-col items-center justify-between px-4 sm:px-6 text-center py-8 sm:py-12">
+        {/* Top spacer for better vertical distribution */}
+        <div className="flex-1 min-h-[2rem] sm:min-h-[4rem]"></div>
+        
+        {/* Site Title and Tagline - Responsive positioning */}
+        <div className="flex-1 flex flex-col justify-center mb-8 sm:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 drop-shadow-lg px-2">
             {t("outdoor.quest")}
           </h1>
-          <p className="text-xl md:text-2xl text-white/95 font-medium max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
+          <p className="text-lg sm:text-xl md:text-2xl text-white/95 font-medium max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl mx-auto leading-relaxed drop-shadow-lg px-4">
             {t("adventure.tagline")}
           </p>
         </div>
 
-        {/* Main Navigation - Made Transparent */}
-        <div className="w-full max-w-sm flex flex-col gap-6">
+        {/* Main Navigation - Made Transparent and Responsive */}
+        <div className="w-full max-w-xs sm:max-w-sm flex flex-col gap-4 sm:gap-6 mb-8 sm:mb-12">
           <Link href="/missions">
             <button
-              className="w-full bg-white/20 backdrop-blur-sm text-white font-semibold py-5 px-8 rounded-xl shadow-xl border border-white/30 transform transition-all duration-200 hover:bg-white/30 hover:scale-105 flex items-center justify-center text-lg"
+              className="w-full bg-white/20 backdrop-blur-sm text-white font-semibold py-4 sm:py-5 px-6 sm:px-8 rounded-xl shadow-xl border border-white/30 transform transition-all duration-200 hover:bg-white/30 hover:scale-105 flex items-center justify-center text-base sm:text-lg touch-manipulation"
               data-testid="button-missions"
             >
-              <i className="fas fa-map-marked-alt mr-3"></i>
+              <i className="fas fa-map-marked-alt mr-2 sm:mr-3 text-sm sm:text-base"></i>
               {t("missions")}
             </button>
           </Link>
 
           <Link href="/contact">
             <button
-              className="w-full bg-white/20 backdrop-blur-sm text-white font-semibold py-5 px-8 rounded-xl shadow-xl border border-white/30 transform transition-all duration-200 hover:bg-white/30 hover:scale-105 flex items-center justify-center text-lg"
+              className="w-full bg-white/20 backdrop-blur-sm text-white font-semibold py-4 sm:py-5 px-6 sm:px-8 rounded-xl shadow-xl border border-white/30 transform transition-all duration-200 hover:bg-white/30 hover:scale-105 flex items-center justify-center text-base sm:text-lg touch-manipulation"
               data-testid="button-contact"
             >
-              <i className="fas fa-envelope mr-3"></i>
+              <i className="fas fa-envelope mr-2 sm:mr-3 text-sm sm:text-base"></i>
               {t("contact")}
             </button>
           </Link>
         </div>
+        
+        {/* Bottom spacer */}
+        <div className="min-h-[2rem] sm:min-h-[4rem]"></div>
       </div>
     </div>
   );
