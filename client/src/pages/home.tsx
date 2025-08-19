@@ -43,7 +43,7 @@ export default function Home() {
         <div className="flex-1 min-h-[2rem] sm:min-h-[4rem]"></div>
         
         {/* Site Title and Tagline - Positioned higher */}
-        <div className="flex-1 flex flex-col justify-start pt-16 sm:pt-20 mb-12 sm:mb-16">
+        <div className="flex-1 flex flex-col justify-start pt-8 sm:pt-12 mb-12 sm:mb-16">
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 drop-shadow-lg px-2">
             {t("outdoor.quest")}
           </h1>
