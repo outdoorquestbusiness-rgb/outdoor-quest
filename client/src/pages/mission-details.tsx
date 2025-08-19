@@ -21,12 +21,12 @@ export default function MissionDetails({ missionId }: MissionDetailsProps) {
 
   useEffect(() => {
     if (mission && showIntro) {
-      // Animation sequence
+      // Animation sequence - reduced by 1 second
       const timeouts = [
-        setTimeout(() => setAnimationPhase(1), 500),
-        setTimeout(() => setAnimationPhase(2), 1500),
-        setTimeout(() => setAnimationPhase(3), 2500),
-        setTimeout(() => setShowIntro(false), 4000),
+        setTimeout(() => setAnimationPhase(1), 400),
+        setTimeout(() => setAnimationPhase(2), 1200),
+        setTimeout(() => setAnimationPhase(3), 2000),
+        setTimeout(() => setShowIntro(false), 3000),
       ];
 
       return () => timeouts.forEach(clearTimeout);
@@ -90,18 +90,13 @@ export default function MissionDetails({ missionId }: MissionDetailsProps) {
               {mission.name}
             </h1>
             
-            {/* Mission Description */}
-            <p className={`text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed transition-all duration-1000 delay-1000 ${
-              animationPhase >= 3 ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-            }`}>
-              {mission.description}
-            </p>
+            {/* Mission Description - Removed from loading animation */}
             
-            {/* Loading indicator */}
+            {/* Loading indicator - reduced to 3 seconds */}
             <div className="mt-12">
               <div className="w-64 h-1 bg-white/20 rounded-full mx-auto overflow-hidden">
-                <div className="h-full bg-white rounded-full animate-[loading_4s_ease-in-out_forwards]" 
-                     style={{ width: '0%', animation: 'loading 4s ease-in-out forwards' }}></div>
+                <div className="h-full bg-white rounded-full animate-[loading_3s_ease-in-out_forwards]" 
+                     style={{ width: '0%', animation: 'loading 3s ease-in-out forwards' }}></div>
               </div>
             </div>
           </div>
