@@ -24,10 +24,6 @@ export default function Missions() {
       return await apiRequest("POST", "/api/missions/validate-code", { accessCode: code });
     },
     onSuccess: (response: any) => {
-      toast({
-        title: "Success!",
-        description: `Mission "${response.name}" added successfully!`,
-      });
       setNewMissionId(response.id || Date.now().toString());
       setAccessCode("");
       setShowAddForm(false);

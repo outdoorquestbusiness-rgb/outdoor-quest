@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { useLocation } from "wouter";
@@ -7,16 +8,46 @@ import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_back
 export default function MissionIntro() {
   const { t } = useLanguage();
   const [, setLocation] = useLocation();
+  const [showContent, setShowContent] = useState(false);
+  const [typewriterText, setTypewriterText] = useState("");
+  const [showButton, setShowButton] = useState(false);
+  const [currentParagraph, setCurrentParagraph] = useState(0);
+
+  const fullStoryText = missionStory.content.join(" ");
+
+  useEffect(() => {
+    // Show background for 1.5 seconds, then start typewriter
+    const showContentTimer = setTimeout(() => {
+      setShowContent(true);
+      
+      // Start typewriter animation
+      let charIndex = 0;
+      const typeInterval = setInterval(() => {
+        if (charIndex < fullStoryText.length) {
+          setTypewriterText(fullStoryText.slice(0, charIndex + 1));
+          charIndex++;
+        } else {
+          clearInterval(typeInterval);
+          // Show button after story is complete
+          setTimeout(() => setShowButton(true), 500);
+        }
+      }, 50); // 50ms per character for realistic typing speed
+
+      return () => clearInterval(typeInterval);
+    }, 1500);
+
+    return () => clearTimeout(showContentTimer);
+  }, [fullStoryText]);
 
   return (
     <div 
-      className="min-h-screen p-6 bg-cover bg-center bg-no-repeat"
+      className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
       style={{ 
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url(${moleMountainImage})` 
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(${moleMountainImage})` 
       }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-8 pt-4">
+      <div className={`flex items-center justify-between mb-8 pt-4 transition-all duration-700 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
         <button
           onClick={() => setLocation("/rules")}
           className="p-2 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow"
@@ -24,37 +55,85 @@ export default function MissionIntro() {
         >
           <ArrowLeft className="h-5 w-5 text-slate-600" />
         </button>
-        <h2 className="text-xl font-bold text-white drop-shadow-lg">Introduction</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">Introduction</h2>
         <div className="w-10"></div>
       </div>
 
       {/* Story Content */}
-      <div className="max-w-md mx-auto">
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden mb-6 border border-white/50">
-          <div className="p-6">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-merriweather font-bold mb-2 text-slate-800">{missionStory.title}</h3>
-              <p className="text-slate-600">{missionStory.subtitle}</p>
-            </div>
-            
-            <div className="prose prose-slate text-sm leading-relaxed">
-              {missionStory.content.map((paragraph, index) => (
-                <p key={index} className="mb-4 text-slate-700">{paragraph}</p>
-              ))}
+      {showContent && (
+        <div className="max-w-2xl mx-auto animate-fadeInUp">
+          <div className="bg-amber-50/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-2 border-amber-200/50">
+            <div className="p-6 sm:p-8">
+              <div className="text-center mb-8">
+                <h3 className="text-3xl sm:text-4xl font-serif font-bold mb-3 text-amber-900 drop-shadow-sm">
+                  {missionStory.title}
+                </h3>
+                <p className="text-lg text-amber-700 italic font-serif">{missionStory.subtitle}</p>
+              </div>
+              
+              {/* Typewriter Story Text */}
+              <div className="relative">
+                <p className="text-lg leading-relaxed font-serif text-amber-900 min-h-[200px] tracking-wide">
+                  {typewriterText}
+                  <span className="animate-pulse">|</span>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Continue Button */}
-        <button
-          onClick={() => setLocation("/riddle/chapter/1/riddle/1")}
-          className="w-full bg-gradient-to-r from-forest to-mountain text-white font-semibold py-4 px-6 rounded-xl shadow-lg transform transition-all duration-200 hover:scale-105"
-          data-testid="button-start-mission"
-        >
-          <ArrowRight className="h-5 w-5 mr-2 inline" />
-          Commencer l'aventure
-        </button>
-      </div>
+          {/* Continue Button - Only show when typing is complete */}
+          {showButton && (
+            <div className="animate-slideInUp">
+              <button
+                onClick={() => setLocation("/riddle/chapter/1/riddle/1")}
+                className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold py-6 px-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 text-xl font-serif"
+                data-testid="button-start-mission"
+              >
+                <ArrowRight className="h-6 w-6 mr-3 inline-block" />
+                Commencer l'aventure
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      <style jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+        
+        @keyframes fadeInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes slideInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fadeInUp {
+          animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .animate-slideInUp {
+          animation: slideInUp 0.6s ease-out;
+        }
+        
+        .font-serif {
+          font-family: 'Merriweather', serif;
+        }
+      `}</style>
     </div>
   );
 }
