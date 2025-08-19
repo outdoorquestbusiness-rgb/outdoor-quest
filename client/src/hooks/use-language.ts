@@ -12,7 +12,7 @@ interface Translations {
 const translations: Translations = {
   // Homepage
   "outdoor.quest": { fr: "Outdoor Quest", en: "Outdoor Quest" },
-  "adventure.tagline": { fr: "Escape game outdoor en groupe - Résolvez des énigmes, collaborez et relevez le défi en famille !", en: "Outdoor group escape game - Solve riddles, collaborate and take on the family challenge!" },
+  "adventure.tagline": { fr: "Escape game outdoor en groupe - Résolvez des énigmes, collaborez et relevez le défi en famille et entre amis !", en: "Outdoor group escape game - Solve riddles, collaborate and take on the family challenge!" },
   "missions": { fr: "Missions", en: "Missions" },
   "contact": { fr: "Contact", en: "Contact" },
 
