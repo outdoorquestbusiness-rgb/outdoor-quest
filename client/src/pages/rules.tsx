@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { ArrowLeft, BookOpen, Backpack, Trophy, ArrowRight, Shield, MapPin, Smartphone, Wifi, Camera } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { useLocation } from "wouter";
@@ -6,6 +7,29 @@ import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_back
 export default function Rules() {
   const { t } = useLanguage();
   const [, setLocation] = useLocation();
+  const [showContent, setShowContent] = useState(false);
+  const [visibleBlocks, setVisibleBlocks] = useState(0);
+
+  useEffect(() => {
+    // Show background for 1 second, then start showing content blocks
+    const showContentTimer = setTimeout(() => {
+      setShowContent(true);
+      
+      // Show each block with 200ms delay
+      const blockTimers = [
+        setTimeout(() => setVisibleBlocks(1), 100),
+        setTimeout(() => setVisibleBlocks(2), 300),
+        setTimeout(() => setVisibleBlocks(3), 500),
+        setTimeout(() => setVisibleBlocks(4), 700),
+        setTimeout(() => setVisibleBlocks(5), 900),
+        setTimeout(() => setVisibleBlocks(6), 1100), // Continue button
+      ];
+      
+      return () => blockTimers.forEach(clearTimeout);
+    }, 1000);
+
+    return () => clearTimeout(showContentTimer);
+  }, []);
 
   return (
     <div 
@@ -15,7 +39,7 @@ export default function Rules() {
       }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-8 pt-4">
+      <div className={`flex items-center justify-between mb-8 pt-4 transition-all duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
         <button
           onClick={() => setLocation("/missions")}
           className="p-2 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow"
@@ -23,14 +47,16 @@ export default function Rules() {
         >
           <ArrowLeft className="h-5 w-5 text-slate-600" />
         </button>
-        <h2 className="text-xl font-bold text-white drop-shadow-lg">Règles & Notice</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">Règles & Notice</h2>
         <div className="w-10"></div>
       </div>
 
       {/* Rules Content */}
       <div className="space-y-6">
         {/* Rules Card */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/50">
+        <div className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/50 transition-all duration-500 ${
+          visibleBlocks >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="flex items-center mb-4">
             <div className="w-10 h-10 bg-forest/10 rounded-full flex items-center justify-center mr-3">
               <BookOpen className="h-5 w-5 text-forest" />
@@ -54,7 +80,9 @@ export default function Rules() {
         </div>
 
         {/* Safety Card */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/50">
+        <div className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/50 transition-all duration-500 ${
+          visibleBlocks >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="flex items-center mb-4">
             <div className="w-10 h-10 bg-red-500/10 rounded-full flex items-center justify-center mr-3">
               <Shield className="h-5 w-5 text-red-500" />
@@ -68,7 +96,9 @@ export default function Rules() {
         </div>
 
         {/* Technical Requirements Card */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/50">
+        <div className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/50 transition-all duration-500 ${
+          visibleBlocks >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="flex items-center mb-4">
             <div className="w-10 h-10 bg-mountain/10 rounded-full flex items-center justify-center mr-3">
               <Smartphone className="h-5 w-5 text-mountain" />
@@ -96,7 +126,9 @@ export default function Rules() {
         </div>
 
         {/* Resources Card */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/50">
+        <div className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 border border-white/50 transition-all duration-500 ${
+          visibleBlocks >= 4 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="flex items-center mb-4">
             <div className="w-10 h-10 bg-mountain/10 rounded-full flex items-center justify-center mr-3">
               <Backpack className="h-5 w-5 text-mountain" />
@@ -124,7 +156,9 @@ export default function Rules() {
         </div>
 
         {/* Scoring Card */}
-        <div className="bg-white rounded-2xl shadow-lg p-6">
+        <div className={`bg-white rounded-2xl shadow-lg p-6 transition-all duration-500 ${
+          visibleBlocks >= 5 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}>
           <div className="flex items-center mb-4">
             <div className="w-10 h-10 bg-adventure/10 rounded-full flex items-center justify-center mr-3">
               <Trophy className="h-5 w-5 text-adventure" />
@@ -149,14 +183,16 @@ export default function Rules() {
       </div>
 
       {/* Continue Button */}
-      <div className="mt-8">
+      <div className={`mt-8 transition-all duration-500 ${
+        visibleBlocks >= 6 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}>
         <button
           onClick={() => setLocation("/mission-intro")}
           className="w-full bg-gradient-to-r from-forest to-mountain text-white font-semibold py-4 px-6 rounded-xl shadow-lg transform transition-all duration-200 hover:scale-105"
           data-testid="button-continue"
         >
           <ArrowRight className="h-5 w-5 mr-2 inline" />
-          Continuer vers l'introduction
+          Commencer la mission
         </button>
       </div>
     </div>
