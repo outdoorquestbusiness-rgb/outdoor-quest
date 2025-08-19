@@ -63,13 +63,14 @@ export default function Missions() {
         >
           <ArrowLeft className="h-5 w-5 text-slate-600" />
         </button>
-        <h2 className="text-2xl font-bold text-white drop-shadow-lg">{t("missions.title")}</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">{t("missions.title")}</h2>
         <button
           onClick={() => setShowAddForm(!showAddForm)}
-          className="p-2 rounded-lg bg-forest text-white shadow-md hover:shadow-lg transition-shadow"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-forest text-white shadow-md hover:shadow-lg transition-all hover:bg-forest/90"
           data-testid="button-add-mission"
         >
           <Plus className="h-5 w-5" />
+          <span className="font-semibold">Add Mission</span>
         </button>
       </div>
 
