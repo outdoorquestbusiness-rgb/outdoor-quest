@@ -12,6 +12,7 @@ export default function Missions() {
   const [, setLocation] = useLocation();
   const [showAddForm, setShowAddForm] = useState(false);
   const [accessCode, setAccessCode] = useState("");
+  const [newMissionId, setNewMissionId] = useState<string | null>(null);
   const { toast } = useToast();
 
   const { data: missions = [], refetch } = useQuery({
@@ -22,11 +23,12 @@ export default function Missions() {
     mutationFn: async (code: string) => {
       return await apiRequest("POST", "/api/missions/validate-code", { accessCode: code });
     },
-    onSuccess: (response) => {
+    onSuccess: (response: any) => {
       toast({
         title: "Success!",
         description: `Mission "${response.name}" added successfully!`,
       });
+      setNewMissionId(response.id || Date.now().toString());
       setAccessCode("");
       setShowAddForm(false);
       refetch();
@@ -76,7 +78,7 @@ export default function Missions() {
 
       {/* Add Mission Form */}
       {showAddForm && (
-        <div className="mb-6">
+        <div className="mb-6 animate-slideInDown">
           <div className="bg-white rounded-xl shadow-lg p-4 border-2 border-forest/20">
             <div className="flex items-center mb-4">
               <Key className="h-5 w-5 text-forest mr-2" />
@@ -110,15 +112,22 @@ export default function Missions() {
 
       {/* Missions List */}
       <div className="space-y-6">
-        {missions.map((mission: any) => {
+        {missions.map((mission: any, index: number) => {
           // Check if mission is "new" (created within last 24 hours)
           const isNewMission = new Date(mission.createdAt).getTime() > Date.now() - 24 * 60 * 60 * 1000;
+          const isJustAdded = newMissionId === mission.id;
           
           return (
             <div
               key={mission.id}
               onClick={() => setLocation(`/mission/${mission.id}`)}
-              className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all cursor-pointer transform hover:scale-[1.02] duration-300 border border-white/50"
+              className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all cursor-pointer transform hover:scale-[1.02] duration-300 border border-white/50 ${
+                isJustAdded ? 'animate-slideInUp' : 'animate-fadeInUp'
+              }`}
+              style={{
+                animationDelay: isJustAdded ? '0ms' : `${index * 150}ms`,
+                animationFillMode: 'both'
+              }}
               data-testid={`card-mission-${mission.id}`}
             >
               <div className="p-6">
@@ -171,6 +180,53 @@ export default function Missions() {
           </div>
         )}
       </div>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes slideInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+        
+        @keyframes slideInDown {
+          0% {
+            opacity: 0;
+            transform: translateY(-20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fadeInUp {
+          animation: fadeInUp 0.6s ease-out;
+        }
+        
+        .animate-slideInUp {
+          animation: slideInUp 0.5s ease-out;
+        }
+        
+        .animate-slideInDown {
+          animation: slideInDown 0.3s ease-out;
+        }
+      `}</style>
     </div>
   );
 }
