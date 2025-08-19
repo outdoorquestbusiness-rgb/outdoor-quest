@@ -39,9 +39,9 @@ export default function Home() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-center justify-center px-6 text-center">
-        {/* Site Title and Tagline */}
-        <div className="mb-12">
+      <div className="flex-1 flex flex-col items-center px-6 text-center pt-20">
+        {/* Site Title and Tagline - Moved Higher */}
+        <div className="mb-16">
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
             {t("outdoor.quest")}
           </h1>
@@ -50,11 +50,11 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Main Navigation with More Spacing */}
+        {/* Main Navigation - Made Transparent */}
         <div className="w-full max-w-sm flex flex-col gap-6">
           <Link href="/missions">
             <button
-              className="w-full bg-forest text-white font-semibold py-5 px-8 rounded-xl shadow-xl border border-white/30 transform transition-all duration-200 hover:bg-forest/90 hover:scale-105 flex items-center justify-center text-lg"
+              className="w-full bg-white/20 backdrop-blur-sm text-white font-semibold py-5 px-8 rounded-xl shadow-xl border border-white/30 transform transition-all duration-200 hover:bg-white/30 hover:scale-105 flex items-center justify-center text-lg"
               data-testid="button-missions"
             >
               <i className="fas fa-map-marked-alt mr-3"></i>
@@ -64,7 +64,7 @@ export default function Home() {
 
           <Link href="/contact">
             <button
-              className="w-full bg-forest text-white font-semibold py-5 px-8 rounded-xl shadow-xl border border-white/30 transform transition-all duration-200 hover:bg-forest/90 hover:scale-105 flex items-center justify-center text-lg"
+              className="w-full bg-white/20 backdrop-blur-sm text-white font-semibold py-5 px-8 rounded-xl shadow-xl border border-white/30 transform transition-all duration-200 hover:bg-white/30 hover:scale-105 flex items-center justify-center text-lg"
               data-testid="button-contact"
             >
               <i className="fas fa-envelope mr-3"></i>
