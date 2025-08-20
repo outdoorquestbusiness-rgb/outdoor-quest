@@ -401,6 +401,23 @@ export default function FirstEnigma() {
                       </div>
                     )}
 
+                    {/* Solution Button - only show if enigma is active */}
+                    {showCrossword && !isCompleted && !isTimeUp && (
+                      <div className="text-center mb-4">
+                        <button
+                          onClick={() => {
+                            setIsTimeUp(true);
+                            setTimerActive(false);
+                            showSolution();
+                          }}
+                          className="bg-red-600 hover:bg-red-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                          data-testid="button-solution"
+                        >
+                          Solution
+                        </button>
+                      </div>
+                    )}
+
                     {/* Continue Button */}
                     {(isCompleted || isTimeUp) && (
                       <div className="text-center animate-slideInUp">

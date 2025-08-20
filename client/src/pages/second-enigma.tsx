@@ -236,7 +236,24 @@ export default function SecondEnigma() {
                             Vous n'avez réussi que {score}/3 questions. Les harmonies de ce monde vous échappent encore.
                           </p>
                           
-                          <div className="bg-white/80 rounded-lg p-4 text-center">
+                          {/* Show correct answers */}
+                          <div className="bg-white/80 rounded-lg p-4 mb-4">
+                            <h5 className="font-bold text-gray-800 mb-3">Les bonnes réponses étaient :</h5>
+                            <div className="space-y-2 text-sm">
+                              {questions.map((question, index) => (
+                                <div key={question.id} className="flex justify-between items-center">
+                                  <span className="text-gray-600">Question {index + 1}:</span>
+                                  <span className={`font-semibold ${answers[index] === question.correct ? 'text-green-600' : 'text-red-600'}`}>
+                                    {question.options[question.correct]}
+                                    {answers[index] === question.correct && ' ✓'}
+                                    {answers[index] !== question.correct && ' ✗'}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                          
+                          <div className="bg-amber-50 rounded-lg p-4 text-center">
                             <p className="text-sm text-gray-700 font-elvish italic">
                               "Les mélodies portent en elles les secrets du cosmos. 
                               Seuls ceux qui savent les reconnaître peuvent poursuivre leur quête..."

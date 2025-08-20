@@ -170,7 +170,7 @@ export default function SecondCompass() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Temps depuis point de départ:</span>
-                  <span className="font-semibold">{isWalking ? `${walkingTime} min` : '~14 minutes'}</span>
+                  <span className="font-semibold">{isWalking ? `${walkingTime.toFixed(1)} min` : '~14 minutes'}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span>Direction:</span>
