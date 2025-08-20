@@ -84,11 +84,60 @@ export default function MissionIntro() {
                 <div className="mt-6 mb-4">
                   <div className="inline-block p-3 bg-amber-100 rounded-xl shadow-lg transform rotate-1">
                     <div className="w-40 h-40 mx-auto bg-white rounded-lg shadow-inner flex items-center justify-center border-2 border-amber-200 relative overflow-hidden">
-                      <img 
-                        src="/attached_assets/dahu_blanc_1755705046128.png" 
-                        alt="Dahu Blanc"
-                        className="w-full h-full object-contain p-2 opacity-90"
-                      />
+                      <svg 
+                        className="w-full h-full p-2 opacity-90"
+                        viewBox="0 0 400 400"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        {/* Dahu body */}
+                        <path d="M80 250 Q120 200 180 210 Q240 220 280 240 Q300 250 290 280 Q280 310 250 320 Q200 330 150 320 Q100 310 80 280 Z" 
+                              fill="#2a2a2a" stroke="#000" strokeWidth="2"/>
+                        
+                        {/* Dahu chest */}
+                        <ellipse cx="150" cy="260" rx="40" ry="35" fill="#4a4a4a" stroke="#000" strokeWidth="1.5"/>
+                        
+                        {/* Dahu head */}
+                        <path d="M270 240 Q290 220 310 230 Q320 240 315 260 Q310 280 290 285 Q270 280 265 260 Z" 
+                              fill="#3a3a3a" stroke="#000" strokeWidth="2"/>
+                        
+                        {/* Horn (curved) */}
+                        <path d="M285 230 Q275 210 270 190 Q268 180 275 175 Q280 180 285 190 Q290 210 285 230" 
+                              fill="#1a1a1a" stroke="#000" strokeWidth="2"/>
+                        
+                        {/* Second horn curve */}
+                        <path d="M275 175 Q270 160 275 145 Q280 135 285 140 Q285 150 280 165" 
+                              fill="#1a1a1a" stroke="#000" strokeWidth="1.5"/>
+                        
+                        {/* Eye */}
+                        <circle cx="295" cy="250" r="4" fill="#000"/>
+                        
+                        {/* Legs */}
+                        <rect x="120" y="320" width="8" height="40" fill="#2a2a2a" stroke="#000" strokeWidth="1"/>
+                        <rect x="140" y="320" width="8" height="40" fill="#2a2a2a" stroke="#000" strokeWidth="1"/>
+                        <rect x="220" y="320" width="8" height="40" fill="#2a2a2a" stroke="#000" strokeWidth="1"/>
+                        <rect x="240" y="320" width="8" height="40" fill="#2a2a2a" stroke="#000" strokeWidth="1"/>
+                        
+                        {/* Hooves */}
+                        <ellipse cx="124" cy="365" rx="6" ry="4" fill="#000"/>
+                        <ellipse cx="144" cy="365" rx="6" ry="4" fill="#000"/>
+                        <ellipse cx="224" cy="365" rx="6" ry="4" fill="#000"/>
+                        <ellipse cx="244" cy="365" rx="6" ry="4" fill="#000"/>
+                        
+                        {/* Fur texture lines */}
+                        <path d="M90 260 Q110 255 130 260" stroke="#000" strokeWidth="1" fill="none"/>
+                        <path d="M100 280 Q120 275 140 280" stroke="#000" strokeWidth="1" fill="none"/>
+                        <path d="M160 240 Q180 235 200 240" stroke="#000" strokeWidth="1" fill="none"/>
+                        <path d="M180 270 Q200 265 220 270" stroke="#000" strokeWidth="1" fill="none"/>
+                        
+                        {/* Ground line */}
+                        <path d="M60 370 Q200 375 340 370" stroke="#000" strokeWidth="2" fill="none"/>
+                        <path d="M70 375 Q150 380 250 375" stroke="#666" strokeWidth="1" fill="none"/>
+                        
+                        {/* Grass marks */}
+                        <path d="M80 370 L85 365 M90 372 L95 367 M110 371 L115 366" stroke="#000" strokeWidth="1"/>
+                        <path d="M280 369 L285 364 M290 371 L295 366 M310 370 L315 365" stroke="#000" strokeWidth="1"/>
+                      </svg>
                       <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-xs font-elvish text-amber-800 bg-white/80 px-2 py-1 rounded">
                         Dahu Blanc
                       </div>

@@ -93,7 +93,7 @@ export default function CompassNavigation() {
           </span>
         </div>
         
-        <h2 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">Navigation</h2>
+        <h2 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg text-center flex-1">Navigation jusqu'au prochain point d'énigme</h2>
         <div className="w-10"></div>
       </div>
 
@@ -101,8 +101,8 @@ export default function CompassNavigation() {
       <div className="max-w-md mx-auto">
         <div className="bg-slate-900/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden mb-6 border-4 border-amber-500/50">
           <div className="p-8">
-            {/* Simplified Compass Display */}
-            <div className="relative w-80 h-80 mx-auto mb-8">
+            {/* Simplified Compass Display with Animation */}
+            <div className="relative w-80 h-80 mx-auto mb-8 animate-compassAppear">
               {/* Outer Ring - simplified */}
               <div className="absolute inset-0 rounded-full border-4 border-slate-700 bg-gradient-to-br from-slate-200 to-slate-300 shadow-2xl">
                 {/* Cardinal Directions Only */}
@@ -221,8 +221,27 @@ export default function CompassNavigation() {
           20%, 40%, 60%, 80% { transform: translateX(10px); }
         }
         
+        @keyframes compassAppear {
+          0% {
+            opacity: 0;
+            transform: scale(0.3) rotate(-180deg);
+          }
+          50% {
+            opacity: 0.5;
+            transform: scale(0.7) rotate(-90deg);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+          }
+        }
+        
         .animate-slideInUp {
           animation: slideInUp 0.6s ease-out;
+        }
+        
+        .animate-compassAppear {
+          animation: compassAppear 1.2s ease-out;
         }
       `}</style>
     </div>

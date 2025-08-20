@@ -93,7 +93,7 @@ export default function RiddleChapter() {
           </span>
         </div>
         
-        <h2 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">Chapitre 1</h2>
+        <div className="w-10"></div>
         <div className="w-10"></div>
       </div>
 
