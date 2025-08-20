@@ -45,22 +45,22 @@ export default function FirstEnigma() {
       }
     }
     
-    // HETRE (1. horizontal, row 1, cols 1-5) - intersects with CHENE at position 2
+    // HETRE (1. horizontal, row 1, cols 1-5) - intersects with CHENE at position 1 (letter E)
     for (let j = 1; j <= 5; j++) {
       initialGrid[1][j] = {
         id: `1-${j}`,
-        value: j === 3 ? 'T' : '', // Pre-fill intersection with CHENE
-        readOnly: j === 3, // Make intersection read-only
+        value: j === 2 ? 'E' : '', // Pre-fill intersection with CHENE (HETRE position 1 = E)
+        readOnly: j === 2, // Make intersection read-only
         wordId: 'hetre',
         position: j - 1
       };
     }
     
-    // CHENE (2. vertical, col 3, rows 0-4) - intersects with HETRE at row 1
+    // CHENE (2. vertical, col 2, rows 0-4) - intersects with HETRE at row 1
     for (let i = 0; i <= 4; i++) {
       if (i === 1) continue; // Skip HETRE intersection (already handled)
-      initialGrid[i][3] = {
-        id: `${i}-3`,
+      initialGrid[i][2] = {
+        id: `${i}-2`,
         value: '',
         readOnly: false,
         wordId: 'chene',
@@ -68,26 +68,26 @@ export default function FirstEnigma() {
       };
     }
     
-    // EPICEA (3. horizontal, row 3, cols 0-5) - intersects with CHENE at position 3 and SAPIN at position 5
+    // EPICEA (3. horizontal, row 4, cols 0-5) - intersects with CHENE at position 2 and SAPIN at position 5
     for (let j = 0; j <= 5; j++) {
-      initialGrid[3][j] = {
-        id: `3-${j}`,
-        value: j === 3 ? 'E' : (j === 5 ? 'A' : ''), // Pre-fill intersections
-        readOnly: j === 3 || j === 5, // Make intersections read-only
+      initialGrid[4][j] = {
+        id: `4-${j}`,
+        value: j === 2 ? 'E' : (j === 5 ? 'A' : ''), // Pre-fill intersections
+        readOnly: j === 2 || j === 5, // Make intersections read-only
         wordId: 'epicea',
         position: j
       };
     }
     
-    // SAPIN (4. vertical, col 5, rows 3-6) - intersects with EPICEA at row 3
-    for (let i = 3; i <= 6; i++) {
-      if (i === 3) continue; // Skip EPICEA intersection (already handled)
+    // SAPIN (4. vertical, col 5, rows 2-5) - intersects with EPICEA at row 4
+    for (let i = 2; i <= 5; i++) {
+      if (i === 4) continue; // Skip EPICEA intersection (already handled)
       initialGrid[i][5] = {
         id: `${i}-5`,
         value: '',
         readOnly: false,
         wordId: 'sapin',
-        position: i - 3
+        position: i - 2
       };
     }
     
@@ -305,11 +305,11 @@ export default function FirstEnigma() {
                           row.map((cell, j) => (
                             <div key={cell.id} className="relative">
                               {/* Number labels for word starts */}
-                              {((i === 1 && j === 1) || (i === 0 && j === 3) || (i === 3 && j === 0) || (i === 3 && j === 5)) && (
+                              {((i === 1 && j === 1) || (i === 0 && j === 2) || (i === 4 && j === 0) || (i === 2 && j === 5)) && (
                                 <div className="absolute -top-1 -left-1 w-3 h-3 bg-emerald-600 text-white text-xs flex items-center justify-center rounded-full font-bold z-10">
                                   {(i === 1 && j === 1) ? '1' : 
-                                   (i === 0 && j === 3) ? '2' : 
-                                   (i === 3 && j === 0) ? '3' : '4'}
+                                   (i === 0 && j === 2) ? '2' : 
+                                   (i === 4 && j === 0) ? '3' : '4'}
                                 </div>
                               )}
                               <input
