@@ -1,62 +1,52 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, Navigation, Timer, Smartphone } from "lucide-react";
+import { ArrowLeft, Timer, Compass, Smartphone } from "lucide-react";
+import { useLanguage } from "@/hooks/use-language";
 import { useLocation } from "wouter";
 import { useChronometer } from "@/hooks/use-chronometer";
 import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_background_c0472772.png";
 
-export default function CompassNavigation() {
+export default function ThirdCompass() {
+  const { t } = useLanguage();
   const [, setLocation] = useLocation();
-  const [walkingTime, setWalkingTime] = useState(15);
-  const [distance, setDistance] = useState(950);
-  const [isWalking, setIsWalking] = useState(false);
-  const [hasArrived, setHasArrived] = useState(false);
-  const [needleRotation, setNeedleRotation] = useState(45); // 45 degrees = North-East // 45 degrees for NE
   const chronometer = useChronometer();
-
-  // Function to simulate screen shake like alarm clock
+  
+  // Navigation states
+  const [isWalking, setIsWalking] = useState(false);
+  const [walkingTime, setWalkingTime] = useState(0);
+  const [distance, setDistance] = useState(400); // 400 meters
+  const [hasArrived, setHasArrived] = useState(false);
+  const [needleRotation, setNeedleRotation] = useState(45); // North-East
+  
+  // Screen shake effect
+  const [isShaking, setIsShaking] = useState(false);
+  
   const shakeScreen = () => {
-    const body = document.body;
-    body.style.animation = 'shake 0.6s ease-in-out';
-    setTimeout(() => {
-      body.style.animation = '';
-    }, 600);
-    
-    // Also try native vibration if available
-    if (navigator.vibrate) {
-      navigator.vibrate([200, 100, 200, 100, 400]);
-    }
+    setIsShaking(true);
+    setTimeout(() => setIsShaking(false), 500);
   };
-
-  useEffect(() => {
-    // Restore chronometer if it was already started
-    const savedStartTime = localStorage.getItem('missionStartTime');
-    if (savedStartTime && !chronometer.isRunning) {
-      chronometer.start();
-    }
-  }, [chronometer]);
 
   const handleStartWalking = () => {
     setIsWalking(true);
     
-    // Slightly move the needle during walking
-    const needleInterval = setInterval(() => {
-      setNeedleRotation(prev => prev + (Math.random() - 0.5) * 4); // Small random movements
-    }, 500);
-    
-    // Animate countdown over 10 seconds
+    // Walking timer - 7 minutes (420 seconds) for demo, compressed to 7 seconds
     const interval = setInterval(() => {
       setWalkingTime(prev => {
-        const newTime = Math.max(0, prev - 1.5); // 15 minutes / 10 seconds = 1.5 per iteration
+        const newTime = prev + 0.1;
         return Math.round(newTime * 10) / 10; // Round to 1 decimal
       });
       
       setDistance(prev => {
-        const newDistance = Math.max(0, prev - 95); // 950m / 10 seconds = 95m per iteration
+        const newDistance = Math.max(0, prev - 57.1); // 400m / 7 seconds = 57.1m per iteration
         return newDistance;
       });
     }, 1000);
 
-    // Stop after 10 seconds and show arrival
+    // Needle movement animation
+    const needleInterval = setInterval(() => {
+      setNeedleRotation(prev => prev + (Math.random() - 0.5) * 10);
+    }, 2000);
+
+    // Stop after 7 seconds and show arrival
     setTimeout(() => {
       clearInterval(interval);
       clearInterval(needleInterval);
@@ -66,12 +56,12 @@ export default function CompassNavigation() {
       setNeedleRotation(45); // Reset needle to NE
       setHasArrived(true);
       shakeScreen(); // Shake screen when arriving
-    }, 10000);
+    }, 7000);
   };
 
   return (
     <div 
-      className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
+      className={`min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat ${isShaking ? 'animate-shake' : ''}`}
       style={{ 
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url(${moleMountainImage})` 
       }}
@@ -79,7 +69,7 @@ export default function CompassNavigation() {
       {/* Header with Timer */}
       <div className="flex items-center justify-between mb-6 pt-4">
         <button
-          onClick={() => setLocation("/forest-challenge")}
+          onClick={() => setLocation("/second-enigma")}
           className="p-2 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow"
           data-testid="button-back"
         >
@@ -118,49 +108,31 @@ export default function CompassNavigation() {
                   className="relative transition-transform duration-500 ease-out"
                   style={{ 
                     transform: `rotate(${needleRotation}deg)`,
-                    transformOrigin: '50% 50%'
                   }}
                 >
-                  {/* Single Large Needle (Red) */}
-                  <div className="absolute top-0 left-1/2 w-0 h-0 transform -translate-x-1/2 border-l-4 border-r-4 border-b-20 border-transparent border-b-red-600"></div>
-                  <div className="absolute top-5 left-1/2 w-3 h-32 transform -translate-x-1/2 bg-gradient-to-b from-red-600 to-red-400 rounded-full shadow-lg"></div>
+                  <div className="w-1 bg-red-600 h-32 origin-bottom rounded-full shadow-lg"></div>
+                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-red-600 rounded-full border-2 border-white shadow-lg"></div>
                 </div>
-              </div>
-              
-              {/* Center Pivot - larger */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-8 h-8 bg-gradient-to-br from-slate-600 to-slate-800 rounded-full shadow-lg border-2 border-slate-400"></div>
               </div>
             </div>
 
-            {/* Navigation Info */}
-            <div className="text-center space-y-4 mb-8">
-              <div className="bg-amber-500/20 rounded-xl p-4 border border-amber-400/30">
-                <div className="flex items-center justify-center mb-2">
-                  <Navigation className="h-5 w-5 text-amber-400 mr-2" />
-                  <span className="text-amber-100 font-semibold">Direction: Nord-Est</span>
-                </div>
-                <div className="grid grid-cols-2 gap-4 mt-4">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">{walkingTime}</div>
-                    <div className="text-amber-300 text-sm">minutes</div>
+            {/* Distance and Time Display */}
+            <div className="bg-amber-50/90 rounded-xl p-6 mb-6 border-2 border-amber-200/50">
+              <div className="text-center">
+                <h3 className="text-xl font-elvish font-bold text-amber-800 mb-4">
+                  Point d'énigme final
+                </h3>
+                <div className="grid grid-cols-2 gap-4 text-amber-700 font-elvish">
+                  <div>
+                    <p className="text-sm opacity-75">Distance</p>
+                    <p className="text-2xl font-bold">{distance.toFixed(0)}m</p>
                   </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">{distance}</div>
-                    <div className="text-amber-300 text-sm">mètres</div>
+                  <div>
+                    <p className="text-sm opacity-75">Temps estimé</p>
+                    <p className="text-2xl font-bold">{isWalking ? `${walkingTime} min` : '7 min'}</p>
                   </div>
                 </div>
               </div>
-              
-              {/* Walking Status */}
-              {isWalking && (
-                <div className="bg-blue-500/20 rounded-xl p-4 border border-blue-400/30 animate-pulse">
-                  <div className="flex items-center justify-center">
-                    <Smartphone className="h-5 w-5 text-blue-400 mr-2" />
-                    <span className="text-blue-100 font-semibold">En route vers le point d'énigme...</span>
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Reminder */}
@@ -182,16 +154,27 @@ export default function CompassNavigation() {
               </button>
             )}
 
+            {/* Walking Progress */}
+            {isWalking && (
+              <div className="text-center animate-slideInUp">
+                <div className="bg-blue-500/20 rounded-xl p-4 border border-blue-400/30 mb-4">
+                  <div className="text-blue-100 font-semibold">
+                    🚶‍♂️ En route vers le point final...
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Arrival Button */}
             {hasArrived && (
               <div className="animate-slideInUp">
                 <div className="bg-green-500/20 rounded-xl p-4 border border-green-400/30 mb-4 text-center">
                   <div className="text-green-100 font-semibold">
-                    🎯 Vous êtes arrivé au point d'énigme !
+                    🎯 Vous êtes arrivé au point d'énigme final !
                   </div>
                 </div>
                 <button
-                  onClick={() => setLocation("/first-enigma")}
+                  onClick={() => setLocation("/third-enigma")}
                   className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transform transition-all duration-200 hover:scale-105"
                   data-testid="button-start-enigma"
                 >
@@ -240,8 +223,17 @@ export default function CompassNavigation() {
           animation: slideInUp 0.6s ease-out;
         }
         
+        .animate-shake {
+          animation: shake 0.5s ease-in-out;
+        }
+        
         .animate-compassAppear {
           animation: compassAppear 1.2s ease-out;
+        }
+        
+        .font-elvish {
+          font-family: 'Kalam', cursive;
+          font-style: normal;
         }
       `}</style>
     </div>

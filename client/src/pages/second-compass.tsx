@@ -10,6 +10,11 @@ export default function SecondCompass() {
   const [, setLocation] = useLocation();
   const chronometer = useChronometer();
   
+  // Content display states
+  const [showContent, setShowContent] = useState(false);
+  const [typewriterText, setTypewriterText] = useState("");
+  const [showNavInfo, setShowNavInfo] = useState(false);
+  
   // Navigation states
   const [isWalking, setIsWalking] = useState(false);
   const [walkingTime, setWalkingTime] = useState(0);
@@ -20,6 +25,8 @@ export default function SecondCompass() {
   // Screen shake effect
   const [isShaking, setIsShaking] = useState(false);
   
+  const storyText = "Un arbre remarquable vous attend sur votre chemin, marqué d'une bande d'écorce blanche distinctive. Il se dresse comme un gardien millénaire, témoin des secrets du Dahu. Gardez les yeux ouverts - ce géant ne peut être manqué. Le Dahu a prévu le prochain défi près de ses racines ancestrales...";
+
   const shakeScreen = () => {
     setIsShaking(true);
     setTimeout(() => setIsShaking(false), 500);
@@ -31,7 +38,7 @@ export default function SecondCompass() {
     // Walking timer - 14 minutes (840 seconds) for demo, compressed to 14 seconds
     const interval = setInterval(() => {
       setWalkingTime(prev => {
-        const newTime = prev + 0.1;
+        const newTime = prev + 1.0;
         return Math.round(newTime * 10) / 10;
       });
       
@@ -58,6 +65,27 @@ export default function SecondCompass() {
       shakeScreen();
     }, 14000);
   };
+
+  useEffect(() => {
+    // Start content display
+    setTimeout(() => {
+      setShowContent(true);
+      
+      // Typewriter effect
+      let charIndex = 0;
+      const typeInterval = setInterval(() => {
+        if (charIndex < storyText.length) {
+          setTypewriterText(storyText.slice(0, charIndex + 1));
+          charIndex++;
+        } else {
+          clearInterval(typeInterval);
+          setTimeout(() => setShowNavInfo(true), 500);
+        }
+      }, 30);
+
+      return () => clearInterval(typeInterval);
+    }, 1000);
+  }, [storyText]);
 
   return (
     <div 
@@ -88,13 +116,14 @@ export default function SecondCompass() {
       </div>
 
       {/* Tree Guardian Content */}
-      <div className="max-w-md mx-auto">
-        <div className="bg-slate-900/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden mb-6 border-4 border-amber-500/50">
-          <div className="p-8">
-            
-            {/* Remarkable Tree Image and Description */}
-            <div className="mb-8">
-              <div className="bg-emerald-50/95 backdrop-blur-sm rounded-2xl p-6 mb-6 border-2 border-emerald-200/50">
+      {showContent && (
+        <div className="max-w-md mx-auto animate-fadeInUp">
+          <div className="bg-slate-900/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden mb-6 border-4 border-amber-500/50">
+            <div className="p-8">
+              
+              {/* Remarkable Tree Image and Description */}
+              <div className="mb-8">
+                <div className="bg-emerald-50/95 backdrop-blur-sm rounded-2xl p-6 mb-6 border-2 border-emerald-200/50">
                 <div className="text-center mb-4">
                   <TreePine className="h-12 w-12 text-emerald-700 mx-auto mb-3" />
                   <h3 className="text-2xl font-elvish font-bold text-emerald-900 drop-shadow-sm">
@@ -142,42 +171,39 @@ export default function SecondCompass() {
                 </div>
                 
                 <div className="text-center font-elvish text-emerald-800 leading-relaxed">
-                  <p className="mb-3 italic">
-                    "Un arbre remarquable vous attend sur votre chemin, marqué d'une bande d'écorce blanche distinctive. 
-                    Il se dresse comme un gardien millénaire, témoin des secrets du Dahu."
-                  </p>
-                  <p className="text-sm text-emerald-600">
-                    Gardez les yeux ouverts - ce géant ne peut être manqué. 
-                    Le Dahu a prévu le prochain défi près de ses racines ancestrales...
+                  <p className="mb-3 italic min-h-[120px]">
+                    {typewriterText}
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Navigation Info */}
-            <div className="bg-amber-50/90 rounded-xl p-6 mb-6 border-2 border-amber-200/50">
-              <div className="text-center mb-4">
-                <Compass className="h-8 w-8 text-amber-600 mx-auto mb-2" />
-                <h4 className="text-lg font-elvish font-bold text-amber-800">
-                  Informations de Navigation
-                </h4>
+            {showNavInfo && (
+              <div className="bg-amber-50/90 rounded-xl p-6 mb-6 border-2 border-amber-200/50 animate-slideInUp">
+                <div className="text-center mb-4">
+                  <Compass className="h-8 w-8 text-amber-600 mx-auto mb-2" />
+                  <h4 className="text-lg font-elvish font-bold text-amber-800">
+                    Informations de Navigation
+                  </h4>
+                </div>
+                
+                <div className="space-y-3 text-amber-700 font-elvish">
+                  <div className="flex justify-between items-center">
+                    <span>Distance depuis point de départ:</span>
+                    <span className="font-semibold">{isWalking ? `${distance}m` : '920m'}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Temps depuis point de départ:</span>
+                    <span className="font-semibold">{isWalking ? `${walkingTime.toFixed(1)} min` : '~14 minutes'}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Direction:</span>
+                    <span className="font-semibold">Sud-Est</span>
+                  </div>
+                </div>
               </div>
-              
-              <div className="space-y-3 text-amber-700 font-elvish">
-                <div className="flex justify-between items-center">
-                  <span>Distance depuis point de départ:</span>
-                  <span className="font-semibold">{isWalking ? `${distance}m` : '920m'}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Temps depuis point de départ:</span>
-                  <span className="font-semibold">{isWalking ? `${walkingTime.toFixed(1)} min` : '~14 minutes'}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span>Direction:</span>
-                  <span className="font-semibold">Sud-Est</span>
-                </div>
-              </div>
-            </div>
+            )}
 
             {/* Reminder */}
             <div className="bg-red-500/20 rounded-xl p-4 border border-red-400/30 mb-6">
@@ -238,9 +264,10 @@ export default function SecondCompass() {
                 </button>
               </div>
             )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
