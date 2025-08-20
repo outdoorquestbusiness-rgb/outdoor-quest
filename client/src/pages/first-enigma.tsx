@@ -30,7 +30,7 @@ export default function FirstEnigma() {
   const [isTimeUp, setIsTimeUp] = useState(false);
   const [showClue, setShowClue] = useState(false);
   
-  // Crossword grid state - 7x7 grid
+  // Crossword grid state - 7x7 grid with intersecting words
   const [grid, setGrid] = useState<CrosswordCell[][]>(() => {
     const initialGrid: CrosswordCell[][] = [];
     for (let i = 0; i < 7; i++) {
@@ -45,20 +45,20 @@ export default function FirstEnigma() {
       }
     }
     
-    // HETRE (horizontal, row 1, cols 1-5)
+    // HETRE (1. horizontal, row 1, cols 1-5) - intersects with CHENE at position 2
     for (let j = 1; j <= 5; j++) {
       initialGrid[1][j] = {
         id: `1-${j}`,
-        value: '',
-        readOnly: false,
+        value: j === 3 ? 'T' : '', // Pre-fill intersection with CHENE
+        readOnly: j === 3, // Make intersection read-only
         wordId: 'hetre',
         position: j - 1
       };
     }
     
-    // CHENE (vertical, col 3, rows 0-4)
+    // CHENE (2. vertical, col 3, rows 0-4) - intersects with HETRE at row 1
     for (let i = 0; i <= 4; i++) {
-      if (initialGrid[i][3].wordId) continue; // Skip intersection
+      if (i === 1) continue; // Skip HETRE intersection (already handled)
       initialGrid[i][3] = {
         id: `${i}-3`,
         value: '',
@@ -68,21 +68,20 @@ export default function FirstEnigma() {
       };
     }
     
-    // EPICEA (horizontal, row 3, cols 0-5)
+    // EPICEA (3. horizontal, row 3, cols 0-5) - intersects with CHENE at position 3 and SAPIN at position 5
     for (let j = 0; j <= 5; j++) {
-      if (initialGrid[3][j].wordId) continue; // Skip intersection
       initialGrid[3][j] = {
         id: `3-${j}`,
-        value: '',
-        readOnly: false,
+        value: j === 3 ? 'E' : (j === 5 ? 'A' : ''), // Pre-fill intersections
+        readOnly: j === 3 || j === 5, // Make intersections read-only
         wordId: 'epicea',
         position: j
       };
     }
     
-    // SAPIN (vertical, col 5, rows 3-7)
-    for (let i = 3; i < 7; i++) {
-      if (initialGrid[i][5].wordId) continue; // Skip intersection
+    // SAPIN (4. vertical, col 5, rows 3-6) - intersects with EPICEA at row 3
+    for (let i = 3; i <= 6; i++) {
+      if (i === 3) continue; // Skip EPICEA intersection (already handled)
       initialGrid[i][5] = {
         id: `${i}-5`,
         value: '',
@@ -115,11 +114,43 @@ export default function FirstEnigma() {
           clearInterval(interval);
           setTimerActive(false);
           setIsTimeUp(true);
+          // Show solution when time is up
+          showSolution();
           return 0;
         }
         return prev - 1;
       });
     }, 1000);
+  };
+
+  // Show solution in grid
+  const showSolution = () => {
+    const solutionGrid = [...grid];
+    
+    // Fill in all answers
+    const solutions = {
+      hetre: 'HETRE',
+      chene: 'CHENE',
+      epicea: 'EPICEA',
+      sapin: 'SAPIN'
+    };
+
+    for (let i = 0; i < 7; i++) {
+      for (let j = 0; j < 7; j++) {
+        const cell = solutionGrid[i][j];
+        if (cell.wordId && !cell.readOnly) {
+          const word = solutions[cell.wordId as keyof typeof solutions];
+          if (word[cell.position]) {
+            solutionGrid[i][j] = {
+              ...cell,
+              value: word[cell.position]
+            };
+          }
+        }
+      }
+    }
+    
+    setGrid(solutionGrid);
   };
 
   // Check if crossword is completed
@@ -209,7 +240,7 @@ export default function FirstEnigma() {
       {/* Header with Timers */}
       <div className="flex items-center justify-between mb-6 pt-4">
         <button
-          onClick={() => setLocation("/compass-navigation")}
+          onClick={() => setLocation("/forest-challenge")}
           className="p-2 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow"
           data-testid="button-back"
         >
@@ -273,6 +304,14 @@ export default function FirstEnigma() {
                         {grid.map((row, i) => 
                           row.map((cell, j) => (
                             <div key={cell.id} className="relative">
+                              {/* Number labels for word starts */}
+                              {((i === 1 && j === 1) || (i === 0 && j === 3) || (i === 3 && j === 0) || (i === 3 && j === 5)) && (
+                                <div className="absolute -top-1 -left-1 w-3 h-3 bg-emerald-600 text-white text-xs flex items-center justify-center rounded-full font-bold z-10">
+                                  {(i === 1 && j === 1) ? '1' : 
+                                   (i === 0 && j === 3) ? '2' : 
+                                   (i === 3 && j === 0) ? '3' : '4'}
+                                </div>
+                              )}
                               <input
                                 type="text"
                                 value={cell.value}
@@ -284,6 +323,8 @@ export default function FirstEnigma() {
                                     : 'bg-white border-emerald-400 focus:border-emerald-600'
                                 } ${
                                   isCompleted ? 'bg-green-100' : ''
+                                } ${
+                                  isTimeUp && !cell.readOnly && !isCompleted ? 'bg-red-100 text-red-700' : ''
                                 } rounded`}
                                 maxLength={1}
                                 data-testid={`crossword-cell-${i}-${j}`}
@@ -302,8 +343,8 @@ export default function FirstEnigma() {
                         </div>
                         <div>
                           <h5 className="font-bold text-emerald-800 mb-2">Vertical:</h5>
-                          <p className="text-emerald-700">1. Arbre au gland (5 lettres)</p>
-                          <p className="text-emerald-700">2. Conifère de Noël (5 lettres)</p>
+                          <p className="text-emerald-700">2. Arbre au gland (5 lettres)</p>
+                          <p className="text-emerald-700">4. Conifère de Noël (4 lettres)</p>
                         </div>
                       </div>
                     </div>
@@ -341,9 +382,21 @@ export default function FirstEnigma() {
                           <h4 className="text-xl font-elvish font-bold text-red-800 mb-3">
                             Trop tard !
                           </h4>
-                          <p className="text-red-700 font-elvish">
-                            Le temps est écoulé. Les secrets de la forêt restent cachés pour cette fois...
+                          <p className="text-red-700 font-elvish mb-4">
+                            Le temps est écoulé. Voici les réponses que vous cherchiez :
                           </p>
+                          <div className="bg-white/80 rounded-lg p-4 text-center">
+                            <div className="grid grid-cols-2 gap-4 text-sm text-gray-700">
+                              <div>
+                                <p><span className="font-bold">1. HETRE</span> - Arbre aux feuilles caduques</p>
+                                <p><span className="font-bold">3. EPICEA</span> - Conifère aux aiguilles plates</p>
+                              </div>
+                              <div>
+                                <p><span className="font-bold">2. CHENE</span> - Arbre au gland</p>
+                                <p><span className="font-bold">4. SAPIN</span> - Conifère de Noël</p>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     )}

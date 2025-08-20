@@ -22,7 +22,7 @@ export default function MissionIntro() {
     chronometer.start();
     // Store start time in localStorage for persistence
     localStorage.setItem('missionStartTime', Date.now().toString());
-    setLocation("/compass-navigation");
+    setLocation("/forest-challenge");
   };
 
   useEffect(() => {
