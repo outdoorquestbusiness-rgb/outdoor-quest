@@ -405,11 +405,11 @@ export default function FirstEnigma() {
                     {(isCompleted || isTimeUp) && (
                       <div className="text-center animate-slideInUp">
                         <button
-                          onClick={() => setLocation("/riddle-chapter")}
+                          onClick={() => setLocation("/second-compass")}
                           className="bg-emerald-600 hover:bg-emerald-700 text-white font-elvish font-bold py-3 px-8 rounded-xl shadow-lg transition-colors"
                           data-testid="button-next-enigma"
                         >
-                          Passer à la prochaine énigme
+                          Continuer l'aventure
                         </button>
                       </div>
                     )}

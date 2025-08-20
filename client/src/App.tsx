@@ -14,6 +14,7 @@ import MissionIntro from "@/pages/mission-intro";
 import RiddleChapter from "@/pages/riddle-chapter";
 import CompassNavigation from "@/pages/compass-navigation";
 import FirstEnigma from "@/pages/first-enigma";
+import SecondCompass from "@/pages/second-compass";
 
 import RiddlePage from "@/pages/riddle";
 import GameEnd from "@/pages/game-end";
@@ -34,6 +35,7 @@ function Router() {
       <Route path="/forest-challenge" component={RiddleChapter} />
       <Route path="/compass-navigation" component={CompassNavigation} />
       <Route path="/first-enigma" component={FirstEnigma} />
+      <Route path="/second-compass" component={SecondCompass} />
       <Route path="/riddle-chapter" component={RiddleChapter} />
 
       <Route path="/riddle/chapter/:chapter/riddle/:riddle">
