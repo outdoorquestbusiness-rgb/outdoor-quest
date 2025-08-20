@@ -26,15 +26,22 @@ export default function ThirdEnigma() {
   const [timeRemaining, setTimeRemaining] = useState(120); // 2 minutes
   const [playerAnswer, setPlayerAnswer] = useState("");
 
-  const storyText = "Vous voici arrivés au cœur du mystère... Le Dahu Blanc se manifeste enfin, sa présence mystique emplissant l'air de magie ancienne. Sa voix résonne dans vos esprits : 'Mortels audacieux, vous avez prouvé votre valeur jusqu'à présent. Mais un dernier défi vous attend. Je garde jalousement un objet sacré, porteur d'un de mes nombreux secrets. Ce secret est écrit dans une langue oubliée des vivants, déchiffrable seulement par ceux qui unissent leurs forces et leur sagesse. Trouvez mon objet secret et révélez le mot qu'il cache... si vous en êtes capables.'";
+  const storyText = "Au plus profond de la forêt mystérieuse, le Dahu Blanc vous attend pour la dernière épreuve de ce domaine sylvestre. Sa voix ancienne résonne entre les arbres : 'Mortels courageux, vous avez traversé les mystères de ma forêt avec sagesse. Une ultime énigme forestière vous sépare de la sortie de ces bois enchantés. Je garde jalousement un objet sacré, porteur d'un de mes nombreux secrets. Ce secret est écrit dans une langue oubliée des vivants, déchiffrable seulement par ceux qui unissent leurs forces. Découvrez mon objet secret et sa signification... puis vous pourrez quitter ma forêt pour poursuivre votre quête au-delà de ces terres.'";
 
-  const letterCorrespondences: LetterCorrespondence[] = [
-    { greek: "Π", cyrillic: "П", latin: "P" },
-    { greek: "Ι", cyrillic: "И", latin: "I" },
-    { greek: "Ε", cyrillic: "Е", latin: "E" },
-    { greek: "Ρ", cyrillic: "Р", latin: "R" },
-    { greek: "Τ", cyrillic: "Т", latin: "T" },
-    { greek: "Ι", cyrillic: "И", latin: "I" },
+  const greekToLatin: { greek: string; latin: string }[] = [
+    { greek: "Π", latin: "P" },
+    { greek: "Ι", latin: "I" },
+    { greek: "Ε", latin: "E" },
+    { greek: "Ρ", latin: "R" },
+    { greek: "Τ", latin: "T" },
+  ];
+
+  const cyrillicToGreek: { cyrillic: string; greek: string }[] = [
+    { cyrillic: "П", greek: "Π" },
+    { cyrillic: "И", greek: "Ι" },
+    { cyrillic: "Е", greek: "Ε" },
+    { cyrillic: "Р", greek: "Ρ" },
+    { cyrillic: "Т", greek: "Τ" },
   ];
 
   const correctAnswer = "PIERRE";
@@ -141,18 +148,18 @@ export default function ThirdEnigma() {
         {showContent && (
           <div className="animate-fadeInUp">
             {/* Story Card */}
-            <div className="bg-purple-900/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-2 border-purple-300/50">
+            <div className="bg-emerald-50/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-2 border-emerald-200/50">
               <div className="p-6 sm:p-8">
                 <div className="text-center mb-6">
-                  <h3 className="text-3xl sm:text-4xl font-elvish font-bold mb-3 text-purple-100 drop-shadow-sm">
-                    Le Défi Final du Dahu Blanc
+                  <h3 className="text-3xl sm:text-4xl font-elvish font-bold mb-3 text-emerald-900 drop-shadow-sm">
+                    La Dernière Énigme de la Forêt
                   </h3>
-                  <p className="text-lg text-purple-200 italic font-elvish">L'Objet Secret</p>
+                  <p className="text-lg text-emerald-700 italic font-elvish">L'Objet Secret du Dahu</p>
                 </div>
                 
                 {/* Typewriter Story Text */}
                 <div className="relative mb-6">
-                  <p className="text-lg leading-relaxed font-elvish text-purple-100 min-h-[150px] tracking-wide italic text-center">
+                  <p className="text-lg leading-relaxed font-elvish text-emerald-900 min-h-[150px] tracking-wide italic text-center">
                     {typewriterText}
                   </p>
                 </div>
@@ -196,9 +203,9 @@ export default function ThirdEnigma() {
                         
                         {/* Greek Letters for Player 1 */}
                         <div className="bg-white/80 rounded-lg p-4">
-                          <h5 className="font-bold text-gray-800 mb-3">Correspondances grecques :</h5>
+                          <h5 className="font-bold text-gray-800 mb-3">Correspondances Grec → Latin :</h5>
                           <div className="grid grid-cols-2 gap-2 text-sm">
-                            {letterCorrespondences.map((letter, index) => (
+                            {greekToLatin.map((letter, index) => (
                               <div key={index} className="flex justify-between">
                                 <span className="font-mono text-lg">{letter.greek}</span>
                                 <span className="font-semibold">{letter.latin}</span>
@@ -245,12 +252,12 @@ export default function ThirdEnigma() {
                         
                         {/* Cyrillic Letters for Player 2 */}
                         <div className="bg-white/80 rounded-lg p-4">
-                          <h5 className="font-bold text-gray-800 mb-3">Correspondances cyrilliques :</h5>
+                          <h5 className="font-bold text-gray-800 mb-3">Correspondances Cyrillique → Grec :</h5>
                           <div className="grid grid-cols-2 gap-2 text-sm">
-                            {letterCorrespondences.map((letter, index) => (
+                            {cyrillicToGreek.map((letter, index) => (
                               <div key={index} className="flex justify-between">
                                 <span className="font-mono text-lg">{letter.cyrillic}</span>
-                                <span className="font-semibold">{letter.latin}</span>
+                                <span className="font-semibold">{letter.greek}</span>
                               </div>
                             ))}
                           </div>
@@ -270,12 +277,12 @@ export default function ThirdEnigma() {
                           value={playerAnswer}
                           onChange={(e) => setPlayerAnswer(e.target.value)}
                           placeholder="Tapez votre réponse..."
-                          className="px-4 py-2 border-2 border-gray-300 rounded-lg font-elvish text-lg focus:border-purple-500 focus:outline-none"
+                          className="px-4 py-2 border-2 border-gray-300 rounded-lg font-elvish text-lg focus:border-emerald-500 focus:outline-none"
                           data-testid="input-answer"
                         />
                         <button
                           onClick={handleSubmit}
-                          className="bg-purple-600 hover:bg-purple-700 text-white font-elvish font-bold py-2 px-6 rounded-lg transition-colors"
+                          className="bg-emerald-600 hover:bg-emerald-700 text-white font-elvish font-bold py-2 px-6 rounded-lg transition-colors"
                           data-testid="button-submit-answer"
                         >
                           Valider
@@ -295,7 +302,7 @@ export default function ThirdEnigma() {
                           Le Dahu Blanc approuve !
                         </h4>
                         <p className="text-green-700 font-elvish mb-4">
-                          Vous avez découvert l'objet secret et déchiffré le mystère de l'écriture cyrillique !
+                          Vous avez découvert l'objet secret et déchiffré le mystère des écritures anciennes ! La forêt s'ouvre devant vous.
                         </p>
                         
                         <div className="bg-amber-100 rounded-lg p-4 border-2 border-amber-400">
@@ -320,7 +327,7 @@ export default function ThirdEnigma() {
                           Le temps s'est écoulé...
                         </h4>
                         <p className="text-red-700 font-elvish mb-4">
-                          Le Dahu Blanc disparaît dans un nuage mystérieux, emportant son secret avec lui.
+                          Le Dahu Blanc disparaît entre les arbres, mais vous permet de continuer votre chemin hors de la forêt.
                         </p>
                         
                         <div className="bg-white/80 rounded-lg p-4 text-center">
@@ -338,10 +345,10 @@ export default function ThirdEnigma() {
                   <div className="text-center">
                     <button
                       onClick={() => setLocation("/game-end")}
-                      className="bg-purple-600 hover:bg-purple-700 text-white font-elvish font-bold py-3 px-8 rounded-xl shadow-lg transition-colors"
-                      data-testid="button-finish-game"
+                      className="bg-emerald-600 hover:bg-emerald-700 text-white font-elvish font-bold py-3 px-8 rounded-xl shadow-lg transition-colors"
+                      data-testid="button-continue-adventure"
                     >
-                      Terminer l'aventure
+                      Sortir de la forêt
                     </button>
                   </div>
                 )}
