@@ -344,7 +344,7 @@ export default function ThirdEnigma() {
                 {(isCompleted || isTimeUp) && (
                   <div className="text-center">
                     <button
-                      onClick={() => setLocation("/game-end")}
+                      onClick={() => setLocation("/alpine-station")}
                       className="bg-emerald-600 hover:bg-emerald-700 text-white font-elvish font-bold py-3 px-8 rounded-xl shadow-lg transition-colors"
                       data-testid="button-continue-adventure"
                     >

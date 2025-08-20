@@ -57,7 +57,7 @@ export default function SecondCompass() {
     setTimeout(() => {
       clearInterval(interval);
       clearInterval(needleInterval);
-      setWalkingTime(0);
+      setWalkingTime(14);
       setDistance(0);
       setIsWalking(false);
       setNeedleRotation(45);

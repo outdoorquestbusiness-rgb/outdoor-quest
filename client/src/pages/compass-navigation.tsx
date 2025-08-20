@@ -138,7 +138,7 @@ export default function CompassNavigation() {
               <div className="bg-amber-500/20 rounded-xl p-4 border border-amber-400/30">
                 <div className="flex items-center justify-center mb-2">
                   <Navigation className="h-5 w-5 text-amber-400 mr-2" />
-                  <span className="text-amber-100 font-semibold">Direction: Nord-Est</span>
+                  <span className="text-amber-100 font-semibold">Direction: Sud-Ouest</span>
                 </div>
                 <div className="grid grid-cols-2 gap-4 mt-4">
                   <div className="text-center">
