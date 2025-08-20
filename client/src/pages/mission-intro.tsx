@@ -26,8 +26,8 @@ export default function MissionIntro() {
   };
 
   useEffect(() => {
-    // Play intriguing sound and show background for 1.5 seconds, then start typewriter
-    createIntriguingSound(1500);
+    // Play horror movie transition sound and show background for 1.5 seconds, then start typewriter
+    createIntriguingSound(2000);
     const showContentTimer = setTimeout(() => {
       setShowContent(true);
       
@@ -42,7 +42,7 @@ export default function MissionIntro() {
           // Show button after story is complete
           setTimeout(() => setShowButton(true), 500);
         }
-      }, 50); // 50ms per character for realistic typing speed
+      }, 30); // 30ms per character for faster handwritten typing speed
 
       return () => clearInterval(typeInterval);
     }, 1500);
@@ -76,17 +76,29 @@ export default function MissionIntro() {
           <div className="bg-amber-50/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-2 border-amber-200/50">
             <div className="p-6 sm:p-8">
               <div className="text-center mb-8">
-                <h3 className="text-3xl sm:text-4xl font-serif font-bold mb-3 text-amber-900 drop-shadow-sm">
+                <h3 className="text-3xl sm:text-4xl font-handwritten font-bold mb-3 text-amber-900 drop-shadow-sm">
                   {missionStory.title}
                 </h3>
-                <p className="text-lg text-amber-700 italic font-serif">{missionStory.subtitle}</p>
+                <p className="text-lg text-amber-700 italic font-handwritten">{missionStory.subtitle}</p>
+                
+                {/* Dahu Image */}
+                <div className="mt-6 mb-4">
+                  <div className="inline-block p-2 bg-amber-100 rounded-xl shadow-lg transform rotate-1">
+                    <div className="w-32 h-32 mx-auto bg-white rounded-lg shadow-inner flex items-center justify-center border-2 border-amber-200">
+                      <div className="text-center">
+                        <div className="text-4xl mb-1">🦌</div>
+                        <div className="text-xs font-handwritten text-amber-800">Dahu Blanc</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               
               {/* Typewriter Story Text */}
               <div className="relative">
-                <p className="text-lg leading-relaxed font-serif text-amber-900 min-h-[200px] tracking-wide">
+                <p className="text-lg leading-relaxed font-handwritten text-amber-900 min-h-[200px] tracking-wide">
                   {typewriterText}
-                  <span className="animate-pulse">|</span>
+                  <span className="animate-pulse text-amber-700">✒️</span>
                 </p>
               </div>
             </div>
@@ -97,7 +109,7 @@ export default function MissionIntro() {
             <div className="animate-slideInUp">
               <button
                 onClick={handleStartAdventure}
-                className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold py-6 px-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 text-xl font-serif"
+                className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold py-6 px-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 text-xl font-handwritten"
                 data-testid="button-start-mission"
               >
                 <ArrowRight className="h-6 w-6 mr-3 inline-block" />
@@ -109,7 +121,7 @@ export default function MissionIntro() {
       )}
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
         
         @keyframes fadeInUp {
           0% {
@@ -141,8 +153,8 @@ export default function MissionIntro() {
           animation: slideInUp 0.6s ease-out;
         }
         
-        .font-serif {
-          font-family: 'Merriweather', serif;
+        .font-handwritten {
+          font-family: 'Kalam', cursive;
         }
       `}</style>
     </div>

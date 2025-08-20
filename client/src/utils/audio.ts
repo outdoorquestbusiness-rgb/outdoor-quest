@@ -1,43 +1,42 @@
 // Audio utility functions for generating sounds
-export function createIntriguingSound(duration: number = 1500): void {
+export function createIntriguingSound(duration: number = 2000): void {
   try {
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
     
-    // Create a haunting, mysterious sound effect
-    const oscillator1 = audioContext.createOscillator();
-    const oscillator2 = audioContext.createOscillator();
+    // Create horror movie scene transition sound effect (like a "whoosh" or "sting")
+    const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
+    const filterNode = audioContext.createBiquadFilter();
     
     // Connect nodes
-    oscillator1.connect(gainNode);
-    oscillator2.connect(gainNode);
+    oscillator.connect(filterNode);
+    filterNode.connect(gainNode);
     gainNode.connect(audioContext.destination);
     
-    // Configure first oscillator (low mysterious tone)
-    oscillator1.type = 'sine';
-    oscillator1.frequency.setValueAtTime(80, audioContext.currentTime);
-    oscillator1.frequency.exponentialRampToValueAtTime(60, audioContext.currentTime + duration / 1000);
+    // Configure oscillator for horror movie sting effect
+    oscillator.type = 'sawtooth';
+    oscillator.frequency.setValueAtTime(40, audioContext.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(120, audioContext.currentTime + 0.3);
+    oscillator.frequency.exponentialRampToValueAtTime(20, audioContext.currentTime + duration / 1000);
     
-    // Configure second oscillator (higher eerie tone)
-    oscillator2.type = 'triangle';
-    oscillator2.frequency.setValueAtTime(200, audioContext.currentTime);
-    oscillator2.frequency.exponentialRampToValueAtTime(150, audioContext.currentTime + duration / 1000);
+    // Configure filter for dramatic effect
+    filterNode.type = 'lowpass';
+    filterNode.frequency.setValueAtTime(2000, audioContext.currentTime);
+    filterNode.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + duration / 1000);
+    filterNode.Q.setValueAtTime(5, audioContext.currentTime);
     
-    // Configure volume envelope
+    // Configure dramatic volume envelope (classic horror sting)
     gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.1, audioContext.currentTime + 0.1);
-    gainNode.gain.exponentialRampToValueAtTime(0.05, audioContext.currentTime + duration / 2000);
+    gainNode.gain.exponentialRampToValueAtTime(0.15, audioContext.currentTime + 0.05);
+    gainNode.gain.exponentialRampToValueAtTime(0.08, audioContext.currentTime + 0.5);
     gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration / 1000);
     
-    // Start and stop oscillators
+    // Start and stop oscillator
     const startTime = audioContext.currentTime;
     const endTime = startTime + duration / 1000;
     
-    oscillator1.start(startTime);
-    oscillator2.start(startTime);
-    
-    oscillator1.stop(endTime);
-    oscillator2.stop(endTime);
+    oscillator.start(startTime);
+    oscillator.stop(endTime);
     
   } catch (error) {
     console.log('Audio not available in this environment');

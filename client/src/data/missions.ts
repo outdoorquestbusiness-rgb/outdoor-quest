@@ -11,9 +11,9 @@ export interface Mission {
 }
 
 export const defaultMission: Mission = {
-  id: "panique-au-mole",
-  name: "Panique au Môle",
-  description: "Une aventure mystérieuse vous attend sur le mont Môle",
+  id: "traces-du-mysterieux-dahu",
+  name: "Sur les traces du mystérieux Dahu",
+  description: "Une aventure mystérieuse vous attend sur le mont Môle à la recherche du dahu blanc",
   duration: "2-3 heures",
   difficulty: "Intermédiaire", 
   ageRecommended: "12+ ans",
@@ -23,7 +23,7 @@ export const defaultMission: Mission = {
 };
 
 export const missionStory = {
-  title: "Le Mystère du Môle",
+  title: "Sur les traces du mystérieux Dahu",
   subtitle: "La quête du dahu blanc",
   content: [
     "Le Môle, montagne solitaire, veille sur la vallée comme une sentinelle. Les anciens disaient qu'un dahu blanc y rôde, invisible aux yeux ordinaires, gardien de la mémoire des sommets.",
