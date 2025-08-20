@@ -187,7 +187,7 @@ export default function RiddleChapter() {
       )}
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,600;1,400&display=swap');
+        @import url('https://fonts.cdnfonts.com/css/tengwar-annatar');
         
         @keyframes fadeInUp {
           0% {
@@ -220,7 +220,8 @@ export default function RiddleChapter() {
         }
         
         .font-elvish {
-          font-family: 'Cinzel', serif;
+          font-family: 'Tengwar Annatar', serif;
+          font-style: italic;
         }
       `}</style>
     </div>

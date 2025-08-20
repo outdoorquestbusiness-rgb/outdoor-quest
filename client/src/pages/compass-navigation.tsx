@@ -121,13 +121,9 @@ export default function CompassNavigation() {
                     transformOrigin: '50% 50%'
                   }}
                 >
-                  {/* Large North Pointer (Red) */}
+                  {/* Single Large Needle (Red) */}
                   <div className="absolute top-0 left-1/2 w-0 h-0 transform -translate-x-1/2 border-l-4 border-r-4 border-b-20 border-transparent border-b-red-600"></div>
-                  <div className="absolute top-5 left-1/2 w-2 h-20 transform -translate-x-1/2 bg-gradient-to-b from-red-600 to-red-400 rounded-full shadow-lg"></div>
-                  
-                  {/* Large South Pointer (White) */}
-                  <div className="absolute bottom-0 left-1/2 w-0 h-0 transform -translate-x-1/2 rotate-180 border-l-4 border-r-4 border-b-20 border-transparent border-b-white"></div>
-                  <div className="absolute bottom-5 left-1/2 w-2 h-20 transform -translate-x-1/2 bg-gradient-to-b from-white to-gray-200 rounded-full shadow-lg border-2 border-gray-400"></div>
+                  <div className="absolute top-5 left-1/2 w-3 h-32 transform -translate-x-1/2 bg-gradient-to-b from-red-600 to-red-400 rounded-full shadow-lg"></div>
                 </div>
               </div>
               
