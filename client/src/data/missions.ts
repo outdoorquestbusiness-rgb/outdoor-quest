@@ -24,11 +24,11 @@ export const defaultMission: Mission = {
 
 export const missionStory = {
   title: "Le Mystère du Môle",
-  subtitle: "Une histoire mystérieuse",
+  subtitle: "La quête du dahu blanc",
   content: [
-    "Il y a des siècles, le mont Môle abritait un secret bien gardé. Des légendes racontent qu'un trésor mystérieux serait caché dans ses forêts profondes...",
-    "Récemment, des randonneurs ont découvert d'étranges symboles gravés sur les rochers. Ces indices pourraient bien mener à la découverte la plus extraordinaire de notre époque.",
-    "Votre mission : suivez les traces des anciens et percez le mystère du Môle. Êtes-vous prêt pour cette aventure ?"
+    "Le Môle, montagne solitaire, veille sur la vallée comme une sentinelle. Les anciens disaient qu'un dahu blanc y rôde, invisible aux yeux ordinaires, gardien de la mémoire des sommets.",
+    "Un carnet de berger retrouvé dans une vieille cabane vous est confié. À la première page :",
+    "« Suis mes traces, de la forêt à la croix. Réponds à mes énigmes, et tu verras l'invisible. Mais chaque pas doit être mérité. »"
   ],
   resources: [
     { type: "video", title: "Vidéo d'introduction", duration: "3 min", icon: "video" },

@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { useLocation } from "wouter";
 import { missionStory } from "@/data/missions";
+import { useChronometer } from "@/hooks/use-chronometer";
 import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_background_c0472772.png";
 
 export default function MissionIntro() {
@@ -12,8 +13,16 @@ export default function MissionIntro() {
   const [typewriterText, setTypewriterText] = useState("");
   const [showButton, setShowButton] = useState(false);
   const [currentParagraph, setCurrentParagraph] = useState(0);
+  const chronometer = useChronometer();
 
   const fullStoryText = missionStory.content.join(" ");
+
+  const handleStartAdventure = () => {
+    chronometer.start();
+    // Store start time in localStorage for persistence
+    localStorage.setItem('missionStartTime', Date.now().toString());
+    setLocation("/riddle/chapter/1");
+  };
 
   useEffect(() => {
     // Show background for 1.5 seconds, then start typewriter
@@ -85,7 +94,7 @@ export default function MissionIntro() {
           {showButton && (
             <div className="animate-slideInUp">
               <button
-                onClick={() => setLocation("/riddle/chapter/1/riddle/1")}
+                onClick={handleStartAdventure}
                 className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold py-6 px-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 text-xl font-serif"
                 data-testid="button-start-mission"
               >
@@ -97,7 +106,7 @@ export default function MissionIntro() {
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&display=swap');
         
         @keyframes fadeInUp {

@@ -11,6 +11,7 @@ import MissionDetails from "@/pages/mission-details";
 import Rules from "@/pages/rules";
 
 import MissionIntro from "@/pages/mission-intro";
+import RiddleChapter from "@/pages/riddle-chapter";
 
 import RiddlePage from "@/pages/riddle";
 import GameEnd from "@/pages/game-end";
@@ -28,6 +29,7 @@ function Router() {
       <Route path="/rules" component={Rules} />
 
       <Route path="/mission-intro" component={MissionIntro} />
+      <Route path="/riddle/chapter/:chapter" component={RiddleChapter} />
 
       <Route path="/riddle/chapter/:chapter/riddle/:riddle">
         {(params) => (
