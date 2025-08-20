@@ -3,40 +3,44 @@ export function createIntriguingSound(duration: number = 2000): void {
   try {
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
     
-    // Create horror movie scene transition sound effect (like a "whoosh" or "sting")
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    const filterNode = audioContext.createBiquadFilter();
+    // Create mysterious polyphonic melody
+    const oscillators: OscillatorNode[] = [];
+    const gainNodes: GainNode[] = [];
     
-    // Connect nodes
-    oscillator.connect(filterNode);
-    filterNode.connect(gainNode);
-    gainNode.connect(audioContext.destination);
+    // Mysterious chord progression (minor keys for mystical feeling)
+    const frequencies = [
+      [220, 261.63, 329.63], // A minor chord
+      [246.94, 293.66, 369.99], // B minor chord  
+      [196, 246.94, 293.66] // G minor chord
+    ];
     
-    // Configure oscillator for horror movie sting effect
-    oscillator.type = 'sawtooth';
-    oscillator.frequency.setValueAtTime(40, audioContext.currentTime);
-    oscillator.frequency.exponentialRampToValueAtTime(120, audioContext.currentTime + 0.3);
-    oscillator.frequency.exponentialRampToValueAtTime(20, audioContext.currentTime + duration / 1000);
-    
-    // Configure filter for dramatic effect
-    filterNode.type = 'lowpass';
-    filterNode.frequency.setValueAtTime(2000, audioContext.currentTime);
-    filterNode.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + duration / 1000);
-    filterNode.Q.setValueAtTime(5, audioContext.currentTime);
-    
-    // Configure dramatic volume envelope (classic horror sting)
-    gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.15, audioContext.currentTime + 0.05);
-    gainNode.gain.exponentialRampToValueAtTime(0.08, audioContext.currentTime + 0.5);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + duration / 1000);
-    
-    // Start and stop oscillator
-    const startTime = audioContext.currentTime;
-    const endTime = startTime + duration / 1000;
-    
-    oscillator.start(startTime);
-    oscillator.stop(endTime);
+    frequencies.forEach((chord, chordIndex) => {
+      chord.forEach((freq, noteIndex) => {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillators.push(oscillator);
+        gainNodes.push(gainNode);
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.type = 'sine';
+        oscillator.frequency.setValueAtTime(freq, audioContext.currentTime);
+        
+        const startDelay = chordIndex * 0.6;
+        const noteDuration = 0.8;
+        
+        // Soft envelope for ethereal sound
+        gainNode.gain.setValueAtTime(0, audioContext.currentTime + startDelay);
+        gainNode.gain.exponentialRampToValueAtTime(0.08, audioContext.currentTime + startDelay + 0.1);
+        gainNode.gain.exponentialRampToValueAtTime(0.04, audioContext.currentTime + startDelay + noteDuration * 0.7);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + startDelay + noteDuration);
+        
+        oscillator.start(audioContext.currentTime + startDelay);
+        oscillator.stop(audioContext.currentTime + startDelay + noteDuration);
+      });
+    });
     
   } catch (error) {
     console.log('Audio not available in this environment');

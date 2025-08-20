@@ -76,19 +76,21 @@ export default function MissionIntro() {
           <div className="bg-amber-50/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-2 border-amber-200/50">
             <div className="p-6 sm:p-8">
               <div className="text-center mb-8">
-                <h3 className="text-3xl sm:text-4xl font-handwritten font-bold mb-3 text-amber-900 drop-shadow-sm">
+                <h3 className="text-3xl sm:text-4xl font-elvish font-bold mb-3 text-amber-900 drop-shadow-sm">
                   {missionStory.title}
                 </h3>
-                <p className="text-lg text-amber-700 italic font-handwritten">{missionStory.subtitle}</p>
+                <p className="text-lg text-amber-700 italic font-elvish">{missionStory.subtitle}</p>
                 
-                {/* Dahu Image */}
+                {/* Dahu Mysterious Shadow */}
                 <div className="mt-6 mb-4">
-                  <div className="inline-block p-2 bg-amber-100 rounded-xl shadow-lg transform rotate-1">
-                    <div className="w-32 h-32 mx-auto bg-white rounded-lg shadow-inner flex items-center justify-center border-2 border-amber-200">
-                      <div className="text-center">
-                        <div className="text-4xl mb-1">🦌</div>
-                        <div className="text-xs font-handwritten text-amber-800">Dahu Blanc</div>
+                  <div className="inline-block p-3 bg-amber-100 rounded-xl shadow-lg transform rotate-1">
+                    <div className="w-32 h-32 mx-auto bg-gradient-to-br from-slate-300 to-slate-500 rounded-lg shadow-inner flex items-center justify-center border-2 border-amber-200 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-600 via-transparent to-slate-400 opacity-70"></div>
+                      <div className="relative text-center z-10">
+                        <div className="text-4xl mb-1 opacity-60 transform scale-110">🦌</div>
+                        <div className="absolute inset-0 bg-slate-700 opacity-30 rounded-full blur-sm"></div>
                       </div>
+                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-xs font-handwritten text-slate-200">Dahu Blanc</div>
                     </div>
                   </div>
                 </div>
@@ -96,9 +98,8 @@ export default function MissionIntro() {
               
               {/* Typewriter Story Text */}
               <div className="relative">
-                <p className="text-lg leading-relaxed font-handwritten text-amber-900 min-h-[200px] tracking-wide">
+                <p className="text-lg leading-relaxed font-elvish text-amber-900 min-h-[200px] tracking-wide italic">
                   {typewriterText}
-                  <span className="animate-pulse text-amber-700">✒️</span>
                 </p>
               </div>
             </div>
@@ -109,7 +110,7 @@ export default function MissionIntro() {
             <div className="animate-slideInUp">
               <button
                 onClick={handleStartAdventure}
-                className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold py-6 px-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 text-xl font-handwritten"
+                className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold py-6 px-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 text-xl font-elvish"
                 data-testid="button-start-mission"
               >
                 <ArrowRight className="h-6 w-6 mr-3 inline-block" />
@@ -121,7 +122,7 @@ export default function MissionIntro() {
       )}
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,600;1,400&display=swap');
         
         @keyframes fadeInUp {
           0% {
@@ -153,8 +154,8 @@ export default function MissionIntro() {
           animation: slideInUp 0.6s ease-out;
         }
         
-        .font-handwritten {
-          font-family: 'Kalam', cursive;
+        .font-elvish {
+          font-family: 'Cinzel', serif;
         }
       `}</style>
     </div>

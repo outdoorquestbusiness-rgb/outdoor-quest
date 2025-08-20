@@ -6,9 +6,25 @@ export function useChronometer() {
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  // Initialize from localStorage if available
+  useEffect(() => {
+    const savedStartTime = localStorage.getItem('missionStartTime');
+    if (savedStartTime && !isRunning) {
+      const savedTime = parseInt(savedStartTime);
+      setStartTime(savedTime);
+      setIsRunning(true);
+    }
+  }, []);
+
   const start = () => {
     if (!isRunning) {
-      const now = Date.now();
+      const savedStartTime = localStorage.getItem('missionStartTime');
+      const now = savedStartTime ? parseInt(savedStartTime) : Date.now();
+      
+      if (!savedStartTime) {
+        localStorage.setItem('missionStartTime', now.toString());
+      }
+      
       setStartTime(now);
       setIsRunning(true);
     }

@@ -33,10 +33,6 @@ export default function RiddleChapter() {
     {
       icon: <Zap className="h-5 w-5" />,
       text: "Une fois dans la zone, votre téléphone vibrera. Soyez à l'affût"
-    },
-    {
-      icon: <Timer className="h-5 w-5" />,
-      text: "Préparez-vous à résoudre la mini-énigme avec célérité"
     }
   ];
 
@@ -109,17 +105,16 @@ export default function RiddleChapter() {
           <div className="bg-emerald-50/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-2 border-emerald-200/50">
             <div className="p-6 sm:p-8">
               <div className="text-center mb-6">
-                <h3 className="text-3xl sm:text-4xl font-handwritten font-bold mb-3 text-emerald-900 drop-shadow-sm">
+                <h3 className="text-3xl sm:text-4xl font-elvish font-bold mb-3 text-emerald-900 drop-shadow-sm">
                   La Forêt des Mystères
                 </h3>
-                <p className="text-lg text-emerald-700 italic font-handwritten">Premier défi du dahu blanc</p>
+                <p className="text-lg text-emerald-700 italic font-elvish">Premier défi du dahu blanc</p>
               </div>
               
               {/* Typewriter Story Text */}
               <div className="relative mb-6">
-                <p className="text-lg leading-relaxed font-handwritten text-emerald-900 min-h-[120px] tracking-wide">
+                <p className="text-lg leading-relaxed font-elvish text-emerald-900 min-h-[120px] tracking-wide italic">
                   {typewriterText}
-                  {typewriterText.length < storyText.length && <span className="animate-pulse text-emerald-700">✒️</span>}
                 </p>
               </div>
 
@@ -127,7 +122,7 @@ export default function RiddleChapter() {
               {showInstructions && (
                 <div className="animate-slideInUp">
                   <div className="bg-emerald-100/80 rounded-xl p-6 mb-6">
-                    <h4 className="text-xl font-handwritten font-bold text-emerald-900 mb-4 text-center">
+                    <h4 className="text-xl font-elvish font-bold text-emerald-900 mb-4 text-center">
                       Les Règles de la Quête
                     </h4>
                     <div className="space-y-3">
@@ -136,21 +131,21 @@ export default function RiddleChapter() {
                           <span className="w-6 h-6 bg-emerald-600 rounded-full flex items-center justify-center text-white text-sm font-bold mr-3 mt-0.5">
                             {index + 1}
                           </span>
-                          <p className="font-handwritten text-emerald-800 leading-relaxed">{instruction}</p>
+                          <p className="font-elvish text-emerald-800 leading-relaxed">{instruction}</p>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Tips */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                    {tips.slice(0, 3).map((tip, index) => (
+                  {/* Tips - vertical layout */}
+                  <div className="space-y-3 mb-4">
+                    {tips.map((tip, index) => (
                       <div key={index} className="bg-white/90 rounded-lg p-4 border-l-4 border-emerald-500">
                         <div className="flex items-start">
                           <div className="text-emerald-600 mr-3 mt-1">
                             {tip.icon}
                           </div>
-                          <p className="text-sm font-handwritten text-slate-700 leading-relaxed">{tip.text}</p>
+                          <p className="text-sm font-elvish text-slate-700 leading-relaxed">{tip.text}</p>
                         </div>
                       </div>
                     ))}
@@ -160,10 +155,10 @@ export default function RiddleChapter() {
                   <div className="bg-amber-100/90 rounded-lg p-4 border-l-4 border-amber-500 mb-6">
                     <div className="flex items-start">
                       <div className="text-amber-600 mr-3 mt-1">
-                        <Smartphone className="h-5 w-5" />
+                        <Timer className="h-5 w-5" />
                       </div>
-                      <p className="text-sm font-handwritten text-amber-800 leading-relaxed font-semibold">
-                        Gardez l'œil alerte et non rivé sur votre écran - la nature recèle bien des surprises
+                      <p className="text-sm font-elvish text-amber-800 leading-relaxed font-semibold">
+                        Jusqu'à votre arrivée au point, vous pouvez juste profiter de la randonnée !
                       </p>
                     </div>
                   </div>
@@ -177,7 +172,7 @@ export default function RiddleChapter() {
             <div className="animate-slideInUp text-center">
               <button
                 onClick={() => setLocation("/compass-navigation")}
-                className="group bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-bold py-6 px-12 rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 text-xl font-handwritten relative overflow-hidden"
+                className="group bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-bold py-6 px-12 rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 text-xl font-elvish relative overflow-hidden"
                 data-testid="button-compass"
               >
                 <div className="flex items-center justify-center">
@@ -192,7 +187,7 @@ export default function RiddleChapter() {
       )}
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:ital,wght@0,400;0,600;1,400&display=swap');
         
         @keyframes fadeInUp {
           0% {
@@ -224,8 +219,8 @@ export default function RiddleChapter() {
           animation: slideInUp 0.6s ease-out;
         }
         
-        .font-handwritten {
-          font-family: 'Kalam', cursive;
+        .font-elvish {
+          font-family: 'Cinzel', serif;
         }
       `}</style>
     </div>

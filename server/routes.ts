@@ -26,8 +26,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Check if this is the special Môle mission
       if (accessCode === "1234") {
         const moleMission: InsertMission = {
-          name: "Panique au Môle",
-          description: "Une aventure mystérieuse vous attend sur le mont Môle", 
+          name: "Sur les traces du mystérieux Dahu",
+          description: "Une aventure mystérieuse vous attend sur le mont Môle à la recherche du dahu blanc", 
           duration: "2-3 heures",
           difficulty: "Intermédiaire",
           ageRecommended: "12+ ans",

@@ -13,8 +13,15 @@ export default function CompassNavigation() {
   const [needleRotation, setNeedleRotation] = useState(45); // 45 degrees for NE
   const chronometer = useChronometer();
 
-  // Function to simulate phone vibration
-  const vibratePhone = () => {
+  // Function to simulate screen shake like alarm clock
+  const shakeScreen = () => {
+    const body = document.body;
+    body.style.animation = 'shake 0.6s ease-in-out';
+    setTimeout(() => {
+      body.style.animation = '';
+    }, 600);
+    
+    // Also try native vibration if available
     if (navigator.vibrate) {
       navigator.vibrate([200, 100, 200, 100, 400]);
     }
@@ -26,7 +33,7 @@ export default function CompassNavigation() {
     if (savedStartTime && !chronometer.isRunning) {
       chronometer.start();
     }
-  }, []);
+  }, [chronometer]);
 
   const handleStartWalking = () => {
     setIsWalking(true);
@@ -58,7 +65,7 @@ export default function CompassNavigation() {
       setIsWalking(false);
       setNeedleRotation(45); // Reset needle to NE
       setHasArrived(true);
-      vibratePhone(); // Vibrate when arriving
+      shakeScreen(); // Shake screen when arriving
     }, 10000);
   };
 
@@ -94,66 +101,39 @@ export default function CompassNavigation() {
       <div className="max-w-md mx-auto">
         <div className="bg-slate-900/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden mb-6 border-4 border-amber-500/50">
           <div className="p-8">
-            {/* Realistic Compass Display */}
-            <div className="relative w-72 h-72 mx-auto mb-8">
-              {/* Outer Ring */}
-              <div className="absolute inset-0 rounded-full border-8 border-amber-600 bg-gradient-to-br from-amber-200 via-amber-100 to-amber-50 shadow-2xl">
-                {/* Degree Markings */}
-                {[...Array(36)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="absolute w-0.5 bg-slate-600"
-                    style={{
-                      height: i % 9 === 0 ? '20px' : '10px',
-                      top: i % 9 === 0 ? '8px' : '13px',
-                      left: '50%',
-                      transformOrigin: '50% 128px',
-                      transform: `translateX(-50%) rotate(${i * 10}deg)`
-                    }}
-                  />
-                ))}
-                
-                {/* Cardinal Directions */}
-                <div className="absolute top-3 left-1/2 transform -translate-x-1/2 text-2xl font-bold text-slate-800">N</div>
-                <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 text-2xl font-bold text-slate-800">S</div>
-                <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-2xl font-bold text-slate-800">W</div>
-                <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-2xl font-bold text-slate-800">E</div>
-                
-                {/* Intermediate Directions */}
-                <div className="absolute top-8 right-8 text-lg font-semibold text-slate-700">NE</div>
-                <div className="absolute bottom-8 right-8 text-lg font-semibold text-slate-700">SE</div>
-                <div className="absolute bottom-8 left-8 text-lg font-semibold text-slate-700">SW</div>
-                <div className="absolute top-8 left-8 text-lg font-semibold text-slate-700">NW</div>
+            {/* Simplified Compass Display */}
+            <div className="relative w-80 h-80 mx-auto mb-8">
+              {/* Outer Ring - simplified */}
+              <div className="absolute inset-0 rounded-full border-4 border-slate-700 bg-gradient-to-br from-slate-200 to-slate-300 shadow-2xl">
+                {/* Cardinal Directions Only */}
+                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-3xl font-bold text-slate-800">N</div>
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-3xl font-bold text-slate-800">S</div>
+                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-3xl font-bold text-slate-800">W</div>
+                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-3xl font-bold text-slate-800">E</div>
               </div>
               
-              {/* Inner Compass Face */}
-              <div className="absolute inset-6 rounded-full bg-gradient-to-br from-white to-gray-100 border-2 border-amber-400 shadow-inner">
-                {/* Compass Rose Pattern */}
-                <div className="absolute inset-4 rounded-full border border-amber-300 bg-gradient-radial from-amber-50 to-transparent opacity-60"></div>
-              </div>
-              
-              {/* Compass Needle */}
+              {/* Large Compass Needle */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <div 
-                  className="relative w-2 h-32 transition-transform duration-500 ease-out"
+                  className="relative transition-transform duration-500 ease-out"
                   style={{ 
                     transform: `rotate(${needleRotation}deg)`,
                     transformOrigin: '50% 50%'
                   }}
                 >
-                  {/* North Pointer (Red) */}
-                  <div className="absolute top-0 left-1/2 w-0 h-0 transform -translate-x-1/2 border-l-2 border-r-2 border-b-16 border-transparent border-b-red-600"></div>
-                  <div className="absolute top-4 left-1/2 w-1 h-12 transform -translate-x-1/2 bg-gradient-to-b from-red-600 to-red-400 rounded-full shadow-md"></div>
+                  {/* Large North Pointer (Red) */}
+                  <div className="absolute top-0 left-1/2 w-0 h-0 transform -translate-x-1/2 border-l-4 border-r-4 border-b-20 border-transparent border-b-red-600"></div>
+                  <div className="absolute top-5 left-1/2 w-2 h-20 transform -translate-x-1/2 bg-gradient-to-b from-red-600 to-red-400 rounded-full shadow-lg"></div>
                   
-                  {/* South Pointer (White) */}
-                  <div className="absolute bottom-0 left-1/2 w-0 h-0 transform -translate-x-1/2 rotate-180 border-l-2 border-r-2 border-b-16 border-transparent border-b-white"></div>
-                  <div className="absolute bottom-4 left-1/2 w-1 h-12 transform -translate-x-1/2 bg-gradient-to-b from-white to-gray-200 rounded-full shadow-md border border-gray-300"></div>
+                  {/* Large South Pointer (White) */}
+                  <div className="absolute bottom-0 left-1/2 w-0 h-0 transform -translate-x-1/2 rotate-180 border-l-4 border-r-4 border-b-20 border-transparent border-b-white"></div>
+                  <div className="absolute bottom-5 left-1/2 w-2 h-20 transform -translate-x-1/2 bg-gradient-to-b from-white to-gray-200 rounded-full shadow-lg border-2 border-gray-400"></div>
                 </div>
               </div>
               
-              {/* Center Pivot */}
+              {/* Center Pivot - larger */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-6 h-6 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full shadow-lg border-2 border-amber-200"></div>
+                <div className="w-8 h-8 bg-gradient-to-br from-slate-600 to-slate-800 rounded-full shadow-lg border-2 border-slate-400"></div>
               </div>
             </div>
 
@@ -237,6 +217,12 @@ export default function CompassNavigation() {
             opacity: 1;
             transform: translateY(0);
           }
+        }
+        
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+          20%, 40%, 60%, 80% { transform: translateX(10px); }
         }
         
         .animate-slideInUp {
