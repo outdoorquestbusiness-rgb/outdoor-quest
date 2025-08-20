@@ -110,8 +110,8 @@ export default function ThirdCompass() {
                     transform: `rotate(${needleRotation}deg)`,
                   }}
                 >
-                  <div className="w-1 bg-red-600 h-32 origin-bottom rounded-full shadow-lg"></div>
-                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-red-600 rounded-full border-2 border-white shadow-lg"></div>
+                  <div className="w-1 bg-red-600 h-32 origin-center rounded-full shadow-lg transform -translate-y-16"></div>
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-red-600 rounded-full border-2 border-white shadow-lg"></div>
                 </div>
               </div>
             </div>
