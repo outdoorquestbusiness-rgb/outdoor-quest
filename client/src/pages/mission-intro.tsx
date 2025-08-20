@@ -22,12 +22,11 @@ export default function MissionIntro() {
     chronometer.start();
     // Store start time in localStorage for persistence
     localStorage.setItem('missionStartTime', Date.now().toString());
-    setLocation("/forest-challenge");
+    setLocation("/compass-navigation");
   };
 
   useEffect(() => {
-    // Play horror movie transition sound and show background for 1.5 seconds, then start typewriter
-    createIntriguingSound(2000);
+    // No sound - removed as requested
     const showContentTimer = setTimeout(() => {
       setShowContent(true);
       
@@ -86,7 +85,7 @@ export default function MissionIntro() {
                   <div className="inline-block p-3 bg-amber-100 rounded-xl shadow-lg transform rotate-1">
                     <div className="w-40 h-40 mx-auto bg-white rounded-lg shadow-inner flex items-center justify-center border-2 border-amber-200 relative overflow-hidden">
                       <img 
-                        src="/attached_assets/dahu_blanc_1755704186917.png" 
+                        src="/attached_assets/dahu_blanc_1755705046128.png" 
                         alt="Dahu Blanc"
                         className="w-full h-full object-contain p-2 opacity-90"
                       />
@@ -124,7 +123,7 @@ export default function MissionIntro() {
       )}
 
       <style>{`
-        @import url('https://fonts.cdnfonts.com/css/tengwar-annatar');
+        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
         
         @keyframes fadeInUp {
           0% {
@@ -157,8 +156,8 @@ export default function MissionIntro() {
         }
         
         .font-elvish {
-          font-family: 'Tengwar Annatar', serif;
-          font-style: italic;
+          font-family: 'Kalam', cursive;
+          font-style: normal;
         }
       `}</style>
     </div>

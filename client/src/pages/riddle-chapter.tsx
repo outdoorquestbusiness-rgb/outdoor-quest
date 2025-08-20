@@ -43,8 +43,7 @@ export default function RiddleChapter() {
       chronometer.start();
     }
 
-    // Play horror movie transition sound and show background for 1 second, then start typewriter
-    createIntriguingSound(2000);
+    // No sound - removed as requested
     const showContentTimer = setTimeout(() => {
       setShowContent(true);
       
@@ -187,7 +186,7 @@ export default function RiddleChapter() {
       )}
 
       <style>{`
-        @import url('https://fonts.cdnfonts.com/css/tengwar-annatar');
+        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
         
         @keyframes fadeInUp {
           0% {
@@ -220,8 +219,8 @@ export default function RiddleChapter() {
         }
         
         .font-elvish {
-          font-family: 'Tengwar Annatar', serif;
-          font-style: italic;
+          font-family: 'Kalam', cursive;
+          font-style: normal;
         }
       `}</style>
     </div>
