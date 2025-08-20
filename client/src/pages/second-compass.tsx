@@ -165,11 +165,11 @@ export default function SecondCompass() {
               
               <div className="space-y-3 text-amber-700 font-elvish">
                 <div className="flex justify-between items-center">
-                  <span>Distance estimée:</span>
+                  <span>Distance depuis point de départ:</span>
                   <span className="font-semibold">{isWalking ? `${distance}m` : '920m'}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span>Temps de marche:</span>
+                  <span>Temps depuis point de départ:</span>
                   <span className="font-semibold">{isWalking ? `${walkingTime} min` : '~14 minutes'}</span>
                 </div>
                 <div className="flex justify-between items-center">
