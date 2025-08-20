@@ -191,7 +191,7 @@ export default function CompassNavigation() {
                   </div>
                 </div>
                 <button
-                  onClick={() => setLocation("/mini-enigma/1")}
+                  onClick={() => setLocation("/first-enigma")}
                   className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transform transition-all duration-200 hover:scale-105"
                   data-testid="button-start-enigma"
                 >
