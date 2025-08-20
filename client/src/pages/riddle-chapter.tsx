@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ArrowLeft, Compass, Smartphone, Timer, Zap } from "lucide-react";
 import { useLocation } from "wouter";
 import { useChronometer } from "@/hooks/use-chronometer";
+import { createIntriguingSound } from "@/utils/audio";
 import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_background_c0472772.png";
 
 export default function RiddleChapter() {
@@ -46,7 +47,8 @@ export default function RiddleChapter() {
       chronometer.start();
     }
 
-    // Show background for 1 second, then start typewriter
+    // Play intriguing sound and show background for 1 second, then start typewriter
+    createIntriguingSound(1500);
     const showContentTimer = setTimeout(() => {
       setShowContent(true);
       
@@ -162,7 +164,7 @@ export default function RiddleChapter() {
           {showCompassButton && (
             <div className="animate-slideInUp text-center">
               <button
-                onClick={() => setLocation("/mini-enigma/1")}
+                onClick={() => setLocation("/compass-navigation")}
                 className="group bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-bold py-6 px-12 rounded-full shadow-2xl transform transition-all duration-300 hover:scale-110 text-xl font-serif relative overflow-hidden"
                 data-testid="button-compass"
               >

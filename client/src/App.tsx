@@ -12,6 +12,7 @@ import Rules from "@/pages/rules";
 
 import MissionIntro from "@/pages/mission-intro";
 import RiddleChapter from "@/pages/riddle-chapter";
+import CompassNavigation from "@/pages/compass-navigation";
 
 import RiddlePage from "@/pages/riddle";
 import GameEnd from "@/pages/game-end";
@@ -29,7 +30,8 @@ function Router() {
       <Route path="/rules" component={Rules} />
 
       <Route path="/mission-intro" component={MissionIntro} />
-      <Route path="/riddle/chapter/:chapter" component={RiddleChapter} />
+      <Route path="/forest-challenge" component={RiddleChapter} />
+      <Route path="/compass-navigation" component={CompassNavigation} />
 
       <Route path="/riddle/chapter/:chapter/riddle/:riddle">
         {(params) => (

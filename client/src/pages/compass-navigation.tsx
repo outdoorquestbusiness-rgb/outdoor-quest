@@ -1,0 +1,202 @@
+import { useState, useEffect } from "react";
+import { ArrowLeft, Navigation, Timer, Smartphone } from "lucide-react";
+import { useLocation } from "wouter";
+import { useChronometer } from "@/hooks/use-chronometer";
+import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_background_c0472772.png";
+
+export default function CompassNavigation() {
+  const [, setLocation] = useLocation();
+  const [walkingTime, setWalkingTime] = useState(15);
+  const [distance, setDistance] = useState(950);
+  const [isWalking, setIsWalking] = useState(false);
+  const [hasArrived, setHasArrived] = useState(false);
+  const chronometer = useChronometer();
+
+  useEffect(() => {
+    // Restore chronometer if it was already started
+    const savedStartTime = localStorage.getItem('missionStartTime');
+    if (savedStartTime && !chronometer.isRunning) {
+      chronometer.start();
+    }
+  }, []);
+
+  const handleStartWalking = () => {
+    setIsWalking(true);
+    
+    // Animate countdown over 10 seconds
+    const interval = setInterval(() => {
+      setWalkingTime(prev => {
+        const newTime = Math.max(0, prev - 1.5); // 15 minutes / 10 seconds = 1.5 per iteration
+        return Math.round(newTime * 10) / 10; // Round to 1 decimal
+      });
+      
+      setDistance(prev => {
+        const newDistance = Math.max(0, prev - 95); // 950m / 10 seconds = 95m per iteration
+        return newDistance;
+      });
+    }, 1000);
+
+    // Stop after 10 seconds and show arrival
+    setTimeout(() => {
+      clearInterval(interval);
+      setWalkingTime(0);
+      setDistance(0);
+      setIsWalking(false);
+      setHasArrived(true);
+    }, 10000);
+  };
+
+  return (
+    <div 
+      className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
+      style={{ 
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url(${moleMountainImage})` 
+      }}
+    >
+      {/* Header with Timer */}
+      <div className="flex items-center justify-between mb-6 pt-4">
+        <button
+          onClick={() => setLocation("/forest-challenge")}
+          className="p-2 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow"
+          data-testid="button-back"
+        >
+          <ArrowLeft className="h-5 w-5 text-slate-600" />
+        </button>
+        
+        <div className="flex items-center bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+          <Timer className="h-4 w-4 text-forest mr-2" />
+          <span className="font-mono text-sm font-semibold text-slate-700">
+            {chronometer.formattedTime}
+          </span>
+        </div>
+        
+        <h2 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">Navigation</h2>
+        <div className="w-10"></div>
+      </div>
+
+      {/* Compass Content */}
+      <div className="max-w-md mx-auto">
+        <div className="bg-slate-900/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden mb-6 border-4 border-amber-500/50">
+          <div className="p-8">
+            {/* Compass Display */}
+            <div className="relative w-64 h-64 mx-auto mb-8">
+              {/* Compass Circle */}
+              <div className="absolute inset-0 rounded-full border-4 border-amber-400 bg-gradient-to-br from-amber-100 to-amber-200">
+                {/* Cardinal Directions */}
+                <div className="absolute top-2 left-1/2 transform -translate-x-1/2 text-xl font-bold text-slate-800">N</div>
+                <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-xl font-bold text-slate-800">S</div>
+                <div className="absolute left-2 top-1/2 transform -translate-y-1/2 text-xl font-bold text-slate-800">W</div>
+                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 text-xl font-bold text-slate-800">E</div>
+                
+                {/* Intermediate Directions */}
+                <div className="absolute top-6 right-6 text-sm font-semibold text-slate-700">NE</div>
+                <div className="absolute bottom-6 right-6 text-sm font-semibold text-slate-700">SE</div>
+                <div className="absolute bottom-6 left-6 text-sm font-semibold text-slate-700">SW</div>
+                <div className="absolute top-6 left-6 text-sm font-semibold text-slate-700">NW</div>
+              </div>
+              
+              {/* Compass Needle pointing NE */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div 
+                  className="w-1 h-24 bg-gradient-to-t from-red-600 to-red-400 rounded-full transform rotate-45 origin-bottom shadow-lg"
+                  style={{ transformOrigin: '50% 90%' }}
+                >
+                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-b-4 border-transparent border-b-red-600"></div>
+                </div>
+              </div>
+              
+              {/* Center Dot */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-4 h-4 bg-slate-800 rounded-full shadow-lg"></div>
+              </div>
+            </div>
+
+            {/* Navigation Info */}
+            <div className="text-center space-y-4 mb-8">
+              <div className="bg-amber-500/20 rounded-xl p-4 border border-amber-400/30">
+                <div className="flex items-center justify-center mb-2">
+                  <Navigation className="h-5 w-5 text-amber-400 mr-2" />
+                  <span className="text-amber-100 font-semibold">Direction: Nord-Est</span>
+                </div>
+                <div className="grid grid-cols-2 gap-4 mt-4">
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-white">{walkingTime}</div>
+                    <div className="text-amber-300 text-sm">minutes</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-white">{distance}</div>
+                    <div className="text-amber-300 text-sm">mètres</div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Walking Status */}
+              {isWalking && (
+                <div className="bg-blue-500/20 rounded-xl p-4 border border-blue-400/30 animate-pulse">
+                  <div className="flex items-center justify-center">
+                    <Smartphone className="h-5 w-5 text-blue-400 mr-2" />
+                    <span className="text-blue-100 font-semibold">En route vers le point d'énigme...</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Reminder */}
+            <div className="bg-emerald-500/20 rounded-xl p-4 border border-emerald-400/30 mb-6">
+              <div className="flex items-center text-emerald-100 text-sm">
+                <Smartphone className="h-4 w-4 mr-2 flex-shrink-0" />
+                <span className="italic">Une vibration vous alertera quand vous approcherez de la zone mystérieuse</span>
+              </div>
+            </div>
+
+            {/* Action Button */}
+            {!hasArrived && !isWalking && (
+              <button
+                onClick={handleStartWalking}
+                className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transform transition-all duration-200 hover:scale-105"
+                data-testid="button-start-walking"
+              >
+                Se rendre au point de la mini-énigme
+              </button>
+            )}
+
+            {/* Arrival Button */}
+            {hasArrived && (
+              <div className="animate-slideInUp">
+                <div className="bg-green-500/20 rounded-xl p-4 border border-green-400/30 mb-4 text-center">
+                  <div className="text-green-100 font-semibold">
+                    🎯 Vous êtes arrivé au point d'énigme !
+                  </div>
+                </div>
+                <button
+                  onClick={() => setLocation("/mini-enigma/1")}
+                  className="w-full bg-gradient-to-r from-green-600 to-green-700 hover:from-green-500 hover:to-green-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg transform transition-all duration-200 hover:scale-105"
+                  data-testid="button-start-enigma"
+                >
+                  Je suis au bon endroit, commencer l'énigme
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @keyframes slideInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-slideInUp {
+          animation: slideInUp 0.6s ease-out;
+        }
+      `}</style>
+    </div>
+  );
+}

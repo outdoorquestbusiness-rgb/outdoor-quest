@@ -4,6 +4,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { useLocation } from "wouter";
 import { missionStory } from "@/data/missions";
 import { useChronometer } from "@/hooks/use-chronometer";
+import { createIntriguingSound } from "@/utils/audio";
 import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_background_c0472772.png";
 
 export default function MissionIntro() {
@@ -21,11 +22,12 @@ export default function MissionIntro() {
     chronometer.start();
     // Store start time in localStorage for persistence
     localStorage.setItem('missionStartTime', Date.now().toString());
-    setLocation("/riddle/chapter/1");
+    setLocation("/forest-challenge");
   };
 
   useEffect(() => {
-    // Show background for 1.5 seconds, then start typewriter
+    // Play intriguing sound and show background for 1.5 seconds, then start typewriter
+    createIntriguingSound(1500);
     const showContentTimer = setTimeout(() => {
       setShowContent(true);
       
