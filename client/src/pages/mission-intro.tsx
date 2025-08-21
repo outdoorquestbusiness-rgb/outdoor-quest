@@ -20,7 +20,7 @@ export default function MissionIntro() {
 
   const handleStartAdventure = () => {
     chronometer.start();
-    createIntriguingSound();
+    // Removed audio as requested - silent experience
     setLocation("/forest-challenge");
   };
 
@@ -88,32 +88,34 @@ export default function MissionIntro() {
                 </p>
               </div>
 
-              {/* Dahu Blanc Photo - After story text */}
-              <div className="text-center">
-                <div className="relative mx-auto max-w-xs">
-                  <img 
-                    src={dahuBlancImage}
-                    alt="Le Dahu Blanc mystérieux dans son environnement montagnard"
-                    className="w-full h-auto rounded-xl shadow-lg border-4 border-amber-200"
-                    data-testid="img-dahu-blanc-intro"
-                  />
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-amber-100/20 to-transparent"></div>
-                </div>
+              {/* Dahu Blanc Photo - Only show after story is complete */}
+              {showButton && (
+                <div className="text-center animate-slideInUp">
+                  <div className="relative mx-auto max-w-xs">
+                    <img 
+                      src={dahuBlancImage}
+                      alt="Le Dahu Blanc mystérieux dans son environnement montagnard"
+                      className="w-full h-auto rounded-xl shadow-lg border-4 border-amber-200"
+                      data-testid="img-dahu-blanc-intro"
+                    />
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-amber-100/20 to-transparent"></div>
+                  </div>
                 
-                {/* Description after photo */}
-                <div className="mt-4 bg-white/90 rounded-xl p-4 border-2 border-emerald-200">
-                  <div className="text-center text-gray-700 font-elvish">
-                    <p className="mb-2 italic">
-                      "Une créature légendaire aux pattes avant plus courtes que les pattes arrière, 
-                      parfaitement adaptée aux pentes escarpées des Alpes..."
-                    </p>
-                    <p className="text-sm">
-                      Votre quête commence maintenant. Suivez les indices, résolvez les énigmes, 
-                      et découvrez les secrets millénaires du Dahu Blanc.
-                    </p>
+                  {/* Description after photo */}
+                  <div className="mt-4 bg-white/90 rounded-xl p-4 border-2 border-emerald-200">
+                    <div className="text-center text-gray-700 font-elvish">
+                      <p className="mb-2 italic">
+                        "Une créature légendaire aux pattes avant plus courtes que les pattes arrière, 
+                        parfaitement adaptée aux pentes escarpées des Alpes..."
+                      </p>
+                      <p className="text-sm">
+                        Votre quête commence maintenant. Suivez les indices, résolvez les énigmes, 
+                        et découvrez les secrets millénaires du Dahu Blanc.
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
 

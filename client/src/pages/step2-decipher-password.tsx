@@ -14,6 +14,7 @@ export default function Step2DecipherPassword() {
   const [showContent, setShowContent] = useState(false);
   const [foundWord, setFoundWord] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   // Only show clues that were actually found in the forest
   const forestClues = ["BLANC", "OLYMPE", "FUJI"];
@@ -21,9 +22,13 @@ export default function Step2DecipherPassword() {
   const handleWordSubmit = () => {
     if (foundWord.toUpperCase() === "MONT") {
       setIsCorrect(true);
+      setShowError(false);
       setTimeout(() => {
         setLocation("/step3-identify-mountain");
       }, 2000);
+    } else {
+      setShowError(true);
+      setTimeout(() => setShowError(false), 3000);
     }
   };
 
@@ -94,7 +99,7 @@ export default function Step2DecipherPassword() {
                       <p className="text-amber-800 font-elvish font-bold mb-4">
                         Quel mot unit ces trois noms ?
                       </p>
-                      <div className="flex justify-center items-center space-x-4">
+                      <div className="flex justify-center items-center space-x-4 mb-4">
                         <input
                           type="text"
                           value={foundWord}
@@ -111,6 +116,15 @@ export default function Step2DecipherPassword() {
                           Valider
                         </button>
                       </div>
+                      
+                      {/* Error Message */}
+                      {showError && (
+                        <div className="bg-orange-100 rounded-xl p-4 border-2 border-orange-300 animate-slideInUp">
+                          <p className="text-orange-800 font-elvish font-bold">
+                            Essaye encore ! Réfléchis à ce que ces trois mots ont en commun...
+                          </p>
+                        </div>
+                      )}
                     </div>
                   )}
 

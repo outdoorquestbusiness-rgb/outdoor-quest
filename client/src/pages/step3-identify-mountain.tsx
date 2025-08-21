@@ -15,12 +15,17 @@ export default function Step3IdentifyMountain() {
   const [selectedMountain, setSelectedMountain] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
   const [guessInput, setGuessInput] = useState("");
+  const [showError, setShowError] = useState(false);
 
   const handleMountainGuess = () => {
     // The correct answer is Mont Salève based on the riddle
     if (guessInput.toLowerCase().includes("saleve") || guessInput.toLowerCase().includes("salève")) {
       setSelectedMountain("Mont Salève");
       setIsCompleted(true);
+      setShowError(false);
+    } else {
+      setShowError(true);
+      setTimeout(() => setShowError(false), 3000);
     }
   };
 
@@ -78,50 +83,80 @@ export default function Step3IdentifyMountain() {
                   <div className="bg-stone-100 rounded-xl p-6 mb-6 border-2 border-stone-300">
                     <h4 className="text-center font-elvish font-bold text-stone-800 mb-4">Table d'Orientation</h4>
                     
-                    {/* SVG Table Illustration */}
+                    {/* Enhanced SVG Table Illustration */}
                     <div className="flex justify-center mb-4">
-                      <svg width="300" height="200" viewBox="0 0 300 200" className="border border-stone-400 rounded-lg bg-stone-200">
-                        {/* Table base */}
-                        <rect x="50" y="120" width="200" height="60" fill="#8B7355" stroke="#654321" strokeWidth="2" rx="5"/>
+                      <svg width="400" height="280" viewBox="0 0 400 280" className="border-2 border-stone-500 rounded-xl bg-gradient-to-b from-stone-100 to-stone-200 shadow-lg">
+                        {/* Table base with perspective */}
+                        <rect x="80" y="180" width="240" height="80" fill="#8B7355" stroke="#654321" strokeWidth="3" rx="8"/>
+                        <rect x="85" y="175" width="230" height="15" fill="#A0855B" rx="5"/>
                         
-                        {/* Orientation disc */}
-                        <circle cx="150" cy="100" r="70" fill="#B8860B" stroke="#654321" strokeWidth="3"/>
+                        {/* Orientation disc with enhanced details */}
+                        <circle cx="200" cy="140" r="85" fill="#C4A747" stroke="#654321" strokeWidth="4"/>
+                        <circle cx="200" cy="140" r="75" fill="#D4B857" stroke="#654321" strokeWidth="2"/>
                         
-                        {/* Direction arrows and labels */}
+                        {/* Compass rose in center */}
+                        <g transform="translate(200,140)">
+                          <circle cx="0" cy="0" r="8" fill="#654321"/>
+                          <text x="-3" y="5" fontSize="12" fill="white" fontWeight="bold">N</text>
+                        </g>
+                        
+                        {/* Direction arrows and enhanced labels */}
                         
                         {/* Sud-Ouest - Mont Vuache */}
-                        <line x1="110" y1="140" x2="90" y2="160" stroke="#654321" strokeWidth="2" markerEnd="url(#arrowhead)"/>
-                        <text x="85" y="175" fontSize="8" fill="#654321" fontFamily="monospace">Vuache</text>
+                        <g>
+                          <line x1="140" y1="180" x2="110" y2="210" stroke="#8B4513" strokeWidth="3" markerEnd="url(#arrowhead)"/>
+                          <rect x="95" y="215" width="45" height="20" fill="white" stroke="#8B4513" rx="3"/>
+                          <text x="117" y="228" fontSize="10" fill="#8B4513" fontWeight="bold" textAnchor="middle">Vuache</text>
+                        </g>
                         
                         {/* Ouest - Mont Forchat */}
-                        <line x1="80" y1="100" x2="60" y2="100" stroke="#654321" strokeWidth="2" markerEnd="url(#arrowhead)"/>
-                        <text x="45" y="95" fontSize="8" fill="#654321" fontFamily="monospace">Forchat</text>
+                        <g>
+                          <line x1="115" y1="140" x2="80" y2="140" stroke="#8B4513" strokeWidth="3" markerEnd="url(#arrowhead)"/>
+                          <rect x="40" y="130" width="45" height="20" fill="white" stroke="#8B4513" rx="3"/>
+                          <text x="62" y="143" fontSize="10" fill="#8B4513" fontWeight="bold" textAnchor="middle">Forchat</text>
+                        </g>
                         
                         {/* Nord - Mont d'Or (Jura) */}
-                        <line x1="150" y1="30" x2="150" y2="10" stroke="#654321" strokeWidth="2" markerEnd="url(#arrowhead)"/>
-                        <text x="135" y="25" fontSize="8" fill="#654321" fontFamily="monospace">d'Or</text>
+                        <g>
+                          <line x1="200" y1="55" x2="200" y2="20" stroke="#8B4513" strokeWidth="3" markerEnd="url(#arrowhead)"/>
+                          <rect x="177" y="5" width="46" height="20" fill="white" stroke="#8B4513" rx="3"/>
+                          <text x="200" y="18" fontSize="10" fill="#8B4513" fontWeight="bold" textAnchor="middle">Mont d'Or</text>
+                        </g>
                         
-                        {/* Est - Mont Salève */}
-                        <line x1="220" y1="100" x2="240" y2="100" stroke="#654321" strokeWidth="2" markerEnd="url(#arrowhead)"/>
-                        <text x="245" y="95" fontSize="8" fill="#654321" fontFamily="monospace">Salève</text>
+                        {/* Est - Mont Salève (highlighted) */}
+                        <g>
+                          <line x1="285" y1="140" x2="320" y2="140" stroke="#B22222" strokeWidth="4" markerEnd="url(#arrowhead-red)"/>
+                          <rect x="325" y="130" width="50" height="20" fill="#FFE4E1" stroke="#B22222" strokeWidth="2" rx="3"/>
+                          <text x="350" y="143" fontSize="11" fill="#B22222" fontWeight="bold" textAnchor="middle">SALÈVE</text>
+                        </g>
                         
                         {/* Sud-Est - Mont Billiat */}
-                        <line x1="190" y1="140" x2="210" y2="160" stroke="#654321" strokeWidth="2" markerEnd="url(#arrowhead)"/>
-                        <text x="215" y="175" fontSize="8" fill="#654321" fontFamily="monospace">Billiat</text>
+                        <g>
+                          <line x1="260" y1="180" x2="290" y2="210" stroke="#8B4513" strokeWidth="3" markerEnd="url(#arrowhead)"/>
+                          <rect x="295" y="215" width="45" height="20" fill="white" stroke="#8B4513" rx="3"/>
+                          <text x="317" y="228" fontSize="10" fill="#8B4513" fontWeight="bold" textAnchor="middle">Billiat</text>
+                        </g>
                         
-                        {/* Chablais region - Ouzon/Chauffé */}
-                        <line x1="120" y1="60" x2="100" y2="40" stroke="#654321" strokeWidth="2" markerEnd="url(#arrowhead)"/>
-                        <text x="85" y="35" fontSize="7" fill="#654321" fontFamily="monospace">Ouzon</text>
+                        {/* Nord-Ouest - Chablais region */}
+                        <g>
+                          <line x1="160" y1="100" x2="130" y2="70" stroke="#8B4513" strokeWidth="3" markerEnd="url(#arrowhead)"/>
+                          <rect x="115" y="60" width="40" height="20" fill="white" stroke="#8B4513" rx="3"/>
+                          <text x="135" y="73" fontSize="10" fill="#8B4513" fontWeight="bold" textAnchor="middle">Ouzon</text>
+                        </g>
                         
-                        {/* Arrow marker definition */}
+                        {/* Arrow marker definitions */}
                         <defs>
-                          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                            <polygon points="0 0, 10 3.5, 0 7" fill="#654321"/>
+                          <marker id="arrowhead" markerWidth="12" markerHeight="9" refX="11" refY="4.5" orient="auto">
+                            <polygon points="0 0, 12 4.5, 0 9" fill="#8B4513"/>
+                          </marker>
+                          <marker id="arrowhead-red" markerWidth="12" markerHeight="9" refX="11" refY="4.5" orient="auto">
+                            <polygon points="0 0, 12 4.5, 0 9" fill="#B22222"/>
                           </marker>
                         </defs>
                         
-                        {/* Center point */}
-                        <circle cx="150" cy="100" r="3" fill="#654321"/>
+                        {/* Decorative elements */}
+                        <circle cx="200" cy="140" r="4" fill="#654321"/>
+                        <text x="200" y="270" fontSize="12" fill="#654321" fontWeight="bold" textAnchor="middle">Table d'Orientation du Petit Môle</text>
                       </svg>
                     </div>
 
@@ -150,7 +185,7 @@ export default function Step3IdentifyMountain() {
                         </p>
                       </div>
                       
-                      <div className="flex justify-center items-center space-x-4">
+                      <div className="flex justify-center items-center space-x-4 mb-4">
                         <input
                           type="text"
                           value={guessInput}
@@ -167,6 +202,15 @@ export default function Step3IdentifyMountain() {
                           Valider
                         </button>
                       </div>
+                      
+                      {/* Error Message */}
+                      {showError && (
+                        <div className="bg-orange-100 rounded-xl p-4 border-2 border-orange-300 animate-slideInUp">
+                          <p className="text-orange-800 font-elvish font-bold text-center">
+                            Essaye encore ! Regarde bien la devinette et l'illustration...
+                          </p>
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -185,11 +229,11 @@ export default function Step3IdentifyMountain() {
                         
                         {/* Continue Button */}
                         <button
-                          onClick={() => setLocation("/final-dahu-encounter")}
+                          onClick={() => setLocation("/final-summit")}
                           className="bg-green-600 hover:bg-green-700 text-white font-elvish font-bold py-3 px-8 rounded-xl shadow-lg transition-colors"
-                          data-testid="button-final-encounter"
+                          data-testid="button-final-summit"
                         >
-                          Continuer l'aventure
+                          Se rendre à l'étape finale
                         </button>
                       </div>
                     </div>
