@@ -5,7 +5,7 @@ import { useLocation } from "wouter";
 import { useChronometer } from "@/hooks/use-chronometer";
 import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_background_c0472772.png";
 
-export default function FinalSummit() {
+export default function FinalCongratulations() {
   const { t } = useLanguage();
   const [, setLocation] = useLocation();
   const chronometer = useChronometer();
@@ -15,6 +15,8 @@ export default function FinalSummit() {
   const [typewriterText, setTypewriterText] = useState("");
   const [showCross, setShowCross] = useState(false);
   const [showFinalMessage, setShowFinalMessage] = useState(false);
+  const [showStats, setShowStats] = useState(false);
+  const [showRating, setShowRating] = useState(false);
 
   const storyText = "Tu as percé les secrets de la table d'orientation. Il ne reste plus qu'une étape pour accomplir ta quête : te rendre au véritable sommet du Petit Môle, là où se dresse la croix. C'est ici, au point culminant, que le Dahu Blanc révèle son plus grand mystère. Les vents de montagne portent des échos anciens... La croix t'attend, gardienne des secrets éternels de ces sommets.";
 

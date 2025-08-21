@@ -229,9 +229,9 @@ export default function Step3IdentifyMountain() {
                         
                         {/* Continue Button */}
                         <button
-                          onClick={() => setLocation("/final-summit")}
+                          onClick={() => setLocation("/journey-to-cross")}
                           className="bg-green-600 hover:bg-green-700 text-white font-elvish font-bold py-3 px-8 rounded-xl shadow-lg transition-colors"
-                          data-testid="button-final-summit"
+                          data-testid="button-journey-to-cross"
                         >
                           Se rendre à l'étape finale
                         </button>

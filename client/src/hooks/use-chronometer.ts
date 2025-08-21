@@ -18,14 +18,12 @@ export function useChronometer() {
 
   const start = () => {
     if (!isRunning) {
-      const savedStartTime = localStorage.getItem('missionStartTime');
-      const now = savedStartTime ? parseInt(savedStartTime) : Date.now();
-      
-      if (!savedStartTime) {
-        localStorage.setItem('missionStartTime', now.toString());
-      }
+      // Reset timer for new mission
+      const now = Date.now();
+      localStorage.setItem('missionStartTime', now.toString());
       
       setStartTime(now);
+      setElapsedTime(0);
       setIsRunning(true);
     }
   };
