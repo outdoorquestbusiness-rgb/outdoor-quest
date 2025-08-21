@@ -35,35 +35,12 @@ export default function SecondCompass() {
   const handleStartWalking = () => {
     setIsWalking(true);
     
-    // Walking timer - 14 minutes (840 seconds) for demo, compressed to 14 seconds
-    const interval = setInterval(() => {
-      setWalkingTime(prev => {
-        const newTime = prev + 1.0;
-        return Math.round(newTime * 10) / 10;
-      });
-      
-      setDistance(prev => {
-        const newDistance = Math.max(0, prev - 65.7); // 920m / 14 seconds = 65.7m per iteration
-        return Math.round(newDistance);
-      });
-    }, 1000);
-
-    // Needle movement animation
-    const needleInterval = setInterval(() => {
-      setNeedleRotation(prev => prev + (Math.random() - 0.5) * 10);
-    }, 2000);
-
-    // Stop after 14 seconds and show arrival
+    // Show arrival after 2 seconds (no countdown)
     setTimeout(() => {
-      clearInterval(interval);
-      clearInterval(needleInterval);
-      setWalkingTime(14);
-      setDistance(0);
       setIsWalking(false);
-      setNeedleRotation(45);
       setHasArrived(true);
       shakeScreen();
-    }, 14000);
+    }, 2000);
   };
 
   useEffect(() => {

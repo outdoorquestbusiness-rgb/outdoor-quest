@@ -17,12 +17,12 @@ export default function AlpineStation() {
   const [showDahuPhoto, setShowDahuPhoto] = useState(false);
   const [showClues, setShowClues] = useState(false);
 
-  const storyText = "Vous émergez enfin de la forêt mystérieuse, vos pas vous menant vers les hauteurs du Mont Môle. Devant vous se dresse la station d'alpage, battue par les vents de montagne. C'est là, dans ce lieu isolé et sauvage, que le Dahu Blanc vous attend pour la suite de votre quête. Les indices récoltés dans la forêt vont maintenant prendre tout leur sens... L'air pur de la montagne porte en lui les secrets millénaires de cette créature légendaire.";
+  const storyText = "Vous émergez enfin de la forêt mystérieuse, vos pas vous menant vers les hauteurs du Mont Môle. Devant vous se dresse la station d'alpage du Petit Môle, battue par les vents de montagne. Cette station offre des vues magnifiques sur les sommets environnants. Ce n'est pas encore la rencontre avec le Dahu Blanc, mais l'exploration de ce lieu magique et de ses panoramas extraordinaires. Les indices récoltés dans la forêt vont maintenant prendre tout leur sens... L'air pur de la montagne porte en lui les secrets millénaires de cette créature légendaire.";
 
   const forestClues = [
-    { enigma: "Énigme des Arbres", clue: "HÊTRE" },
-    { enigma: "Test Musical", clue: "MUSIQUE" },
-    { enigma: "Objet Secret", clue: "PIERRE" }
+    { enigma: "Énigme des Arbres", clue: "BLANC" },
+    { enigma: "Test Musical", clue: "OLYMPE" },
+    { enigma: "Objet Secret", clue: "FUJI" }
   ];
 
   useEffect(() => {
@@ -164,11 +164,11 @@ export default function AlpineStation() {
                     {/* Continue Button */}
                     <div className="text-center">
                       <button
-                        onClick={() => setLocation("/final-challenge")}
+                        onClick={() => setLocation("/orientation-table")}
                         className="bg-slate-700 hover:bg-slate-800 text-white font-elvish font-bold py-3 px-8 rounded-xl shadow-lg transition-colors transform hover:scale-105"
-                        data-testid="button-final-challenge"
+                        data-testid="button-orientation-table"
                       >
-                        Découvrir le Secret Final du Dahu
+                        Explorer la Station d'Alpage
                       </button>
                     </div>
                   </div>

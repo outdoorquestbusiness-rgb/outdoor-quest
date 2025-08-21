@@ -364,9 +364,9 @@ export default function FirstEnigma() {
                           {showClue && (
                             <div className="bg-amber-100 rounded-lg p-4 border-2 border-amber-400">
                               <h5 className="font-bold text-amber-800 mb-2">Indice précieux :</h5>
-                              <p className="text-lg font-elvish font-bold text-amber-900">DIEU</p>
+                              <p className="text-lg font-elvish font-bold text-amber-900">BLANC</p>
                               <p className="text-sm text-amber-700 italic mt-2">
-                                Gardez ce mot précieusement en mémoire, il vous sera utile plus tard...
+                                "La couleur de ma fourrure immaculée..."
                               </p>
                             </div>
                           )}
@@ -401,9 +401,44 @@ export default function FirstEnigma() {
                       </div>
                     )}
 
-                    {/* Solution Button - only show if enigma is active */}
+                    {/* Validation & Solution Buttons */}
                     {showCrossword && !isCompleted && !isTimeUp && (
-                      <div className="text-center mb-4">
+                      <div className="flex justify-center space-x-4 mb-4">
+                        <button
+                          onClick={() => {
+                            const allCorrect = 
+                              grid[1][1].value.toUpperCase() === 'H' &&
+                              grid[1][2].value.toUpperCase() === 'E' &&
+                              grid[1][3].value.toUpperCase() === 'T' &&
+                              grid[1][4].value.toUpperCase() === 'R' &&
+                              grid[1][5].value.toUpperCase() === 'E' &&
+                              grid[0][2].value.toUpperCase() === 'C' &&
+                              grid[2][2].value.toUpperCase() === 'H' &&
+                              grid[3][2].value.toUpperCase() === 'E' &&
+                              grid[4][2].value.toUpperCase() === 'N' &&
+                              grid[4][0].value.toUpperCase() === 'E' &&
+                              grid[4][1].value.toUpperCase() === 'P' &&
+                              grid[4][2].value.toUpperCase() === 'I' &&
+                              grid[4][3].value.toUpperCase() === 'C' &&
+                              grid[4][4].value.toUpperCase() === 'E' &&
+                              grid[4][5].value.toUpperCase() === 'A' &&
+                              grid[2][5].value.toUpperCase() === 'S' &&
+                              grid[3][5].value.toUpperCase() === 'A' &&
+                              grid[4][5].value.toUpperCase() === 'P' &&
+                              grid[5][5].value.toUpperCase() === 'I' &&
+                              grid[6][5].value.toUpperCase() === 'N';
+                            
+                            if (allCorrect) {
+                              setIsCompleted(true);
+                              setTimerActive(false);
+                              setTimeout(() => setShowClue(true), 1000);
+                            }
+                          }}
+                          className="bg-emerald-600 hover:bg-emerald-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                          data-testid="button-validate"
+                        >
+                          Valider ma solution
+                        </button>
                         <button
                           onClick={() => {
                             setIsTimeUp(true);

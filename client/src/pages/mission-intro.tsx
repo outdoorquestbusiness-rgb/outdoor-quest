@@ -1,75 +1,69 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight, Timer } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { useLocation } from "wouter";
 import { missionStory } from "@/data/missions";
 import { useChronometer } from "@/hooks/use-chronometer";
 import { createIntriguingSound } from "@/utils/audio";
 import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_background_c0472772.png";
+import dahuBlancImage from "@assets/dahu_blanc_1755704186917.png";
 
 export default function MissionIntro() {
   const { t } = useLanguage();
   const [, setLocation] = useLocation();
+  const chronometer = useChronometer();
+  
+  // Content display states
   const [showContent, setShowContent] = useState(false);
   const [typewriterText, setTypewriterText] = useState("");
   const [showButton, setShowButton] = useState(false);
-  const [currentParagraph, setCurrentParagraph] = useState(0);
-  const chronometer = useChronometer();
-
-  const fullStoryText = missionStory.content.join(" ");
 
   const handleStartAdventure = () => {
     chronometer.start();
-    // Store start time in localStorage for persistence
-    localStorage.setItem('missionStartTime', Date.now().toString());
+    createIntriguingSound();
     setLocation("/forest-challenge");
   };
 
   useEffect(() => {
-    // No sound - removed as requested
-    const showContentTimer = setTimeout(() => {
+    // Start content display after initial delay
+    setTimeout(() => {
       setShowContent(true);
       
-      // Start typewriter animation
+      // Typewriter effect for story
       let charIndex = 0;
       const typeInterval = setInterval(() => {
-        if (charIndex < fullStoryText.length) {
-          setTypewriterText(fullStoryText.slice(0, charIndex + 1));
+        if (charIndex < missionStory.story.length) {
+          setTypewriterText(missionStory.story.slice(0, charIndex + 1));
           charIndex++;
         } else {
           clearInterval(typeInterval);
           // Show button after story is complete
-          setTimeout(() => setShowButton(true), 500);
+          setTimeout(() => setShowButton(true), 1000);
         }
-      }, 30); // 30ms per character for faster handwritten typing speed
+      }, 30); // 30ms per character for smooth typing
 
       return () => clearInterval(typeInterval);
-    }, 1500);
-
-    return () => clearTimeout(showContentTimer);
-  }, [fullStoryText]);
+    }, 1000); // Initial delay before showing content
+  }, []);
 
   return (
     <div 
       className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
       style={{ 
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(${moleMountainImage})` 
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url(${moleMountainImage})` 
       }}
     >
-      {/* Header */}
-      <div className={`flex items-center justify-between mb-8 pt-4 transition-all duration-700 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
-        <button
-          onClick={() => setLocation("/rules")}
-          className="p-2 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow"
-          data-testid="button-back"
-        >
-          <ArrowLeft className="h-5 w-5 text-slate-600" />
-        </button>
-        <h2 className="text-2xl md:text-3xl font-bold text-white drop-shadow-lg">Introduction</h2>
-        <div className="w-10"></div>
+      {/* Timer in top right */}
+      <div className="absolute top-4 right-4">
+        <div className="flex items-center bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+          <Timer className="h-4 w-4 text-forest mr-2" />
+          <span className="font-mono text-sm font-semibold text-slate-700">
+            {chronometer.formattedTime}
+          </span>
+        </div>
       </div>
 
-      {/* Story Content */}
+      {/* Main Content */}
       {showContent && (
         <div className="max-w-2xl mx-auto animate-fadeInUp">
           <div className="bg-amber-50/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-2 border-amber-200/50">
@@ -80,69 +74,31 @@ export default function MissionIntro() {
                 </h3>
                 <p className="text-lg text-amber-700 italic font-elvish">{missionStory.subtitle}</p>
                 
-                {/* Authentic Dahu Image */}
+                {/* Dahu Blanc Photo */}
                 <div className="mt-6 mb-4">
-                  <div className="inline-block p-3 bg-amber-100 rounded-xl shadow-lg transform rotate-1">
-                    <div className="w-40 h-40 mx-auto bg-white rounded-lg shadow-inner flex items-center justify-center border-2 border-amber-200 relative overflow-hidden">
-                      <svg 
-                        className="w-full h-full p-2 opacity-90"
-                        viewBox="0 0 400 400"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        {/* Dahu body */}
-                        <path d="M80 250 Q120 200 180 210 Q240 220 280 240 Q300 250 290 280 Q280 310 250 320 Q200 330 150 320 Q100 310 80 280 Z" 
-                              fill="#2a2a2a" stroke="#000" strokeWidth="2"/>
-                        
-                        {/* Dahu chest */}
-                        <ellipse cx="150" cy="260" rx="40" ry="35" fill="#4a4a4a" stroke="#000" strokeWidth="1.5"/>
-                        
-                        {/* Dahu head */}
-                        <path d="M270 240 Q290 220 310 230 Q320 240 315 260 Q310 280 290 285 Q270 280 265 260 Z" 
-                              fill="#3a3a3a" stroke="#000" strokeWidth="2"/>
-                        
-                        {/* Horn (curved) */}
-                        <path d="M285 230 Q275 210 270 190 Q268 180 275 175 Q280 180 285 190 Q290 210 285 230" 
-                              fill="#1a1a1a" stroke="#000" strokeWidth="2"/>
-                        
-                        {/* Second horn curve */}
-                        <path d="M275 175 Q270 160 275 145 Q280 135 285 140 Q285 150 280 165" 
-                              fill="#1a1a1a" stroke="#000" strokeWidth="1.5"/>
-                        
-                        {/* Eye */}
-                        <circle cx="295" cy="250" r="4" fill="#000"/>
-                        
-                        {/* Legs */}
-                        <rect x="120" y="320" width="8" height="40" fill="#2a2a2a" stroke="#000" strokeWidth="1"/>
-                        <rect x="140" y="320" width="8" height="40" fill="#2a2a2a" stroke="#000" strokeWidth="1"/>
-                        <rect x="220" y="320" width="8" height="40" fill="#2a2a2a" stroke="#000" strokeWidth="1"/>
-                        <rect x="240" y="320" width="8" height="40" fill="#2a2a2a" stroke="#000" strokeWidth="1"/>
-                        
-                        {/* Hooves */}
-                        <ellipse cx="124" cy="365" rx="6" ry="4" fill="#000"/>
-                        <ellipse cx="144" cy="365" rx="6" ry="4" fill="#000"/>
-                        <ellipse cx="224" cy="365" rx="6" ry="4" fill="#000"/>
-                        <ellipse cx="244" cy="365" rx="6" ry="4" fill="#000"/>
-                        
-                        {/* Fur texture lines */}
-                        <path d="M90 260 Q110 255 130 260" stroke="#000" strokeWidth="1" fill="none"/>
-                        <path d="M100 280 Q120 275 140 280" stroke="#000" strokeWidth="1" fill="none"/>
-                        <path d="M160 240 Q180 235 200 240" stroke="#000" strokeWidth="1" fill="none"/>
-                        <path d="M180 270 Q200 265 220 270" stroke="#000" strokeWidth="1" fill="none"/>
-                        
-                        {/* Ground line */}
-                        <path d="M60 370 Q200 375 340 370" stroke="#000" strokeWidth="2" fill="none"/>
-                        <path d="M70 375 Q150 380 250 375" stroke="#666" strokeWidth="1" fill="none"/>
-                        
-                        {/* Grass marks */}
-                        <path d="M80 370 L85 365 M90 372 L95 367 M110 371 L115 366" stroke="#000" strokeWidth="1"/>
-                        <path d="M280 369 L285 364 M290 371 L295 366 M310 370 L315 365" stroke="#000" strokeWidth="1"/>
-                      </svg>
-                      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-xs font-elvish text-amber-800 bg-white/80 px-2 py-1 rounded">
-                        Dahu Blanc
-                      </div>
-                    </div>
+                  <div className="relative mx-auto max-w-xs">
+                    <img 
+                      src={dahuBlancImage}
+                      alt="Le Dahu Blanc mystérieux dans son environnement montagnard"
+                      className="w-full h-auto rounded-xl shadow-lg border-4 border-amber-200"
+                      data-testid="img-dahu-blanc-intro"
+                    />
+                    <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-amber-100/20 to-transparent"></div>
                   </div>
+                </div>
+              </div>
+              
+              {/* Continue description after photo */}
+              <div className="bg-white/90 rounded-xl p-6 mb-6 border-2 border-emerald-200">
+                <div className="text-center text-gray-700 font-elvish">
+                  <p className="mb-3 italic">
+                    "Une créature légendaire aux pattes avant plus courtes que les pattes arrière, 
+                    parfaitement adaptée aux pentes escarpées des Alpes..."
+                  </p>
+                  <p className="text-sm">
+                    Votre quête commence maintenant. Suivez les indices, résolvez les énigmes, 
+                    et découvrez les secrets millénaires du Dahu Blanc.
+                  </p>
                 </div>
               </div>
               

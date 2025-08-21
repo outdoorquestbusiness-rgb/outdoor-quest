@@ -44,8 +44,8 @@ export default function ThirdEnigma() {
     { cyrillic: "Т", greek: "Τ" },
   ];
 
-  const correctAnswer = "PIERRE";
-  const cyrillicWord = "ПИЕРРЕ"; // "PIERRE" in Cyrillic
+  const correctAnswer = "FUJI";
+  const cyrillicWord = "ФУДЖИ"; // "FUJI" in Cyrillic
 
   const handleSubmit = () => {
     if (playerAnswer.toUpperCase() === correctAnswer) {
@@ -194,9 +194,9 @@ export default function ThirdEnigma() {
                             <circle cx="130" cy="110" r="4" fill="#696969" opacity="0.5"/>
                             <circle cx="110" cy="85" r="2" fill="#2F4F4F" opacity="0.7"/>
                             
-                            {/* Cyrillic text "ПИЕРРЕ" */}
+                            {/* Cyrillic text "ФУДЖИ" */}
                             <text x="100" y="110" textAnchor="middle" fontSize="24" fontWeight="bold" fill="#2F4F4F">
-                              ПИЕРРЕ
+                              ФУДЖИ
                             </text>
                           </svg>
                         </div>
@@ -307,9 +307,9 @@ export default function ThirdEnigma() {
                         
                         <div className="bg-amber-100 rounded-lg p-4 border-2 border-amber-400">
                           <h5 className="font-bold text-amber-800 mb-2">Mot indice révélé :</h5>
-                          <p className="text-lg font-elvish font-bold text-amber-900">PIERRE</p>
+                          <p className="text-lg font-elvish font-bold text-amber-900">FUJI</p>
                           <p className="text-sm text-amber-700 italic mt-2">
-                            "La pierre millénaire garde mes secrets les plus profonds..."
+                            "Le mont sacré de l'Orient révèle ses mystères..."
                           </p>
                         </div>
                       </div>

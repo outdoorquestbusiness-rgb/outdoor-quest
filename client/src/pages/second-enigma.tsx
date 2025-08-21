@@ -215,9 +215,9 @@ export default function SecondEnigma() {
                           
                           <div className="bg-amber-100 rounded-lg p-4 border-2 border-amber-400">
                             <h5 className="font-bold text-amber-800 mb-2">Indice précieux révélé :</h5>
-                            <p className="text-lg font-elvish font-bold text-amber-900">MUSIQUE</p>
+                            <p className="text-lg font-elvish font-bold text-amber-900">OLYMPE</p>
                             <p className="text-sm text-amber-700 italic mt-2">
-                              L'Arbre murmure : "Les harmonies guideront votre chemin vers le Dahu..."
+                              L'Arbre murmure : "Le sommet des dieux guide votre chemin vers le Dahu..."
                             </p>
                           </div>
                         </div>
