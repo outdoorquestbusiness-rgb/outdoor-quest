@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { ArrowLeft, Timer, Mountain, Star } from "lucide-react";
+import { ArrowLeft, Timer, Mountain } from "lucide-react";
 import { useLanguage } from "@/hooks/use-language";
 import { useLocation } from "wouter";
 import { useChronometer } from "@/hooks/use-chronometer";
 import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_background_c0472772.png";
-import dahuBlancImage from "@assets/dahu_blanc_1755704186917.png";
 
 export default function AlpineStation() {
   const { t } = useLanguage();
@@ -17,13 +16,7 @@ export default function AlpineStation() {
   const [showDahuPhoto, setShowDahuPhoto] = useState(false);
   const [showClues, setShowClues] = useState(false);
 
-  const storyText = "Vous émergez enfin de la forêt mystérieuse, vos pas vous menant vers les hauteurs du Mont Môle. Devant vous se dresse la station d'alpage du Petit Môle, battue par les vents de montagne. Cette station offre des vues magnifiques sur les sommets environnants. Ce n'est pas encore la rencontre avec le Dahu Blanc, mais l'exploration de ce lieu magique et de ses panoramas extraordinaires. Les indices récoltés dans la forêt vont maintenant prendre tout leur sens... L'air pur de la montagne porte en lui les secrets millénaires de cette créature légendaire.";
-
-  const forestClues = [
-    { enigma: "Énigme des Arbres", clue: "BLANC" },
-    { enigma: "Test Musical", clue: "OLYMPE" },
-    { enigma: "Objet Secret", clue: "FUJI" }
-  ];
+  const storyText = "Vous émergez enfin de la forêt mystérieuse, vos pas vous menant vers les hauteurs du Mont Môle. Devant vous se dresse la station d'alpage du Petit Môle, battue par les vents de montagne. Cette station offre des vues magnifiques sur les sommets environnants, un panorama à couper le souffle sur les Alpes françaises et suisses. L'air pur de la montagne semble porter des murmures anciens... Quelque part dans ces hauteurs, le Dahu Blanc continue sa garde éternelle, invisible mais présent. Les légendes parlent d'une créature qui ne se révèle qu'à ceux qui savent vraiment regarder...";
 
   useEffect(() => {
     // Start content display
@@ -55,7 +48,7 @@ export default function AlpineStation() {
     <div 
       className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
       style={{ 
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(${moleMountainImage})` 
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url(${moleMountainImage})` 
       }}
     >
       {/* Header with Timer */}
@@ -88,9 +81,9 @@ export default function AlpineStation() {
                 <div className="text-center mb-6">
                   <Mountain className="h-12 w-12 text-slate-300 mx-auto mb-3" />
                   <h3 className="text-3xl sm:text-4xl font-elvish font-bold mb-3 text-slate-100 drop-shadow-sm">
-                    La Station d'Alpage du Mont Môle
+                    La Station d'Alpage du Petit Môle
                   </h3>
-                  <p className="text-lg text-slate-300 italic font-elvish">Rencontre avec le Dahu Blanc</p>
+                  <p className="text-lg text-slate-300 italic font-elvish">Les hauteurs mystérieuses</p>
                 </div>
                 
                 {/* Typewriter Story Text */}
@@ -100,75 +93,61 @@ export default function AlpineStation() {
                   </p>
                 </div>
 
-                {/* Dahu Blanc Photo */}
+                {/* Mountain Atmosphere */}
                 {showDahuPhoto && (
-                  <div className="animate-slideInUp mb-8">
-                    <div className="bg-white/95 rounded-xl p-6 text-center border-2 border-slate-200">
-                      <h4 className="text-2xl font-elvish font-bold text-slate-800 mb-4">
-                        Le Dahu Blanc Légendaire
-                      </h4>
-                      
-                      <div className="relative mx-auto mb-4 max-w-md">
-                        <img 
-                          src={dahuBlancImage}
-                          alt="Le Dahu Blanc mystérieux dans son environnement montagnard"
-                          className="w-full h-auto rounded-lg shadow-lg border-4 border-amber-200"
-                          data-testid="img-dahu-blanc"
-                        />
-                        <div className="absolute inset-0 rounded-lg bg-gradient-to-t from-amber-100/20 to-transparent"></div>
-                      </div>
-                      
-                      <p className="text-slate-700 font-elvish italic">
-                        "Voici le majestueux Dahu Blanc, gardien des secrets du Mont Môle. 
-                        Sa fourrure immaculée brille sous les rayons alpins, et ses yeux anciens 
-                        reflètent la sagesse des montagnes éternelles."
+                  <div className="animate-slideInUp mb-6">
+                    <div className="bg-white/80 rounded-xl p-6 text-center border-2 border-blue-300">
+                      <p className="text-blue-900 font-elvish italic text-lg mb-4">
+                        Le vent souffle à travers les herbes d'alpage... Un silence mystérieux plane sur les hauteurs.
+                      </p>
+                      <p className="text-blue-800 font-elvish">
+                        Vous ressentez une présence invisible, comme si des yeux anciens vous observaient depuis les crêtes.
+                        Les légendes prennent vie dans ces lieux sauvages et préservés.
                       </p>
                     </div>
                   </div>
                 )}
 
-                {/* Forest Clues Summary */}
+                {/* Mountain Description and Continue */}
                 {showClues && (
                   <div className="animate-slideInUp">
-                    <div className="bg-amber-50/95 rounded-xl p-6 mb-6 border-2 border-amber-300/50">
-                      <div className="text-center mb-6">
-                        <Star className="h-8 w-8 text-amber-600 mx-auto mb-3" />
-                        <h4 className="text-xl font-elvish font-bold text-amber-800">
-                          Indices Récoltés dans la Forêt
-                        </h4>
-                        <p className="text-amber-700 italic font-elvish mt-2">
-                          Ces mots mystérieux vont révéler leur véritable pouvoir...
+                    <div className="bg-white/90 rounded-xl p-6 mb-6">
+                      <h4 className="text-xl font-elvish font-bold text-blue-900 mb-4 text-center">
+                        Le Petit Môle
+                      </h4>
+                      <p className="text-blue-800 font-elvish text-center mb-4 italic">
+                        "Un sommet privilégié offrant un panorama exceptionnel sur les Alpes..."
+                      </p>
+                      
+                      <div className="bg-slate-100 rounded-lg p-4 text-center border-2 border-slate-300">
+                        <p className="text-slate-800 font-elvish mb-3">
+                          Altitude : 1863 mètres
+                        </p>
+                        <p className="text-slate-700 text-sm">
+                          Vue sur le Mont Blanc, le Lac Léman, les Préalpes et le Jura.
+                          Point de départ de nombreuses randonnées vers les sommets du Chablais.
                         </p>
                       </div>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                        {forestClues.map((item, index) => (
-                          <div key={index} className="bg-white/80 rounded-lg p-4 text-center border-2 border-amber-200">
-                            <h5 className="font-bold text-amber-800 mb-2">{item.enigma}</h5>
-                            <div className="text-2xl font-elvish font-bold text-amber-900 bg-amber-100 rounded-lg py-2 px-4 border border-amber-300">
-                              {item.clue}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                      
-                      <div className="bg-gradient-to-r from-amber-100 to-yellow-100 rounded-lg p-4 border-2 border-amber-400">
-                        <p className="text-center font-elvish text-amber-900 italic">
-                          Le Dahu Blanc regarde ces mots avec un sourire mystérieux...
-                          <br />
-                          "Ces trois indices forment ensemble la clé de mon plus grand secret."
+                      <div className="text-center mt-6 bg-amber-100/80 rounded-lg p-4 border-2 border-amber-300">
+                        <p className="text-amber-800 font-elvish font-bold mb-2">
+                          L'esprit de la montagne murmure :
+                        </p>
+                        <p className="text-amber-700 italic">
+                          "Celui qui cherche le Dahu trouvera bien plus que ce qu'il espérait. 
+                          La montagne révèle ses secrets à ceux qui savent regarder au-delà du visible..."
                         </p>
                       </div>
                     </div>
 
-                    {/* Continue Button */}
+                    {/* Continue to Exploration */}
                     <div className="text-center">
                       <button
-                        onClick={() => setLocation("/orientation-table")}
+                        onClick={() => setLocation("/step1-find-table")}
                         className="bg-slate-700 hover:bg-slate-800 text-white font-elvish font-bold py-3 px-8 rounded-xl shadow-lg transition-colors transform hover:scale-105"
-                        data-testid="button-orientation-table"
+                        data-testid="button-start-exploration"
                       >
-                        Explorer la Station d'Alpage
+                        Commencer l'exploration du Petit Môle
                       </button>
                     </div>
                   </div>

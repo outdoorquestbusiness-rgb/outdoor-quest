@@ -79,40 +79,40 @@ export default function MissionIntro() {
                   {missionStory.title}
                 </h3>
                 <p className="text-lg text-amber-700 italic font-elvish">{missionStory.subtitle}</p>
-                
-                {/* Dahu Blanc Photo */}
-                <div className="mt-6 mb-4">
-                  <div className="relative mx-auto max-w-xs">
-                    <img 
-                      src={dahuBlancImage}
-                      alt="Le Dahu Blanc mystérieux dans son environnement montagnard"
-                      className="w-full h-auto rounded-xl shadow-lg border-4 border-amber-200"
-                      data-testid="img-dahu-blanc-intro"
-                    />
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-amber-100/20 to-transparent"></div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Continue description after photo */}
-              <div className="bg-white/90 rounded-xl p-6 mb-6 border-2 border-emerald-200">
-                <div className="text-center text-gray-700 font-elvish">
-                  <p className="mb-3 italic">
-                    "Une créature légendaire aux pattes avant plus courtes que les pattes arrière, 
-                    parfaitement adaptée aux pentes escarpées des Alpes..."
-                  </p>
-                  <p className="text-sm">
-                    Votre quête commence maintenant. Suivez les indices, résolvez les énigmes, 
-                    et découvrez les secrets millénaires du Dahu Blanc.
-                  </p>
-                </div>
               </div>
               
               {/* Typewriter Story Text */}
-              <div className="relative">
+              <div className="relative mb-6">
                 <p className="text-lg leading-relaxed font-elvish text-amber-900 min-h-[200px] tracking-wide italic">
                   {typewriterText}
                 </p>
+              </div>
+
+              {/* Dahu Blanc Photo - After story text */}
+              <div className="text-center">
+                <div className="relative mx-auto max-w-xs">
+                  <img 
+                    src={dahuBlancImage}
+                    alt="Le Dahu Blanc mystérieux dans son environnement montagnard"
+                    className="w-full h-auto rounded-xl shadow-lg border-4 border-amber-200"
+                    data-testid="img-dahu-blanc-intro"
+                  />
+                  <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-amber-100/20 to-transparent"></div>
+                </div>
+                
+                {/* Description after photo */}
+                <div className="mt-4 bg-white/90 rounded-xl p-4 border-2 border-emerald-200">
+                  <div className="text-center text-gray-700 font-elvish">
+                    <p className="mb-2 italic">
+                      "Une créature légendaire aux pattes avant plus courtes que les pattes arrière, 
+                      parfaitement adaptée aux pentes escarpées des Alpes..."
+                    </p>
+                    <p className="text-sm">
+                      Votre quête commence maintenant. Suivez les indices, résolvez les énigmes, 
+                      et découvrez les secrets millénaires du Dahu Blanc.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

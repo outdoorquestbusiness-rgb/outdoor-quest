@@ -20,6 +20,9 @@ import ThirdCompass from "@/pages/third-compass";
 import ThirdEnigma from "@/pages/third-enigma";
 import AlpineStation from "@/pages/alpine-station";
 import OrientationTable from "@/pages/orientation-table";
+import Step1FindTable from "@/pages/step1-find-table";
+import Step2DecipherPassword from "@/pages/step2-decipher-password";
+import Step3IdentifyMountain from "@/pages/step3-identify-mountain";
 
 import RiddlePage from "@/pages/riddle";
 import GameEnd from "@/pages/game-end";
@@ -46,6 +49,9 @@ function Router() {
       <Route path="/third-enigma" component={ThirdEnigma} />
       <Route path="/alpine-station" component={AlpineStation} />
       <Route path="/orientation-table" component={OrientationTable} />
+      <Route path="/step1-find-table" component={Step1FindTable} />
+      <Route path="/step2-decipher-password" component={Step2DecipherPassword} />
+      <Route path="/step3-identify-mountain" component={Step3IdentifyMountain} />
       <Route path="/riddle-chapter" component={RiddleChapter} />
 
       <Route path="/riddle/chapter/:chapter/riddle/:riddle">

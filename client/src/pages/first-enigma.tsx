@@ -29,6 +29,7 @@ export default function FirstEnigma() {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isTimeUp, setIsTimeUp] = useState(false);
   const [showClue, setShowClue] = useState(false);
+  const [showValidationError, setShowValidationError] = useState(false);
   
   // Crossword grid state - 7x7 grid with intersecting words
   const [grid, setGrid] = useState<CrosswordCell[][]>(() => {
@@ -374,6 +375,20 @@ export default function FirstEnigma() {
                       </div>
                     )}
 
+                    {/* Validation Error Message */}
+                    {showValidationError && (
+                      <div className="bg-orange-100/90 rounded-xl p-4 mb-6 animate-slideInUp border-2 border-orange-300">
+                        <div className="text-center">
+                          <h4 className="text-lg font-elvish font-bold text-orange-800 mb-2">
+                            Pas tout à fait...
+                          </h4>
+                          <p className="text-orange-700 font-elvish">
+                            Vérifiez vos réponses et continuez à chercher ! Tous les mots ne sont pas encore corrects.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
                     {/* Time Up Message */}
                     {isTimeUp && !isCompleted && (
                       <div className="bg-red-100/90 rounded-xl p-6 mb-6 animate-slideInUp border-2 border-red-300">
@@ -431,7 +446,11 @@ export default function FirstEnigma() {
                             if (allCorrect) {
                               setIsCompleted(true);
                               setTimerActive(false);
+                              setShowValidationError(false);
                               setTimeout(() => setShowClue(true), 1000);
+                            } else {
+                              setShowValidationError(true);
+                              setTimeout(() => setShowValidationError(false), 3000);
                             }
                           }}
                           className="bg-emerald-600 hover:bg-emerald-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"

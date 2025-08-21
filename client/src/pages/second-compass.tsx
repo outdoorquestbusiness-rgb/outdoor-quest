@@ -17,8 +17,8 @@ export default function SecondCompass() {
   
   // Navigation states
   const [isWalking, setIsWalking] = useState(false);
-  const [walkingTime, setWalkingTime] = useState(0);
-  const [distance, setDistance] = useState(920); // 920 meters
+  const [walkingTime] = useState(0);
+  const [distance] = useState(920); // 920 meters
   const [hasArrived, setHasArrived] = useState(false);
   const [needleRotation, setNeedleRotation] = useState(45);
   
