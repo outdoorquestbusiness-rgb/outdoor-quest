@@ -30,19 +30,25 @@ export default function MissionIntro() {
       setShowContent(true);
       
       // Typewriter effect for story
-      let charIndex = 0;
-      const typeInterval = setInterval(() => {
-        if (charIndex < missionStory.story.length) {
-          setTypewriterText(missionStory.story.slice(0, charIndex + 1));
-          charIndex++;
-        } else {
-          clearInterval(typeInterval);
-          // Show button after story is complete
-          setTimeout(() => setShowButton(true), 1000);
-        }
-      }, 30); // 30ms per character for smooth typing
+      if (missionStory && missionStory.content && Array.isArray(missionStory.content)) {
+        const fullStory = missionStory.content.join(" ");
+        let charIndex = 0;
+        const typeInterval = setInterval(() => {
+          if (charIndex < fullStory.length) {
+            setTypewriterText(fullStory.slice(0, charIndex + 1));
+            charIndex++;
+          } else {
+            clearInterval(typeInterval);
+            // Show button after story is complete
+            setTimeout(() => setShowButton(true), 1000);
+          }
+        }, 30); // 30ms per character for smooth typing
 
-      return () => clearInterval(typeInterval);
+        return () => clearInterval(typeInterval);
+      } else {
+        // Fallback if missionStory is not available
+        setTimeout(() => setShowButton(true), 1000);
+      }
     }, 1000); // Initial delay before showing content
   }, []);
 
