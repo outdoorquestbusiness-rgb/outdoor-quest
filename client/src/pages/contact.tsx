@@ -23,6 +23,10 @@ export default function Contact() {
         description: "Message sent successfully!",
       });
       setMessage("");
+      // Auto-return to main page after successful message send
+      setTimeout(() => {
+        setLocation("/");
+      }, 2000);
     },
     onError: () => {
       toast({
