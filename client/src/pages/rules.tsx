@@ -158,20 +158,20 @@ export default function Rules() {
           </div>
         </div>
 
-        {/* Mont Môle Requirements */}
-        <div className="bg-blue-50/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 border-2 border-blue-300">
+        {/* Environmental Respect */}
+        <div className="bg-green-50/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 border-2 border-green-300">
           <div className="text-center mb-6">
-            <h3 className="text-2xl font-elvish font-bold text-blue-800 mb-4">
-              🏔️ Exigences Mont Môle
+            <h3 className="text-2xl font-elvish font-bold text-green-800 mb-4">
+              🌿 Respect de l'Environnement
             </h3>
           </div>
           
-          <div className="bg-white/80 rounded-lg p-6 border-2 border-blue-200">
-            <p className="text-blue-800 font-elvish text-lg leading-relaxed">
-              L'aventure demande de se déplacer le long du sentier menant au sommet du Môle. 
-              Assurez-vous d'être en mesure de marcher pendant la durée indiquée de l'aventure, 
-              en prévoyant les vêtements appropriés et l'eau nécessaire. 
-              Aucune étape ne requiert de s'écarter des sentiers de randonnée.
+          <div className="bg-white/80 rounded-lg p-6 border-2 border-green-200">
+            <p className="text-green-800 font-elvish text-lg leading-relaxed">
+              Respectez l'environnement et ne restez pas trop sur le téléphone ! 
+              Prenez plaisir de ce que la nature offre comme cadre magnifique. 
+              L'aventure est aussi l'occasion de déconnecter et d'apprécier 
+              la beauté des paysages du Mont Môle.
             </p>
           </div>
         </div>
