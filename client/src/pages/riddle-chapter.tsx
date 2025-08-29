@@ -71,24 +71,28 @@ export default function RiddleChapter() {
 
   return (
     <div 
-      className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
-      style={{ 
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(${moleMountainImage})` 
+      className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-green-900 via-emerald-800 to-stone-800 relative"
+      style={{
+        backgroundImage: `
+          radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.2) 0%, transparent 50%),
+          radial-gradient(circle at 80% 70%, rgba(101, 163, 13, 0.2) 0%, transparent 50%),
+          radial-gradient(circle at 50% 10%, rgba(87, 83, 78, 0.15) 0%, transparent 40%)
+        `
       }}
     >
       {/* Header with Timer */}
       <div className={`flex items-center justify-between mb-6 pt-4 transition-all duration-700 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
         <button
           onClick={() => setLocation("/mission-intro")}
-          className="p-2 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow"
+          className="p-3 rounded-lg bg-gradient-to-r from-emerald-700 to-green-700 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-amber-600"
           data-testid="button-back"
         >
-          <ArrowLeft className="h-5 w-5 text-slate-600" />
+          <ArrowLeft className="h-5 w-5 text-amber-200" />
         </button>
         
-        <div className="flex items-center bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
-          <Timer className="h-4 w-4 text-forest mr-2" />
-          <span className="font-mono text-sm font-semibold text-slate-700">
+        <div className="flex items-center bg-gradient-to-r from-stone-800/90 to-emerald-900/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-xl border-2 border-amber-600/50">
+          <Timer className="h-4 w-4 text-amber-200 mr-2" />
+          <span className="font-mono text-sm font-semibold text-amber-100">
             {chronometer.formattedTime}
           </span>
         </div>
@@ -101,13 +105,15 @@ export default function RiddleChapter() {
       {showContent && (
         <div className="max-w-3xl mx-auto animate-fadeInUp">
           {/* Story Card */}
-          <div className="bg-emerald-50/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-2 border-emerald-200/50">
-            <div className="p-6 sm:p-8">
+          <div className="bg-gradient-to-br from-emerald-800/95 via-green-800/95 to-stone-800/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-4 border-amber-600/60 relative">
+            <div className="absolute inset-0 rounded-2xl border-4 border-green-600/30 pointer-events-none"></div>
+            <div className="absolute inset-2 rounded-xl border-2 border-amber-500/40 pointer-events-none"></div>
+            <div className="p-6 sm:p-8 relative">
               <div className="text-center mb-6">
-                <h3 className="text-3xl sm:text-4xl font-elvish font-bold mb-3 text-emerald-900 drop-shadow-sm">
-                  La Forêt des Mystères
+                <h3 className="text-3xl sm:text-4xl font-forest font-bold mb-3 text-amber-300 drop-shadow-lg tracking-wider">
+                  ◈ LA FORÊT DES MYSTÈRES ◈
                 </h3>
-                <p className="text-lg text-emerald-700 italic font-elvish">Premier défi du dahu blanc</p>
+                <p className="text-lg text-green-200 italic font-forest tracking-wide">Premier défi du dahu blanc</p>
               </div>
               
               {/* Typewriter Story Text */}
@@ -218,9 +224,14 @@ export default function RiddleChapter() {
           animation: slideInUp 0.6s ease-out;
         }
         
-        .font-elvish {
-          font-family: 'Kalam', cursive;
-          font-style: normal;
+        .font-forest {
+          font-family: 'Uncial Antiqua', 'MedievalSharp', serif;
+          font-weight: 400;
+          letter-spacing: 0.03em;
+        }
+        
+        .text-shadow-forest {
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 15px rgba(34, 197, 94, 0.3);
         }
       `}</style>
     </div>
