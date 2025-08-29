@@ -143,54 +143,36 @@ export default function Rules() {
             </div>
             <ul className="space-y-3 text-red-700">
               <li className="flex items-start">
-                <span className="text-red-600 mr-2">🥾</span>
-                <span className="font-elvish">Équipement de randonnée obligatoire</span>
+                <span className="text-red-600 mr-2">⚠️</span>
+                <span className="font-elvish">Aucune énigme demande d'avoir des comportements dangereux</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-red-600 mr-2">💧</span>
+                <span className="font-elvish">Assez d'eau</span>
               </li>
               <li className="flex items-start">
                 <span className="text-red-600 mr-2">📍</span>
                 <span className="font-elvish">Restez sur les sentiers balisés</span>
               </li>
-              <li className="flex items-start">
-                <span className="text-red-600 mr-2">🌦️</span>
-                <span className="font-elvish">Vérifiez la météo avant de partir</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-red-600 mr-2">📞</span>
-                <span className="font-elvish">Gardez un moyen de communication</span>
-              </li>
             </ul>
           </div>
         </div>
 
-        {/* Game Flow */}
+        {/* Mont Môle Requirements */}
         <div className="bg-blue-50/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 sm:p-8 border-2 border-blue-300">
           <div className="text-center mb-6">
             <h3 className="text-2xl font-elvish font-bold text-blue-800 mb-4">
-              🗺️ Déroulement de l'Aventure
+              🏔️ Exigences Mont Môle
             </h3>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div className="bg-white/80 rounded-lg p-4 text-center border-2 border-blue-200">
-              <div className="text-3xl mb-2">🌲</div>
-              <h4 className="font-elvish font-bold text-blue-800 mb-2">Forêt</h4>
-              <p className="text-blue-700 text-sm">Énigmes de départ et découverte des indices</p>
-            </div>
-            <div className="bg-white/80 rounded-lg p-4 text-center border-2 border-blue-200">
-              <div className="text-3xl mb-2">🏔️</div>
-              <h4 className="font-elvish font-bold text-blue-800 mb-2">Station Alpine</h4>
-              <p className="text-blue-700 text-sm">Défis de navigation et orientation</p>
-            </div>
-            <div className="bg-white/80 rounded-lg p-4 text-center border-2 border-blue-200">
-              <div className="text-3xl mb-2">🗺️</div>
-              <h4 className="font-elvish font-bold text-blue-800 mb-2">Table d'Orientation</h4>
-              <p className="text-blue-700 text-sm">Géographie et déchiffrement</p>
-            </div>
-            <div className="bg-white/80 rounded-lg p-4 text-center border-2 border-blue-200">
-              <div className="text-3xl mb-2">✝️</div>
-              <h4 className="font-elvish font-bold text-blue-800 mb-2">Croix du Sommet</h4>
-              <p className="text-blue-700 text-sm">Épreuve finale et révélation</p>
-            </div>
+          <div className="bg-white/80 rounded-lg p-6 border-2 border-blue-200">
+            <p className="text-blue-800 font-elvish text-lg leading-relaxed">
+              L'aventure demande de se déplacer le long du sentier menant au sommet du Môle. 
+              Assurez-vous d'être en mesure de marcher pendant la durée indiquée de l'aventure, 
+              en prévoyant les vêtements appropriés et l'eau nécessaire. 
+              Aucune étape ne requiert de s'écarter des sentiers de randonnée.
+            </p>
           </div>
         </div>
 
