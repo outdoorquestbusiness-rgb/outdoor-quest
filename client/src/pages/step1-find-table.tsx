@@ -69,30 +69,26 @@ export default function Step1FindTable() {
 
   return (
     <div 
-      className={`min-h-screen p-4 sm:p-6 bg-gradient-to-b from-slate-900 via-indigo-950 to-purple-950 relative transition-transform duration-300 ${
+      className={`min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat transition-transform duration-300 ${
         isShaking ? 'animate-pulse' : ''
       }`}
-      style={{
-        backgroundImage: `
-          radial-gradient(circle at 30% 30%, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
-          radial-gradient(circle at 70% 70%, rgba(147, 51, 234, 0.2) 0%, transparent 50%),
-          radial-gradient(circle at 50% 10%, rgba(30, 64, 175, 0.15) 0%, transparent 40%)
-        `
+      style={{ 
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(${moleMountainImage})` 
       }}
     >
       {/* Header with Timer */}
       <div className="flex items-center justify-between mb-6 pt-4">
         <button
           onClick={() => setLocation("/alpine-station")}
-          className="p-3 rounded-lg bg-gradient-to-r from-purple-800 to-indigo-800 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-gold-400"
+          className="p-2 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow"
           data-testid="button-back"
         >
-          <ArrowLeft className="h-5 w-5 text-gold-300" />
+          <ArrowLeft className="h-5 w-5 text-slate-600" />
         </button>
         
-        <div className="flex items-center bg-gradient-to-r from-purple-900/90 to-indigo-900/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-xl border-2 border-gold-500/50">
-          <Timer className="h-4 w-4 text-gold-300 mr-2" />
-          <span className="font-mono text-sm font-semibold text-gold-100">
+        <div className="flex items-center bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+          <Timer className="h-4 w-4 text-forest mr-2" />
+          <span className="font-mono text-sm font-semibold text-slate-700">
             {chronometer.formattedTime}
           </span>
         </div>
@@ -105,24 +101,20 @@ export default function Step1FindTable() {
         {showContent && (
           <div className="animate-fadeInUp">
             {/* Story Card - Step 1 */}
-            <div className="bg-gradient-to-br from-purple-900/95 via-indigo-900/95 to-slate-900/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-4 border-gold-500/60 relative">
-              <div className="absolute inset-0 rounded-2xl border-4 border-purple-500/30 pointer-events-none"></div>
-              <div className="absolute inset-2 rounded-xl border-2 border-gold-400/40 pointer-events-none"></div>
-              <div className="p-6 sm:p-8 relative">
+            <div className="bg-blue-900/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-2 border-blue-300/50">
+              <div className="p-6 sm:p-8">
                 <div className="text-center mb-6">
-                  <MapPin className="h-12 w-12 text-gold-400 mx-auto mb-3" />
-                  <h3 className="text-3xl sm:text-4xl font-majora font-bold mb-3 text-gold-300 drop-shadow-lg tracking-wider">
-                    ◆ ÉTAPE I — TROUVER LA TABLE D'ORIENTATION ◆
+                  <MapPin className="h-12 w-12 text-blue-300 mx-auto mb-3" />
+                  <h3 className="text-3xl sm:text-4xl font-elvish font-bold mb-3 text-blue-100 drop-shadow-sm">
+                    Étape 1 — Trouver la table d'orientation
                   </h3>
                 </div>
                 
                 {/* Typewriter Story Text */}
                 <div className="relative mb-8">
-                  <div className="bg-gradient-to-r from-slate-800/60 via-purple-800/60 to-slate-800/60 rounded-xl p-6 border-2 border-purple-500/40">
-                    <p className="text-lg leading-relaxed font-majora text-purple-100 min-h-[100px] tracking-wide italic text-center text-shadow-lg">
-                      {typewriterText}
-                    </p>
-                  </div>
+                  <p className="text-lg leading-relaxed font-elvish text-blue-100 min-h-[100px] tracking-wide italic text-center">
+                    {typewriterText}
+                  </p>
                 </div>
 
                 {/* Walk to Table Button */}
@@ -183,7 +175,7 @@ export default function Step1FindTable() {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
         
         @keyframes fadeInUp {
           0% {
@@ -215,14 +207,9 @@ export default function Step1FindTable() {
           animation: slideInUp 0.6s ease-out;
         }
         
-        .font-majora {
-          font-family: 'Cinzel', 'Philosopher', serif;
-          font-weight: 600;
-          letter-spacing: 0.05em;
-        }
-        
-        .text-shadow-lg {
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(147, 51, 234, 0.5);
+        .font-elvish {
+          font-family: 'Kalam', cursive;
+          font-style: normal;
         }
       `}</style>
     </div>

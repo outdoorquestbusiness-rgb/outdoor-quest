@@ -38,28 +38,24 @@ export default function Step2DecipherPassword() {
 
   return (
     <div 
-      className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-slate-900 via-purple-950 to-indigo-950 relative"
-      style={{
-        backgroundImage: `
-          radial-gradient(circle at 25% 25%, rgba(147, 51, 234, 0.25) 0%, transparent 50%),
-          radial-gradient(circle at 75% 75%, rgba(79, 70, 229, 0.25) 0%, transparent 50%),
-          radial-gradient(circle at 50% 50%, rgba(30, 64, 175, 0.15) 0%, transparent 50%)
-        `
+      className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
+      style={{ 
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(${moleMountainImage})` 
       }}
     >
       {/* Header with Timer */}
       <div className="flex items-center justify-between mb-6 pt-4">
         <button
           onClick={() => setLocation("/step1-find-table")}
-          className="p-3 rounded-lg bg-gradient-to-r from-purple-800 to-indigo-800 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-gold-400"
+          className="p-2 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow"
           data-testid="button-back"
         >
-          <ArrowLeft className="h-5 w-5 text-gold-300" />
+          <ArrowLeft className="h-5 w-5 text-slate-600" />
         </button>
         
-        <div className="flex items-center bg-gradient-to-r from-purple-900/90 to-indigo-900/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-xl border-2 border-gold-500/50">
-          <Timer className="h-4 w-4 text-gold-300 mr-2" />
-          <span className="font-mono text-sm font-semibold text-gold-100">
+        <div className="flex items-center bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+          <Timer className="h-4 w-4 text-forest mr-2" />
+          <span className="font-mono text-sm font-semibold text-slate-700">
             {chronometer.formattedTime}
           </span>
         </div>
@@ -72,19 +68,17 @@ export default function Step2DecipherPassword() {
         {showContent && (
           <div className="animate-fadeInUp">
             {/* Step 2 - Password Challenge */}
-            <div className="bg-gradient-to-br from-purple-900/95 via-indigo-900/95 to-slate-900/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-4 border-gold-500/60 relative">
-              <div className="absolute inset-0 rounded-2xl border-4 border-purple-500/30 pointer-events-none"></div>
-              <div className="absolute inset-2 rounded-xl border-2 border-gold-400/40 pointer-events-none"></div>
-              <div className="p-6 sm:p-8 relative">
+            <div className="bg-amber-900/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-2 border-amber-300/50">
+              <div className="p-6 sm:p-8">
                 <div className="text-center mb-6">
-                  <Star className="h-12 w-12 text-gold-400 mx-auto mb-3" />
-                  <h3 className="text-3xl sm:text-4xl font-majora font-bold mb-3 text-gold-300 drop-shadow-lg tracking-wider">
-                    ◆ ÉTAPE II — DÉCHIFFRER LE MOT DE PASSE ◆
+                  <Star className="h-12 w-12 text-amber-300 mx-auto mb-3" />
+                  <h3 className="text-3xl sm:text-4xl font-elvish font-bold mb-3 text-amber-100 drop-shadow-sm">
+                    Étape 2 — Déchiffrer le mot de passe
                   </h3>
                 </div>
 
-                <div className="bg-gradient-to-r from-slate-800/80 via-purple-800/80 to-slate-800/80 rounded-xl p-6 mb-6 border-2 border-purple-500/50">
-                  <p className="text-purple-100 font-majora text-lg italic text-center mb-6 tracking-wide text-shadow-lg">
+                <div className="bg-white/90 rounded-xl p-6 mb-6">
+                  <p className="text-amber-900 font-elvish text-lg italic text-center mb-6">
                     "Tu as récolté trois noms au cœur de la forêt : Regarde-les bien. 
                     Ils ont une origine commune. Réunis-les, et tu trouveras le mot de passe qui ouvre la porte des cimes."
                   </p>
@@ -92,8 +86,8 @@ export default function Step2DecipherPassword() {
                   {/* Forest Clues Display - Only found words */}
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     {forestClues.map((clue, index) => (
-                      <div key={index} className="bg-gradient-to-br from-indigo-800/80 to-purple-800/80 rounded-lg p-4 text-center border-2 border-gold-400/60">
-                        <div className="text-xl font-majora font-bold text-gold-200 tracking-wider">
+                      <div key={index} className="bg-emerald-100 rounded-lg p-4 text-center border-2 border-emerald-300">
+                        <div className="text-xl font-elvish font-bold text-emerald-900">
                           {clue}
                         </div>
                       </div>
@@ -102,7 +96,7 @@ export default function Step2DecipherPassword() {
 
                   {!isCorrect && (
                     <div className="text-center">
-                      <p className="text-purple-100 font-majora font-bold mb-4 tracking-wide">
+                      <p className="text-amber-800 font-elvish font-bold mb-4">
                         Quel mot unit ces trois noms ?
                       </p>
                       <div className="flex justify-center items-center space-x-4 mb-4">
@@ -157,7 +151,7 @@ export default function Step2DecipherPassword() {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
         
         @keyframes fadeInUp {
           0% {
@@ -189,14 +183,9 @@ export default function Step2DecipherPassword() {
           animation: slideInUp 0.6s ease-out;
         }
         
-        .font-majora {
-          font-family: 'Cinzel', 'Philosopher', serif;
-          font-weight: 600;
-          letter-spacing: 0.05em;
-        }
-        
-        .text-shadow-lg {
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(147, 51, 234, 0.5);
+        .font-elvish {
+          font-family: 'Kalam', cursive;
+          font-style: normal;
         }
       `}</style>
     </div>

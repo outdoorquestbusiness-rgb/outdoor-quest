@@ -46,28 +46,24 @@ export default function AlpineStation() {
 
   return (
     <div 
-      className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-emerald-900 via-green-900 to-stone-900 relative"
-      style={{
-        backgroundImage: `
-          radial-gradient(circle at 20% 30%, rgba(34, 197, 94, 0.15) 0%, transparent 50%),
-          radial-gradient(circle at 80% 70%, rgba(101, 163, 13, 0.15) 0%, transparent 50%),
-          radial-gradient(circle at 50% 10%, rgba(87, 83, 78, 0.2) 0%, transparent 40%)
-        `
+      className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
+      style={{ 
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url(${moleMountainImage})` 
       }}
     >
       {/* Header with Timer */}
       <div className="flex items-center justify-between mb-6 pt-4">
         <button
           onClick={() => setLocation("/third-enigma")}
-          className="p-3 rounded-lg bg-gradient-to-r from-emerald-700 to-green-700 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-amber-600"
+          className="p-2 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow"
           data-testid="button-back"
         >
-          <ArrowLeft className="h-5 w-5 text-amber-200" />
+          <ArrowLeft className="h-5 w-5 text-slate-600" />
         </button>
         
-        <div className="flex items-center bg-gradient-to-r from-stone-800/90 to-emerald-900/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-xl border-2 border-amber-600/50">
-          <Timer className="h-4 w-4 text-amber-200 mr-2" />
-          <span className="font-mono text-sm font-semibold text-amber-100">
+        <div className="flex items-center bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+          <Timer className="h-4 w-4 text-forest mr-2" />
+          <span className="font-mono text-sm font-semibold text-slate-700">
             {chronometer.formattedTime}
           </span>
         </div>
@@ -163,7 +159,7 @@ export default function AlpineStation() {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=MedievalSharp&family=Uncial+Antiqua&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
         
         @keyframes fadeInUp {
           0% {
@@ -195,14 +191,9 @@ export default function AlpineStation() {
           animation: slideInUp 0.6s ease-out;
         }
         
-        .font-forest {
-          font-family: 'Uncial Antiqua', 'MedievalSharp', serif;
-          font-weight: 400;
-          letter-spacing: 0.03em;
-        }
-        
-        .text-shadow-forest {
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 15px rgba(34, 197, 94, 0.3);
+        .font-elvish {
+          font-family: 'Kalam', cursive;
+          font-style: normal;
         }
       `}</style>
     </div>

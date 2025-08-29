@@ -71,13 +71,9 @@ export default function CompassNavigation() {
 
   return (
     <div 
-      className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-green-900 via-emerald-900 to-stone-800 relative"
-      style={{
-        backgroundImage: `
-          radial-gradient(circle at 30% 20%, rgba(34, 197, 94, 0.2) 0%, transparent 50%),
-          radial-gradient(circle at 70% 80%, rgba(101, 163, 13, 0.2) 0%, transparent 50%),
-          radial-gradient(circle at 50% 50%, rgba(87, 83, 78, 0.15) 0%, transparent 50%)
-        `
+      className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
+      style={{ 
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url(${moleMountainImage})` 
       }}
     >
       {/* Header with Timer */}

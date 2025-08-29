@@ -35,28 +35,24 @@ export default function Step3IdentifyMountain() {
 
   return (
     <div 
-      className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-indigo-950 via-slate-900 to-purple-950 relative"
-      style={{
-        backgroundImage: `
-          radial-gradient(circle at 40% 20%, rgba(79, 70, 229, 0.2) 0%, transparent 50%),
-          radial-gradient(circle at 80% 60%, rgba(147, 51, 234, 0.2) 0%, transparent 50%),
-          radial-gradient(circle at 20% 80%, rgba(30, 64, 175, 0.15) 0%, transparent 50%)
-        `
+      className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
+      style={{ 
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(${moleMountainImage})` 
       }}
     >
       {/* Header with Timer */}
       <div className="flex items-center justify-between mb-6 pt-4">
         <button
           onClick={() => setLocation("/step2-decipher-password")}
-          className="p-3 rounded-lg bg-gradient-to-r from-purple-800 to-indigo-800 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-gold-400"
+          className="p-2 rounded-lg bg-white shadow-md hover:shadow-lg transition-shadow"
           data-testid="button-back"
         >
-          <ArrowLeft className="h-5 w-5 text-gold-300" />
+          <ArrowLeft className="h-5 w-5 text-slate-600" />
         </button>
         
-        <div className="flex items-center bg-gradient-to-r from-purple-900/90 to-indigo-900/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-xl border-2 border-gold-500/50">
-          <Timer className="h-4 w-4 text-gold-300 mr-2" />
-          <span className="font-mono text-sm font-semibold text-gold-100">
+        <div className="flex items-center bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+          <Timer className="h-4 w-4 text-forest mr-2" />
+          <span className="font-mono text-sm font-semibold text-slate-700">
             {chronometer.formattedTime}
           </span>
         </div>
