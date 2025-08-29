@@ -26,6 +26,7 @@ const translations: Translations = {
 
   // Missions Page
   "missions.title": { fr: "Missions", en: "Missions" },
+  "add.mission": { fr: "Ajouter Mission", en: "Add Mission" },
   "access.code": { fr: "Code d'accès", en: "Access code" },
   "enter.code": { fr: "Entrez le code...", en: "Enter code..." },
   "demo.code": { fr: "Code démo: 1234", en: "Demo code: 1234" },

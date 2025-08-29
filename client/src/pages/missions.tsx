@@ -6,6 +6,8 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import mountainBgImage from "@assets/generated_images/Mountain_adventure_family_background_406e0d3d.png";
+import basicOutdoorThumbnail from "@assets/generated_images/Basic_outdoor_exploration_thumbnail_3d7c7a09.png";
+import dahuMysteryThumbnail from "@assets/generated_images/Dahu_mountain_mystery_thumbnail_dd7e6fba.png";
 
 export default function Missions() {
   const { t } = useLanguage();
@@ -68,7 +70,7 @@ export default function Missions() {
           data-testid="button-add-mission"
         >
           <Plus className="h-5 w-5" />
-          <span className="font-semibold">Add Mission</span>
+          <span className="font-semibold">{t("add.mission")}</span>
         </button>
       </div>
 
@@ -113,11 +115,21 @@ export default function Missions() {
           const isNewMission = new Date(mission.createdAt).getTime() > Date.now() - 24 * 60 * 60 * 1000;
           const isJustAdded = newMissionId === mission.id;
           
+          // Select thumbnail based on mission type
+          const getThumbnail = (missionId: string, missionName: string) => {
+            if (missionId === "outdoor-exploration-basic") {
+              return basicOutdoorThumbnail;
+            } else if (missionName.toLowerCase().includes("dahu") || missionName.toLowerCase().includes("mystérieux")) {
+              return dahuMysteryThumbnail;
+            }
+            return basicOutdoorThumbnail; // Default fallback
+          };
+          
           return (
             <div
               key={mission.id}
               onClick={() => setLocation(`/mission/${mission.id}`)}
-              className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all cursor-pointer transform hover:scale-[1.02] duration-300 border border-white/50 ${
+              className={`bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl transition-all cursor-pointer transform hover:scale-[1.02] duration-300 border border-white/50 overflow-hidden ${
                 isJustAdded ? 'animate-slideInUp' : 'animate-fadeInUp'
               }`}
               style={{
@@ -129,8 +141,12 @@ export default function Missions() {
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center">
-                    <div className="w-14 h-14 bg-gradient-to-br from-forest via-mountain to-adventure rounded-xl flex items-center justify-center mr-4 shadow-lg">
-                      <i className="fas fa-mountain text-white text-xl"></i>
+                    <div className="w-16 h-16 rounded-xl mr-4 shadow-lg overflow-hidden">
+                      <img 
+                        src={getThumbnail(mission.id, mission.name)} 
+                        alt={mission.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-slate-800 mb-1">{mission.name}</h3>
