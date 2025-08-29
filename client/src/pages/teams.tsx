@@ -60,7 +60,7 @@ export default function Teams() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8 pt-4">
         <button
-          onClick={() => setLocation("/")}
+          onClick={() => setLocation("/missions")}
           className="p-2 rounded-lg bg-white/90 backdrop-blur-sm shadow-md hover:shadow-lg transition-all"
           data-testid="button-back"
         >

@@ -177,7 +177,7 @@ export default function MissionDetails({ missionId }: MissionDetailsProps) {
 
             {/* Start Adventure Button */}
             <button
-              onClick={() => setLocation("/rules")}
+              onClick={() => setLocation("/teams")}
               className="group bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-bold py-6 px-12 rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300 text-xl"
               data-testid="button-start-adventure"
             >

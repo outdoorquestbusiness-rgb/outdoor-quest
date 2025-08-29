@@ -205,7 +205,7 @@ export default function Rules() {
           </p>
           
           <button
-            onClick={() => setLocation("/missions")}
+            onClick={() => setLocation("/mission-intro")}
             className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-500 hover:to-orange-500 text-white font-elvish font-bold py-4 px-8 rounded-xl shadow-lg transform transition-all duration-300 hover:scale-105"
             data-testid="button-start-adventure"
           >
