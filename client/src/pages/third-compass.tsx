@@ -12,10 +12,7 @@ export default function ThirdCompass() {
   
   // Navigation states
   const [isWalking, setIsWalking] = useState(false);
-  const [walkingTime, setWalkingTime] = useState(0);
-  const [distance, setDistance] = useState(400); // 400 meters
   const [hasArrived, setHasArrived] = useState(false);
-  const [needleRotation, setNeedleRotation] = useState(45); // North-East
   
   // Screen shake effect
   const [isShaking, setIsShaking] = useState(false);
@@ -28,35 +25,12 @@ export default function ThirdCompass() {
   const handleStartWalking = () => {
     setIsWalking(true);
     
-    // Walking timer - 7 minutes (420 seconds) for demo, compressed to 7 seconds
-    const interval = setInterval(() => {
-      setWalkingTime(prev => {
-        const newTime = prev + 0.1;
-        return Math.round(newTime * 10) / 10; // Round to 1 decimal
-      });
-      
-      setDistance(prev => {
-        const newDistance = Math.max(0, prev - 57.1); // 400m / 7 seconds = 57.1m per iteration
-        return newDistance;
-      });
-    }, 1000);
-
-    // Needle movement animation
-    const needleInterval = setInterval(() => {
-      setNeedleRotation(prev => prev + (Math.random() - 0.5) * 10);
-    }, 2000);
-
-    // Stop after 7 seconds and show arrival
+    // Show arrival after 3 seconds (simplified)
     setTimeout(() => {
-      clearInterval(interval);
-      clearInterval(needleInterval);
-      setWalkingTime(0);
-      setDistance(0);
       setIsWalking(false);
-      setNeedleRotation(45); // Reset needle to NE
       setHasArrived(true);
       shakeScreen(); // Shake screen when arriving
-    }, 7000);
+    }, 3000);
   };
 
   return (
@@ -91,47 +65,15 @@ export default function ThirdCompass() {
       <div className="max-w-md mx-auto">
         <div className="bg-slate-900/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden mb-6 border-4 border-amber-500/50">
           <div className="p-8">
-            {/* Simplified Compass Display with Animation */}
-            <div className="relative w-80 h-80 mx-auto mb-8 animate-compassAppear">
-              {/* Outer Ring - simplified */}
-              <div className="absolute inset-0 rounded-full border-4 border-slate-700 bg-gradient-to-br from-slate-200 to-slate-300 shadow-2xl">
-                {/* Cardinal Directions Only */}
-                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-3xl font-bold text-slate-800">N</div>
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-3xl font-bold text-slate-800">S</div>
-                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-3xl font-bold text-slate-800">W</div>
-                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-3xl font-bold text-slate-800">E</div>
-              </div>
-              
-              {/* Large Compass Needle */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div 
-                  className="relative transition-transform duration-500 ease-out"
-                  style={{ 
-                    transform: `rotate(${needleRotation}deg)`,
-                  }}
-                >
-                  <div className="w-1 bg-red-600 h-32 origin-center rounded-full shadow-lg transform -translate-y-16"></div>
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-red-600 rounded-full border-2 border-white shadow-lg"></div>
-                </div>
-              </div>
-            </div>
-
-            {/* Distance and Time Display */}
-            <div className="bg-amber-50/90 rounded-xl p-6 mb-6 border-2 border-amber-200/50">
-              <div className="text-center">
-                <h3 className="text-xl font-elvish font-bold text-amber-800 mb-4">
-                  Point d'énigme final
+            {/* Simple navigation message */}
+            <div className="text-center mb-8">
+              <div className="bg-amber-50/90 rounded-xl p-6 border-2 border-amber-200/50">
+                <h3 className="text-2xl font-elvish font-bold text-amber-800 mb-4">
+                  Navigation vers le point final
                 </h3>
-                <div className="grid grid-cols-2 gap-4 text-amber-700 font-elvish">
-                  <div>
-                    <p className="text-sm opacity-75">Distance</p>
-                    <p className="text-2xl font-bold">{distance.toFixed(0)}m</p>
-                  </div>
-                  <div>
-                    <p className="text-sm opacity-75">Temps estimé</p>
-                    <p className="text-2xl font-bold">{isWalking ? `${walkingTime} min` : '7 min'}</p>
-                  </div>
-                </div>
+                <p className="text-amber-700 font-elvish text-lg">
+                  Suivez le sentier jusqu'au dernier point d'énigme
+                </p>
               </div>
             </div>
 

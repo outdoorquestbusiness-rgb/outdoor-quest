@@ -17,10 +17,7 @@ export default function SecondCompass() {
   
   // Navigation states
   const [isWalking, setIsWalking] = useState(false);
-  const [walkingTime] = useState(0);
-  const [distance] = useState(920); // 920 meters
   const [hasArrived, setHasArrived] = useState(false);
-  const [needleRotation, setNeedleRotation] = useState(45);
   
   // Screen shake effect
   const [isShaking, setIsShaking] = useState(false);
@@ -159,25 +156,18 @@ export default function SecondCompass() {
             {showNavInfo && (
               <div className="bg-amber-50/90 rounded-xl p-6 mb-6 border-2 border-amber-200/50 animate-slideInUp">
                 <div className="text-center mb-4">
-                  <Compass className="h-8 w-8 text-amber-600 mx-auto mb-2" />
                   <h4 className="text-lg font-elvish font-bold text-amber-800">
-                    Informations de Navigation
+                    Navigation vers l'Arbre Gardien
                   </h4>
                 </div>
                 
-                <div className="space-y-3 text-amber-700 font-elvish">
-                  <div className="flex justify-between items-center">
-                    <span>Distance depuis point de départ:</span>
-                    <span className="font-semibold">{isWalking ? `${distance}m` : '920m'}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Temps depuis point de départ:</span>
-                    <span className="font-semibold">{isWalking ? `${walkingTime.toFixed(1)} min` : '~14 minutes'}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Direction:</span>
-                    <span className="font-semibold">Sud-Est</span>
-                  </div>
+                <div className="space-y-3 text-amber-700 font-elvish text-center">
+                  <p className="font-semibold">
+                    Cherchez l'arbre gardien avec son écorce blanche distinctive
+                  </p>
+                  <p className="text-sm italic">
+                    Suivez le sentier naturellement jusqu'au prochain point mystérieux
+                  </p>
                 </div>
               </div>
             )}

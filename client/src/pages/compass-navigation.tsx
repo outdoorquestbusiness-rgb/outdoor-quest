@@ -101,54 +101,23 @@ export default function CompassNavigation() {
       <div className="max-w-md mx-auto">
         <div className="bg-slate-900/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden mb-6 border-4 border-amber-500/50">
           <div className="p-8">
-            {/* Simplified Compass Display with Animation */}
-            <div className="relative w-80 h-80 mx-auto mb-8 animate-compassAppear">
-              {/* Outer Ring - simplified */}
-              <div className="absolute inset-0 rounded-full border-4 border-slate-700 bg-gradient-to-br from-slate-200 to-slate-300 shadow-2xl">
-                {/* Cardinal Directions Only */}
-                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 text-3xl font-bold text-slate-800">N</div>
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-3xl font-bold text-slate-800">S</div>
-                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-3xl font-bold text-slate-800">W</div>
-                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 text-3xl font-bold text-slate-800">E</div>
-              </div>
-              
-              {/* Large Compass Needle */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div 
-                  className="relative transition-transform duration-500 ease-out"
-                  style={{ 
-                    transform: `rotate(${needleRotation}deg)`,
-                    transformOrigin: '50% 50%'
-                  }}
-                >
-                  {/* Single Large Needle (Red) */}
-                  <div className="absolute top-0 left-1/2 w-0 h-0 transform -translate-x-1/2 border-l-4 border-r-4 border-b-20 border-transparent border-b-red-600"></div>
-                  <div className="absolute top-5 left-1/2 w-3 h-32 transform -translate-x-1/2 bg-gradient-to-b from-red-600 to-red-400 rounded-full shadow-lg"></div>
-                </div>
-              </div>
-              
-              {/* Center Pivot - larger */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-8 h-8 bg-gradient-to-br from-slate-600 to-slate-800 rounded-full shadow-lg border-2 border-slate-400"></div>
+            {/* Simple navigation message */}
+            <div className="text-center mb-8">
+              <div className="bg-amber-50/90 rounded-xl p-6 border-2 border-amber-200/50">
+                <h3 className="text-2xl font-elvish font-bold text-amber-800 mb-4">
+                  Navigation vers le prochain point
+                </h3>
+                <p className="text-amber-700 font-elvish text-lg">
+                  Suivez le sentier jusqu'au prochain point d'énigme
+                </p>
               </div>
             </div>
 
-            {/* Navigation Info */}
+            {/* Navigation Info - Removed time/distance/direction */}
             <div className="text-center space-y-4 mb-8">
               <div className="bg-amber-500/20 rounded-xl p-4 border border-amber-400/30">
-                <div className="flex items-center justify-center mb-2">
-                  <Navigation className="h-5 w-5 text-amber-400 mr-2" />
-                  <span className="text-amber-100 font-semibold">Direction: Sud-Ouest</span>
-                </div>
-                <div className="grid grid-cols-2 gap-4 mt-4">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">{walkingTime}</div>
-                    <div className="text-amber-300 text-sm">minutes</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-white">{distance}</div>
-                    <div className="text-amber-300 text-sm">mètres</div>
-                  </div>
+                <div className="flex items-center justify-center">
+                  <span className="text-amber-100 font-semibold">En route vers le point mystérieux</span>
                 </div>
               </div>
               
