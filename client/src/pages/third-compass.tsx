@@ -12,6 +12,7 @@ export default function ThirdCompass() {
   
   // Navigation states
   const [isWalking, setIsWalking] = useState(false);
+  const [distance, setDistance] = useState(480); // 480 meters to final point
   const [hasArrived, setHasArrived] = useState(false);
   
   // Screen shake effect
@@ -25,12 +26,22 @@ export default function ThirdCompass() {
   const handleStartWalking = () => {
     setIsWalking(true);
     
-    // Show arrival after 3 seconds (simplified)
+    // Decrease distance over 5 seconds
+    const interval = setInterval(() => {
+      setDistance(prev => {
+        const newDistance = Math.max(0, prev - 96); // 480m / 5 seconds = 96m per iteration
+        return newDistance;
+      });
+    }, 1000);
+    
+    // Show arrival after 5 seconds
     setTimeout(() => {
+      clearInterval(interval);
+      setDistance(0);
       setIsWalking(false);
       setHasArrived(true);
       shakeScreen(); // Shake screen when arriving
-    }, 3000);
+    }, 5000);
   };
 
   return (
@@ -71,9 +82,14 @@ export default function ThirdCompass() {
                 <h3 className="text-2xl font-elvish font-bold text-amber-800 mb-4">
                   Navigation vers le point final
                 </h3>
-                <p className="text-amber-700 font-elvish text-lg">
+                <p className="text-amber-700 font-elvish text-lg mb-4">
                   Suivez le sentier jusqu'au dernier point d'énigme
                 </p>
+                <div className="bg-white/80 rounded-lg p-4 border-2 border-amber-300">
+                  <p className="text-sm text-amber-700 mb-2">Distance jusqu'au point de repère</p>
+                  <div className="text-4xl font-bold text-amber-900 font-mono">{distance}</div>
+                  <div className="text-amber-700 text-lg">mètres</div>
+                </div>
               </div>
             </div>
 

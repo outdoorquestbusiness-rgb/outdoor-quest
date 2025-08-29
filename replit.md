@@ -10,6 +10,12 @@ The application combines outdoor exploration with digital gaming elements, offer
 
 Preferred communication style: Simple, everyday language.
 
+### Recent UI Updates (January 2025)
+- Button text changed from "Suivre la boussole" to "Trouver le point de repère" in challenge views
+- Compass navigation views simplified: removed compass displays, time information, and direction indicators
+- Added distance meters that decrease as players approach landmarks (950m → 0m for first point, 720m → 0m for Tree Guardian, 480m → 0m for final point)
+- Enhanced navigation experience with real-time distance feedback during walking simulation
+
 ## System Architecture
 
 ### Frontend Architecture

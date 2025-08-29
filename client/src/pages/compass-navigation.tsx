@@ -113,11 +113,15 @@ export default function CompassNavigation() {
               </div>
             </div>
 
-            {/* Navigation Info - Removed time/distance/direction */}
+            {/* Distance Display */}
             <div className="text-center space-y-4 mb-8">
               <div className="bg-amber-500/20 rounded-xl p-4 border border-amber-400/30">
-                <div className="flex items-center justify-center">
-                  <span className="text-amber-100 font-semibold">En route vers le point mystérieux</span>
+                <div className="flex items-center justify-center mb-2">
+                  <span className="text-amber-100 font-semibold">Distance jusqu'au point de repère</span>
+                </div>
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-white font-mono">{distance}</div>
+                  <div className="text-amber-300 text-lg">mètres</div>
                 </div>
               </div>
               

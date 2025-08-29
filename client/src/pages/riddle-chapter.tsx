@@ -187,7 +187,7 @@ export default function RiddleChapter() {
               >
                 <div className="flex items-center justify-center">
                   <Compass className="h-8 w-8 mr-3 group-hover:rotate-12 transition-transform duration-300" />
-                  <span>Suivre la boussole</span>
+                  <span>Trouver le point de repère</span>
                 </div>
                 <div className="absolute inset-0 bg-white/20 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></div>
               </button>

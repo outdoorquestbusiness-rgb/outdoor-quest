@@ -17,6 +17,7 @@ export default function SecondCompass() {
   
   // Navigation states
   const [isWalking, setIsWalking] = useState(false);
+  const [distance, setDistance] = useState(720); // 720 meters to Tree Guardian
   const [hasArrived, setHasArrived] = useState(false);
   
   // Screen shake effect
@@ -32,12 +33,22 @@ export default function SecondCompass() {
   const handleStartWalking = () => {
     setIsWalking(true);
     
-    // Show arrival after 2 seconds (no countdown)
+    // Decrease distance over 4 seconds
+    const interval = setInterval(() => {
+      setDistance(prev => {
+        const newDistance = Math.max(0, prev - 180); // 720m / 4 seconds = 180m per iteration
+        return newDistance;
+      });
+    }, 1000);
+    
+    // Show arrival after 4 seconds
     setTimeout(() => {
+      clearInterval(interval);
+      setDistance(0);
       setIsWalking(false);
       setHasArrived(true);
       shakeScreen();
-    }, 2000);
+    }, 4000);
   };
 
   useEffect(() => {
@@ -161,10 +172,15 @@ export default function SecondCompass() {
                   </h4>
                 </div>
                 
-                <div className="space-y-3 text-amber-700 font-elvish text-center">
+                <div className="space-y-4 text-amber-700 font-elvish text-center">
                   <p className="font-semibold">
                     Cherchez l'arbre gardien avec son écorce blanche distinctive
                   </p>
+                  <div className="bg-white/80 rounded-lg p-4 border-2 border-amber-300">
+                    <p className="text-sm mb-2">Distance jusqu'au point de repère</p>
+                    <div className="text-3xl font-bold text-amber-900 font-mono">{distance}</div>
+                    <div className="text-amber-700 text-lg">mètres</div>
+                  </div>
                   <p className="text-sm italic">
                     Suivez le sentier naturellement jusqu'au prochain point mystérieux
                   </p>
