@@ -66,9 +66,13 @@ export default function SecondCompass() {
 
   return (
     <div 
-      className={`min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat ${isShaking ? 'animate-shake' : ''}`}
-      style={{ 
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url(${moleMountainImage})` 
+      className={`min-h-screen p-4 sm:p-6 bg-gradient-to-b from-emerald-900 via-green-800 to-stone-800 relative ${isShaking ? 'animate-shake' : ''}`}
+      style={{
+        backgroundImage: `
+          radial-gradient(circle at 30% 30%, rgba(34, 197, 94, 0.2) 0%, transparent 50%),
+          radial-gradient(circle at 70% 70%, rgba(101, 163, 13, 0.2) 0%, transparent 50%),
+          radial-gradient(circle at 50% 20%, rgba(87, 83, 78, 0.15) 0%, transparent 50%)
+        `
       }}
     >
       {/* Header with Timer */}

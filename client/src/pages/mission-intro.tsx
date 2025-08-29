@@ -54,12 +54,12 @@ export default function MissionIntro() {
 
   return (
     <div 
-      className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-indigo-950 via-purple-950 to-slate-900 relative"
+      className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-sky-900 via-blue-900 to-green-900 relative"
       style={{
         backgroundImage: `
-          radial-gradient(circle at 20% 20%, rgba(147, 51, 234, 0.3) 0%, transparent 50%),
-          radial-gradient(circle at 80% 80%, rgba(79, 70, 229, 0.3) 0%, transparent 50%),
-          radial-gradient(circle at 40% 40%, rgba(30, 64, 175, 0.2) 0%, transparent 50%)
+          radial-gradient(circle at 40% 20%, rgba(59, 130, 246, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(34, 197, 94, 0.25) 0%, transparent 50%),
+          radial-gradient(circle at 20% 60%, rgba(251, 191, 36, 0.2) 0%, transparent 40%)
         `
       }}
     >
@@ -70,9 +70,9 @@ export default function MissionIntro() {
 
       {/* Timer in top right */}
       <div className="absolute top-4 right-4 z-20">
-        <div className="flex items-center bg-gradient-to-r from-purple-900/90 to-indigo-900/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-xl border-2 border-gold-500/50">
-          <Timer className="h-4 w-4 text-gold-300 mr-2" />
-          <span className="font-mono text-sm font-semibold text-gold-100">
+        <div className="flex items-center bg-gradient-to-r from-blue-900/90 to-green-900/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-xl border-2 border-yellow-500/50">
+          <Timer className="h-4 w-4 text-yellow-300 mr-2" />
+          <span className="font-mono text-sm font-semibold text-yellow-100">
             {chronometer.formattedTime}
           </span>
         </div>
@@ -81,23 +81,23 @@ export default function MissionIntro() {
       {/* Main Content */}
       {showContent && (
         <div className="max-w-2xl mx-auto animate-fadeInUp relative z-10">
-          <div className="bg-gradient-to-br from-purple-900/95 via-indigo-900/95 to-slate-900/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-4 border-gold-500/60 relative">
+          <div className="bg-gradient-to-br from-blue-900/95 via-sky-900/95 to-green-900/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-4 border-yellow-500/60 relative">
             {/* Ornate border decoration */}
-            <div className="absolute inset-0 rounded-2xl border-4 border-purple-500/30 pointer-events-none"></div>
-            <div className="absolute inset-2 rounded-xl border-2 border-gold-400/40 pointer-events-none"></div>
+            <div className="absolute inset-0 rounded-2xl border-4 border-blue-500/30 pointer-events-none"></div>
+            <div className="absolute inset-2 rounded-xl border-2 border-yellow-400/40 pointer-events-none"></div>
             
             <div className="p-6 sm:p-8 relative">
               <div className="text-center mb-8">
-                <h3 className="text-3xl sm:text-4xl font-majora font-bold mb-3 text-gold-300 drop-shadow-lg tracking-wider">
-                  ◆ {missionStory.title} ◆
+                <h3 className="text-3xl sm:text-4xl font-hyrule font-bold mb-3 text-yellow-300 drop-shadow-lg tracking-wider">
+                  ♦ {missionStory.title} ♦
                 </h3>
-                <p className="text-lg text-purple-200 italic font-majora tracking-wide">{missionStory.subtitle}</p>
+                <p className="text-lg text-blue-200 italic font-hyrule tracking-wide">{missionStory.subtitle}</p>
               </div>
               
               {/* Typewriter Story Text */}
               <div className="relative mb-6">
-                <div className="bg-gradient-to-r from-slate-800/60 via-purple-800/60 to-slate-800/60 rounded-xl p-6 border-2 border-purple-500/40">
-                  <p className="text-lg leading-relaxed font-majora text-purple-100 min-h-[200px] tracking-wide italic text-shadow-lg">
+                <div className="bg-gradient-to-r from-blue-800/60 via-sky-800/60 to-green-800/60 rounded-xl p-6 border-2 border-blue-500/40">
+                  <p className="text-lg leading-relaxed font-hyrule text-blue-100 min-h-[200px] tracking-wide italic text-shadow-hyrule">
                     {typewriterText}
                   </p>
                 </div>
@@ -218,14 +218,14 @@ export default function MissionIntro() {
           animation: slideInUp 0.6s ease-out;
         }
         
-        .font-majora {
+        .font-hyrule {
           font-family: 'Cinzel', 'Philosopher', serif;
-          font-weight: 600;
-          letter-spacing: 0.05em;
+          font-weight: 500;
+          letter-spacing: 0.04em;
         }
         
-        .text-shadow-lg {
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(147, 51, 234, 0.5);
+        .text-shadow-hyrule {
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(59, 130, 246, 0.4);
         }
         
         .mystical-particles {
