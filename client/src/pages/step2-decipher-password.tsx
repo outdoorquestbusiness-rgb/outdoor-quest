@@ -99,22 +99,49 @@ export default function Step2DecipherPassword() {
                       <p className="text-amber-800 font-elvish font-bold mb-4">
                         Quel mot unit ces trois noms ?
                       </p>
-                      <div className="flex justify-center items-center space-x-4 mb-4">
-                        <input
-                          type="text"
-                          value={foundWord}
-                          onChange={(e) => setFoundWord(e.target.value)}
-                          placeholder="Tapez le mot de passe..."
-                          className="px-4 py-2 border-2 border-amber-400 rounded-lg font-elvish text-lg focus:border-amber-600 focus:outline-none"
-                          data-testid="input-password"
-                        />
-                        <button
-                          onClick={handleWordSubmit}
-                          className="bg-amber-600 hover:bg-amber-700 text-white font-elvish font-bold py-2 px-6 rounded-lg transition-colors"
-                          data-testid="button-submit-password"
-                        >
-                          Valider
-                        </button>
+                      <div className="space-y-4 mb-4">
+                        <div className="flex justify-center">
+                          <input
+                            type="text"
+                            value={foundWord}
+                            onChange={(e) => setFoundWord(e.target.value)}
+                            placeholder="Tapez le mot de passe..."
+                            className="px-4 py-2 border-2 border-amber-400 rounded-lg font-elvish text-lg focus:border-amber-600 focus:outline-none"
+                            data-testid="input-password"
+                          />
+                        </div>
+                        
+                        {/* Control Buttons */}
+                        <div className="flex justify-center space-x-4">
+                          <button
+                            onClick={handleWordSubmit}
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                            data-testid="button-validate"
+                          >
+                            Valider ma solution
+                          </button>
+                          <button
+                            onClick={() => {
+                              // Force continue to next step
+                              setIsCorrect(true);
+                              setLocation("/step3-identify-mountain");
+                            }}
+                            className="bg-red-600 hover:bg-red-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                            data-testid="button-abandon"
+                          >
+                            Abandon
+                          </button>
+                          <button
+                            onClick={() => {
+                              // Show hint - give first letter
+                              setFoundWord(prev => prev || 'M');
+                            }}
+                            className="bg-amber-600 hover:bg-amber-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                            data-testid="button-hint"
+                          >
+                            Indice
+                          </button>
+                        </div>
                       </div>
                       
                       {/* Error Message */}

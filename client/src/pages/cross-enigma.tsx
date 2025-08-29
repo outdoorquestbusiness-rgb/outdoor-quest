@@ -185,15 +185,36 @@ export default function CrossEnigma() {
                         </div>
                       </div>
 
-                      {/* Submit Button */}
-                      <div className="text-center mt-6">
+                      {/* Control Buttons */}
+                      <div className="flex justify-center space-x-4 mt-6">
                         <button
                           onClick={handleSubmit}
-                          className="bg-blue-600 hover:bg-blue-700 text-white font-elvish font-bold py-3 px-8 rounded-xl shadow-lg transition-colors"
-                          data-testid="button-submit-code"
+                          className="bg-emerald-600 hover:bg-emerald-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                          data-testid="button-validate"
                         >
-                          <Key className="h-5 w-5 mr-2 inline-block" />
-                          Assembler le code
+                          Valider ma solution
+                        </button>
+                        <button
+                          onClick={() => {
+                            // Force continue to next step
+                            setIsCompleted(true);
+                            setTimeout(() => setShowNextStep(true), 1000);
+                          }}
+                          className="bg-red-600 hover:bg-red-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                          data-testid="button-abandon"
+                        >
+                          Abandon
+                        </button>
+                        <button
+                          onClick={() => {
+                            // Show hint - pre-fill the answers
+                            setPlayer1Answer('2024');
+                            setPlayer2Answer('1863');
+                          }}
+                          className="bg-amber-600 hover:bg-amber-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                          data-testid="button-hint"
+                        >
+                          Indice
                         </button>
                       </div>
 

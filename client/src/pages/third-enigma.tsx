@@ -271,22 +271,48 @@ export default function ThirdEnigma() {
                         Quel mot est inscrit sur l'objet secret ?
                       </h4>
                       
-                      <div className="flex items-center justify-center space-x-4">
-                        <input
-                          type="text"
-                          value={playerAnswer}
-                          onChange={(e) => setPlayerAnswer(e.target.value)}
-                          placeholder="Tapez votre réponse..."
-                          className="px-4 py-2 border-2 border-gray-300 rounded-lg font-elvish text-lg focus:border-emerald-500 focus:outline-none"
-                          data-testid="input-answer"
-                        />
-                        <button
-                          onClick={handleSubmit}
-                          className="bg-emerald-600 hover:bg-emerald-700 text-white font-elvish font-bold py-2 px-6 rounded-lg transition-colors"
-                          data-testid="button-submit-answer"
-                        >
-                          Valider
-                        </button>
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-center">
+                          <input
+                            type="text"
+                            value={playerAnswer}
+                            onChange={(e) => setPlayerAnswer(e.target.value)}
+                            placeholder="Tapez votre réponse..."
+                            className="px-4 py-2 border-2 border-gray-300 rounded-lg font-elvish text-lg focus:border-emerald-500 focus:outline-none"
+                            data-testid="input-answer"
+                          />
+                        </div>
+                        
+                        {/* Control Buttons */}
+                        <div className="flex justify-center space-x-4">
+                          <button
+                            onClick={handleSubmit}
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                            data-testid="button-validate"
+                          >
+                            Valider ma solution
+                          </button>
+                          <button
+                            onClick={() => {
+                              setIsTimeUp(true);
+                              setTimerActive(false);
+                            }}
+                            className="bg-red-600 hover:bg-red-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                            data-testid="button-abandon"
+                          >
+                            Abandon
+                          </button>
+                          <button
+                            onClick={() => {
+                              // Show hint - fill in one letter
+                              setPlayerAnswer(prev => prev || 'F');
+                            }}
+                            className="bg-amber-600 hover:bg-amber-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                            data-testid="button-hint"
+                          >
+                            Indice
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>

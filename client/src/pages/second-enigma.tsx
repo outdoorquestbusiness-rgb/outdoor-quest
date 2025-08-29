@@ -168,7 +168,7 @@ export default function SecondEnigma() {
                       </div>
 
                       {/* Options */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
                         {questions[currentQuestion].options.map((option, index) => (
                           <button
                             key={index}
@@ -179,6 +179,48 @@ export default function SecondEnigma() {
                             {option}
                           </button>
                         ))}
+                      </div>
+
+                      {/* Control Buttons */}
+                      <div className="flex justify-center space-x-4 mb-6">
+                        <button
+                          onClick={() => {
+                            // Auto-validate with current correct answer
+                            const correctAnswer = questions[currentQuestion].correct;
+                            handleAnswerSelect(correctAnswer);
+                          }}
+                          className="bg-emerald-600 hover:bg-emerald-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                          data-testid="button-validate"
+                        >
+                          Valider ma solution
+                        </button>
+                        <button
+                          onClick={() => {
+                            // Force completion with current score
+                            setIsCompleted(true);
+                            setTimeout(() => setShowResults(true), 1000);
+                          }}
+                          className="bg-red-600 hover:bg-red-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                          data-testid="button-abandon"
+                        >
+                          Abandon
+                        </button>
+                        <button
+                          onClick={() => {
+                            // Show hint - highlight correct answer briefly
+                            const correctOption = document.querySelector(`[data-testid="option-${questions[currentQuestion].correct}"]`);
+                            if (correctOption) {
+                              correctOption.classList.add('bg-amber-200', 'border-amber-500');
+                              setTimeout(() => {
+                                correctOption.classList.remove('bg-amber-200', 'border-amber-500');
+                              }, 2000);
+                            }
+                          }}
+                          className="bg-amber-600 hover:bg-amber-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                          data-testid="button-hint"
+                        >
+                          Indice
+                        </button>
                       </div>
 
                       {/* Progress */}

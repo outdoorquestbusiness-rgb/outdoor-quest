@@ -416,7 +416,7 @@ export default function FirstEnigma() {
                       </div>
                     )}
 
-                    {/* Validation & Solution Buttons */}
+                    {/* Validation & Control Buttons */}
                     {showCrossword && !isCompleted && !isTimeUp && (
                       <div className="flex justify-center space-x-4 mb-4">
                         <button
@@ -465,9 +465,24 @@ export default function FirstEnigma() {
                             showSolution();
                           }}
                           className="bg-red-600 hover:bg-red-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
-                          data-testid="button-solution"
+                          data-testid="button-abandon"
                         >
-                          Solution
+                          Abandon
+                        </button>
+                        <button
+                          onClick={() => {
+                            // Show hint - fill one correct letter
+                            const newGrid = [...grid];
+                            // Fill first letter of HETRE as hint
+                            if (newGrid[1][1].value === '') {
+                              newGrid[1][1] = { ...newGrid[1][1], value: 'H' };
+                              setGrid(newGrid);
+                            }
+                          }}
+                          className="bg-amber-600 hover:bg-amber-700 text-white font-elvish font-bold py-2 px-6 rounded-lg shadow-lg transition-colors"
+                          data-testid="button-hint"
+                        >
+                          Indice
                         </button>
                       </div>
                     )}
