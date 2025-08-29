@@ -8,8 +8,6 @@ import Home from "@/pages/home";
 import Contact from "@/pages/contact";
 import Missions from "@/pages/missions";
 import MissionDetails from "@/pages/mission-details";
-import Rules from "@/pages/rules";
-
 import MissionIntro from "@/pages/mission-intro";
 import RiddleChapter from "@/pages/riddle-chapter";
 import CompassNavigation from "@/pages/compass-navigation";
@@ -28,6 +26,8 @@ import JourneytoCross from "@/pages/journey-to-cross";
 import CrossEnigma from "@/pages/cross-enigma";
 import ArDahuDiscovery from "@/pages/ar-dahu-discovery";
 import FinalCongratulations from "@/pages/final-congratulations";
+import Teams from "@/pages/teams";
+import Rules from "@/pages/rules";
 
 import RiddlePage from "@/pages/riddle";
 import GameEnd from "@/pages/game-end";
@@ -62,6 +62,8 @@ function Router() {
       <Route path="/cross-enigma" component={CrossEnigma} />
       <Route path="/ar-dahu-discovery" component={ArDahuDiscovery} />
       <Route path="/final-congratulations" component={FinalCongratulations} />
+      <Route path="/teams" component={Teams} />
+      <Route path="/rules" component={Rules} />
       <Route path="/riddle-chapter" component={RiddleChapter} />
 
       <Route path="/riddle/chapter/:chapter/riddle/:riddle">

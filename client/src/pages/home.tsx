@@ -64,6 +64,16 @@ export default function Home() {
             </button>
           </Link>
 
+          <Link href="/teams">
+            <button
+              className="w-full bg-white/20 backdrop-blur-sm text-white font-semibold py-4 sm:py-5 px-6 sm:px-8 rounded-xl shadow-xl border border-white/30 transform transition-all duration-200 hover:bg-white/30 hover:scale-105 flex items-center justify-center text-base sm:text-lg touch-manipulation"
+              data-testid="button-teams"
+            >
+              <i className="fas fa-users mr-2 sm:mr-3 text-sm sm:text-base"></i>
+              Équipes
+            </button>
+          </Link>
+
           <Link href="/contact">
             <button
               className="w-full bg-white/20 backdrop-blur-sm text-white font-semibold py-4 sm:py-5 px-6 sm:px-8 rounded-xl shadow-xl border border-white/30 transform transition-all duration-200 hover:bg-white/30 hover:scale-105 flex items-center justify-center text-base sm:text-lg touch-manipulation"
