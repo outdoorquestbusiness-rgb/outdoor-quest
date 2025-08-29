@@ -4,6 +4,7 @@ import { useLocation } from "wouter";
 import { useChronometer } from "@/hooks/use-chronometer";
 import { createIntriguingSound } from "@/utils/audio";
 import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_background_c0472772.png";
+import forestImage from "@assets/generated_images/Mystical_forest_challenge_scene_4ab3a037.png";
 
 export default function RiddleChapter() {
   const [, setLocation] = useLocation();
@@ -18,7 +19,8 @@ export default function RiddleChapter() {
   const instructions = [
     "Trois mini-énigmes vous attendent dans cette forêt mystérieuse.",
     "Résolvez chaque défi en temps imparti pour gagner un indice précieux.",
-    "Ces indices, je le pressens, vous serviront dans votre quête à venir."
+    "Ces indices, je le pressens, vous serviront dans votre quête à venir.",
+    "Si vous échouez à l'énigme cela implique que vous n'obtiendrez pas le mot indice. Cependant, ne pas obtenir le mot indice ne vous empêche pas de continuer."
   ];
 
   const tips = [
@@ -73,7 +75,7 @@ export default function RiddleChapter() {
     <div 
       className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
       style={{ 
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(${moleMountainImage})` 
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url(${forestImage})` 
       }}
     >
       {/* Header with Timer */}
@@ -110,6 +112,15 @@ export default function RiddleChapter() {
                 <p className="text-lg text-emerald-700 italic font-elvish">Premier défi du dahu blanc</p>
               </div>
               
+              {/* Forest Image */}
+              <div className="relative mb-6 rounded-xl overflow-hidden">
+                <img 
+                  src={forestImage} 
+                  alt="Forêt mystérieuse du Mont Môle"
+                  className="w-full h-48 object-cover"
+                />
+              </div>
+
               {/* Typewriter Story Text */}
               <div className="relative mb-6">
                 <p className="text-lg leading-relaxed font-elvish text-emerald-900 min-h-[120px] tracking-wide italic">

@@ -4,6 +4,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { useLocation } from "wouter";
 import { useChronometer } from "@/hooks/use-chronometer";
 import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_background_c0472772.png";
+import orientationTableImage from "@assets/generated_images/Mountain_orientation_table_view_f3e0ee45.png";
 
 export default function OrientationTable() {
   const { t } = useLanguage();
@@ -127,6 +128,15 @@ export default function OrientationTable() {
                   <h3 className="text-3xl sm:text-4xl font-elvish font-bold mb-3 text-blue-100 drop-shadow-sm">
                     Étape 1 — Trouver la table d'orientation
                   </h3>
+                </div>
+                
+                {/* Orientation Table Image */}
+                <div className="relative mb-6 rounded-xl overflow-hidden">
+                  <img 
+                    src={orientationTableImage} 
+                    alt="Table d'orientation du Mont Môle"
+                    className="w-full h-48 object-cover"
+                  />
                 </div>
                 
                 {/* Typewriter Story Text */}

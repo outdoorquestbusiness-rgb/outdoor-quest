@@ -4,6 +4,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { useLocation } from "wouter";
 import { useChronometer } from "@/hooks/use-chronometer";
 import moleMountainImage from "@assets/generated_images/Mont_Môle_mountain_background_c0472772.png";
+import alpineStationImage from "@assets/generated_images/Alpine_station_mountain_view_004fe327.png";
 
 export default function AlpineStation() {
   const { t } = useLanguage();
@@ -84,6 +85,15 @@ export default function AlpineStation() {
                     La Station d'Alpage du Petit Môle
                   </h3>
                   <p className="text-lg text-slate-300 italic font-elvish">Les hauteurs mystérieuses</p>
+                </div>
+                
+                {/* Alpine Station Image */}
+                <div className="relative mb-6 rounded-xl overflow-hidden">
+                  <img 
+                    src={alpineStationImage} 
+                    alt="Station d'alpage du Petit Môle"
+                    className="w-full h-48 object-cover"
+                  />
                 </div>
                 
                 {/* Typewriter Story Text */}
