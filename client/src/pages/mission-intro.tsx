@@ -54,16 +54,25 @@ export default function MissionIntro() {
 
   return (
     <div 
-      className="min-h-screen p-4 sm:p-6 bg-cover bg-center bg-no-repeat"
-      style={{ 
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url(${moleMountainImage})` 
+      className="min-h-screen p-4 sm:p-6 bg-gradient-to-b from-indigo-950 via-purple-950 to-slate-900 relative"
+      style={{
+        backgroundImage: `
+          radial-gradient(circle at 20% 20%, rgba(147, 51, 234, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 80% 80%, rgba(79, 70, 229, 0.3) 0%, transparent 50%),
+          radial-gradient(circle at 40% 40%, rgba(30, 64, 175, 0.2) 0%, transparent 50%)
+        `
       }}
     >
+      {/* Mystical Particles Overlay */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="mystical-particles"></div>
+      </div>
+
       {/* Timer in top right */}
-      <div className="absolute top-4 right-4">
-        <div className="flex items-center bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
-          <Timer className="h-4 w-4 text-forest mr-2" />
-          <span className="font-mono text-sm font-semibold text-slate-700">
+      <div className="absolute top-4 right-4 z-20">
+        <div className="flex items-center bg-gradient-to-r from-purple-900/90 to-indigo-900/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-xl border-2 border-gold-500/50">
+          <Timer className="h-4 w-4 text-gold-300 mr-2" />
+          <span className="font-mono text-sm font-semibold text-gold-100">
             {chronometer.formattedTime}
           </span>
         </div>
@@ -71,44 +80,57 @@ export default function MissionIntro() {
 
       {/* Main Content */}
       {showContent && (
-        <div className="max-w-2xl mx-auto animate-fadeInUp">
-          <div className="bg-amber-50/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-2 border-amber-200/50">
-            <div className="p-6 sm:p-8">
+        <div className="max-w-2xl mx-auto animate-fadeInUp relative z-10">
+          <div className="bg-gradient-to-br from-purple-900/95 via-indigo-900/95 to-slate-900/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden mb-6 border-4 border-gold-500/60 relative">
+            {/* Ornate border decoration */}
+            <div className="absolute inset-0 rounded-2xl border-4 border-purple-500/30 pointer-events-none"></div>
+            <div className="absolute inset-2 rounded-xl border-2 border-gold-400/40 pointer-events-none"></div>
+            
+            <div className="p-6 sm:p-8 relative">
               <div className="text-center mb-8">
-                <h3 className="text-3xl sm:text-4xl font-elvish font-bold mb-3 text-amber-900 drop-shadow-sm">
-                  {missionStory.title}
+                <h3 className="text-3xl sm:text-4xl font-majora font-bold mb-3 text-gold-300 drop-shadow-lg tracking-wider">
+                  ◆ {missionStory.title} ◆
                 </h3>
-                <p className="text-lg text-amber-700 italic font-elvish">{missionStory.subtitle}</p>
+                <p className="text-lg text-purple-200 italic font-majora tracking-wide">{missionStory.subtitle}</p>
               </div>
               
               {/* Typewriter Story Text */}
               <div className="relative mb-6">
-                <p className="text-lg leading-relaxed font-elvish text-amber-900 min-h-[200px] tracking-wide italic">
-                  {typewriterText}
-                </p>
+                <div className="bg-gradient-to-r from-slate-800/60 via-purple-800/60 to-slate-800/60 rounded-xl p-6 border-2 border-purple-500/40">
+                  <p className="text-lg leading-relaxed font-majora text-purple-100 min-h-[200px] tracking-wide italic text-shadow-lg">
+                    {typewriterText}
+                  </p>
+                </div>
               </div>
 
               {/* Dahu Blanc Photo - Only show after story is complete */}
               {showButton && (
                 <div className="text-center animate-slideInUp">
                   <div className="relative mx-auto max-w-xs">
-                    <img 
-                      src={dahuBlancImage}
-                      alt="Le Dahu Blanc mystérieux dans son environnement montagnard"
-                      className="w-full h-auto rounded-xl shadow-lg border-4 border-amber-200"
-                      data-testid="img-dahu-blanc-intro"
-                    />
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-amber-100/20 to-transparent"></div>
+                    <div className="relative">
+                      <img 
+                        src={dahuBlancImage}
+                        alt="Le Dahu Blanc mystérieux dans son environnement montagnard"
+                        className="w-full h-auto rounded-xl shadow-2xl border-4 border-gold-400 transform hover:scale-105 transition-transform duration-300"
+                        data-testid="img-dahu-blanc-intro"
+                        style={{
+                          filter: 'drop-shadow(0 0 20px rgba(147, 51, 234, 0.7)) brightness(1.1) contrast(1.1)'
+                        }}
+                      />
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-purple-800/30 via-transparent to-indigo-800/30 pointer-events-none"></div>
+                      {/* Mystical glow effect */}
+                      <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-purple-500 via-indigo-500 to-purple-500 opacity-30 blur-sm animate-pulse"></div>
+                    </div>
                   </div>
                 
                   {/* Description after photo */}
-                  <div className="mt-4 bg-white/90 rounded-xl p-4 border-2 border-emerald-200">
-                    <div className="text-center text-gray-700 font-elvish">
-                      <p className="mb-2 italic">
+                  <div className="mt-6 bg-gradient-to-r from-indigo-900/80 via-purple-900/80 to-indigo-900/80 rounded-xl p-6 border-2 border-gold-400/60">
+                    <div className="text-center text-purple-100 font-majora">
+                      <p className="mb-3 italic text-lg tracking-wide">
                         "Une créature légendaire aux pattes avant plus courtes que les pattes arrière, 
                         parfaitement adaptée aux pentes escarpées des Alpes..."
                       </p>
-                      <p className="text-sm">
+                      <p className="text-purple-200 tracking-wide">
                         Votre quête commence maintenant. Suivez les indices, résolvez les énigmes, 
                         et découvrez les secrets millénaires du Dahu Blanc.
                       </p>
@@ -124,11 +146,15 @@ export default function MissionIntro() {
             <div className="animate-slideInUp">
               <button
                 onClick={handleStartAdventure}
-                className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-white font-bold py-6 px-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 text-xl font-elvish"
+                className="w-full bg-gradient-to-r from-purple-700 via-indigo-700 to-purple-700 hover:from-purple-600 hover:via-indigo-600 hover:to-purple-600 text-gold-100 font-bold py-6 px-8 rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 text-xl font-majora tracking-wider border-4 border-gold-500/60 relative overflow-hidden"
                 data-testid="button-start-mission"
               >
-                <ArrowRight className="h-6 w-6 mr-3 inline-block" />
-                Commencer l'aventure
+                {/* Button glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 via-gold-500/20 to-purple-500/20 animate-pulse"></div>
+                <div className="relative z-10 flex items-center justify-center">
+                  <ArrowRight className="h-6 w-6 mr-3 text-gold-300" />
+                  ◆ COMMENCER L'AVENTURE ◆
+                </div>
               </button>
             </div>
           )}
@@ -136,7 +162,7 @@ export default function MissionIntro() {
       )}
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap');
         
         @keyframes fadeInUp {
           0% {
@@ -160,6 +186,30 @@ export default function MissionIntro() {
           }
         }
         
+        @keyframes mysticalFloat {
+          0%, 100% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0.6;
+          }
+          33% {
+            transform: translateY(-20px) rotate(120deg);
+            opacity: 0.8;
+          }
+          66% {
+            transform: translateY(-10px) rotate(240deg);
+            opacity: 0.4;
+          }
+        }
+        
+        @keyframes mysticalGlow {
+          0%, 100% {
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+          }
+          50% {
+            box-shadow: 0 0 40px rgba(79, 70, 229, 0.8);
+          }
+        }
+        
         .animate-fadeInUp {
           animation: fadeInUp 0.8s ease-out;
         }
@@ -168,9 +218,42 @@ export default function MissionIntro() {
           animation: slideInUp 0.6s ease-out;
         }
         
-        .font-elvish {
-          font-family: 'Kalam', cursive;
-          font-style: normal;
+        .font-majora {
+          font-family: 'Cinzel', 'Philosopher', serif;
+          font-weight: 600;
+          letter-spacing: 0.05em;
+        }
+        
+        .text-shadow-lg {
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(147, 51, 234, 0.5);
+        }
+        
+        .mystical-particles {
+          position: absolute;
+          inset: 0;
+          background-image: 
+            radial-gradient(2px 2px at 20px 30px, #fbbf24, transparent),
+            radial-gradient(2px 2px at 40px 70px, #a855f7, transparent),
+            radial-gradient(1px 1px at 90px 40px, #6366f1, transparent),
+            radial-gradient(1px 1px at 130px 80px, #fbbf24, transparent),
+            radial-gradient(2px 2px at 160px 30px, #a855f7, transparent);
+          background-repeat: repeat;
+          background-size: 200px 100px;
+          animation: mysticalFloat 8s ease-in-out infinite;
+          opacity: 0.7;
+        }
+        
+        .mystical-particles::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background-image: 
+            radial-gradient(1px 1px at 50px 50px, #fbbf24, transparent),
+            radial-gradient(2px 2px at 120px 120px, #6366f1, transparent),
+            radial-gradient(1px 1px at 180px 80px, #a855f7, transparent);
+          background-repeat: repeat;
+          background-size: 250px 150px;
+          animation: mysticalFloat 12s ease-in-out infinite reverse;
         }
       `}</style>
     </div>

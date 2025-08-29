@@ -177,7 +177,7 @@ export default function Missions() {
         )}
       </div>
 
-      <style jsx>{`
+      <style>{`
         @keyframes fadeInUp {
           0% {
             opacity: 0;
